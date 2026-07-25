@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preguntas y Respuestas — Grupo Valle de Puebla · A.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/></noscript>
+<style>
+:root{
+  --azul:#2c5f8a;--azul-oscuro:#1a3a5c;--azul-claro:#e2ecf4;
+  --azul-borde:rgba(44,95,138,0.2);--fondo:#f0f4f8;--fondo-alt:#dde8f2;
+  --texto:#1a2a3a;--texto-suave:rgba(26,42,58,0.6);--texto-tenue:rgba(26,42,58,0.4);
+  --rojo:#b03030;--dorado:#a07828;--verde:#2a7a4a;--radio:2px;
+  --sombra:0 2px 12px rgba(44,95,138,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lato',sans-serif;background:var(--fondo);color:var(--texto);min-height:100vh;font-size:17px;line-height:1.6;}
+.pantalla{display:none;min-height:100vh;}
+.pantalla.activa{display:flex;flex-direction:column;}
+.pantalla-centro{justify-content:center;align-items:center;padding:30px 20px;}
+
+/* ── HERO ── */
+.hero-bg{
+  background:linear-gradient(160deg,#dde8f0 0%,#e8f0f7 40%,#f0f4f8 100%);
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:16px 20px 20px;position:relative;text-align:center;
+}
+.hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,rgba(44,95,138,0.07) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{border:1px solid var(--azul);color:var(--azul);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;padding:4px 14px;margin-bottom:10px;position:relative;z-index:1;}
+.hero-numero{font-family:'Playfair Display',serif;font-size:clamp(60px,16vw,90px);font-weight:900;line-height:0.85;color:transparent;-webkit-text-stroke:2px var(--azul);letter-spacing:-4px;margin-bottom:4px;position:relative;z-index:1;}
+.hero-aniv{font-family:'Playfair Display',serif;font-size:clamp(10px,2.5vw,14px);color:var(--azul);letter-spacing:8px;text-transform:uppercase;margin-bottom:10px;position:relative;z-index:1;}
+.hero-divider{width:30px;height:1px;background:var(--azul);opacity:0.3;margin:0 auto 10px;position:relative;z-index:1;}
+.hero-titulo{font-family:'Playfair Display',serif;font-size:clamp(16px,4vw,22px);font-weight:700;color:var(--azul-oscuro);line-height:1.2;margin-bottom:2px;position:relative;z-index:1;}
+.hero-subtitulo{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--azul);font-weight:700;margin-bottom:16px;position:relative;z-index:1;}
+
+/* ── RELOJES ── */
+.relojes-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:270px;margin-bottom:12px;position:relative;z-index:1;}
+.reloj-btn{background:white;border:1px solid var(--azul-borde);cursor:pointer;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;transition:all 0.2s;position:relative;overflow:hidden;}
+.reloj-btn::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--azul);transform:scaleX(0);transition:transform 0.2s;}
+.reloj-btn:hover::after{transform:scaleX(1);}
+.reloj-btn:hover{border-color:var(--azul);box-shadow:0 4px 16px rgba(44,95,138,0.15);}
+.reloj-btn:active{transform:scale(0.97);}
+.reloj-btn{background:#f5f8fb;border-color:rgba(44,95,138,0.2);}
+.reloj-wrap{position:relative;width:68px;height:68px;margin-bottom:3px;}
+.reloj-wrap svg{position:absolute;top:0;left:0;width:100%;height:100%;}
+.reloj-hora{text-align:center;line-height:1;}
+.hora-num{font-family:'Playfair Display',serif;font-size:14px;font-weight:900;color:#1a3a5c;display:block;white-space:nowrap;margin-bottom:1px;}
+.hora-sub{font-family:'Lato',sans-serif;font-size:7px;letter-spacing:2px;color:#2c5f8a;display:block;font-weight:700;margin-bottom:4px;}
+.reloj-desc{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--azul-oscuro);}
+.btn-admin-link{background:none;border:none;font-size:10px;color:var(--texto-tenue);letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:4px;position:relative;z-index:1;}
+.btn-admin-link:hover{color:var(--azul);}
+
+/* ── CARD ── */
+.card{width:100%;max-width:400px;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.card-logo{width:68px;height:68px;border:1.5px solid var(--azul);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;background:rgba(44,95,138,0.04);}
+.card-logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:transparent;-webkit-text-stroke:1.5px var(--azul);}
+.card-pretitulo{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--azul);font-weight:700;text-align:center;margin-bottom:5px;}
+.card-titulo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--texto);text-align:center;margin-bottom:5px;}
+.card-desc{font-size:14px;color:var(--texto-suave);text-align:center;margin-bottom:20px;line-height:1.6;}
+.card-divider{width:30px;height:1px;background:var(--azul-borde);margin:0 auto 20px;}
+.label-campo{display:block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--azul);margin-bottom:8px;}
+input[type="text"],input[type="password"],textarea{width:100%;padding:14px 16px;border:1px solid var(--azul-borde);border-radius:var(--radio);font-size:17px;font-family:'Lato',sans-serif;outline:none;background:white;color:var(--texto);transition:border-color 0.2s,box-shadow 0.2s;}
+input:focus,textarea:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(44,95,138,0.1);}
+.nota-campo{font-size:12px;color:var(--texto-tenue);margin-top:5px;}
+.divisor-botones{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+.btn{width:100%;padding:16px;border:none;border-radius:var(--radio);font-size:14px;font-weight:700;font-family:'Lato',sans-serif;cursor:pointer;transition:opacity 0.15s,transform 0.1s;letter-spacing:1.5px;text-transform:uppercase;}
+.btn:active{transform:scale(0.98);opacity:0.88;}
+.btn-azul{background:var(--azul);color:white;}
+.btn-outline{background:transparent;color:var(--azul);border:1px solid var(--azul);}
+.btn-rojo{background:var(--rojo);color:white;}
+.btn-dorado{background:var(--dorado);color:white;}
+.btn-gris{background:var(--fondo-alt);color:var(--texto);}
+.btn-verde{background:var(--verde);color:white;}
+.btn-sm{padding:8px 14px;font-size:11px;font-weight:700;font-family:'Lato',sans-serif;letter-spacing:1px;text-transform:uppercase;border-radius:var(--radio);border:none;cursor:pointer;transition:opacity 0.15s;width:auto;}
+.btn-sm:active{opacity:0.8;}
+.error-msg{color:var(--rojo);font-size:13px;margin-top:12px;display:none;text-align:center;font-weight:700;}
+
+/* ── ENCABEZADO ── */
+#p-main{background:var(--fondo);}
+.encabezado{background:linear-gradient(160deg,var(--azul-oscuro) 0%,var(--azul) 100%);color:white;padding:8px 18px;position:sticky;top:0;z-index:10;box-shadow:0 2px 16px rgba(26,42,58,0.25);}
+.enc-top{text-align:center;margin-bottom:6px;}
+.enc-badge{font-size:9px;letter-spacing:4px;text-transform:uppercase;opacity:0.6;margin-bottom:1px;font-weight:700;}
+.enc-titulo{font-family:'Playfair Display',serif;font-size:clamp(13px,3vw,16px);font-weight:700;}
+.enc-horario{font-size:10px;opacity:0.65;letter-spacing:2px;text-transform:uppercase;margin-top:1px;}
+.enc-subtitulo{font-size:10px;opacity:0.8;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+.enc-fila{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.enc-usuario{font-size:13px;opacity:0.85;font-weight:700;letter-spacing:0.5px;}
+.badge-mod{background:var(--dorado);color:white;font-size:10px;font-weight:700;padding:3px 10px;letter-spacing:1.5px;text-transform:uppercase;}
+.btn-salir{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:white;font-size:11px;font-family:'Lato',sans-serif;padding:5px 12px;cursor:pointer;letter-spacing:0.5px;border-radius:var(--radio);}
+.enc-clave-mod{display:none;margin-top:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:10px 14px;text-align:center;}
+.enc-clave-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:0.65;margin-bottom:3px;}
+.enc-clave-valor{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;letter-spacing:7px;color:white;margin-bottom:8px;}
+.enc-clave-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.enc-clave-btns button{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:11px;font-family:'Lato',sans-serif;padding:6px 14px;cursor:pointer;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:var(--radio);}
+
+/* ── ENVIAR ── */
+.seccion-enviar{background:white;padding:16px;border-bottom:1px solid var(--azul-borde);box-shadow:var(--sombra);}
+textarea{resize:none;min-height:88px;line-height:1.55;font-size:16px;}
+.contador-texto{font-size:11px;color:var(--texto-tenue);text-align:right;margin-top:5px;letter-spacing:1px;}
+
+/* ── LISTA ── */
+.lista-preguntas{flex:1;padding:16px 16px 80px;overflow-y:auto;}
+.sin-preguntas{text-align:center;padding:60px 20px;color:var(--texto-suave);font-size:15px;line-height:1.9;}
+.sin-preguntas .sin-icon{font-size:32px;display:block;margin-bottom:14px;opacity:0.3;}
+.sin-preguntas em{font-family:'Playfair Display',serif;font-style:italic;color:var(--azul);font-size:17px;}
+
+/* ── TARJETA ── */
+.tarjeta{background:white;padding:16px;margin-bottom:12px;box-shadow:var(--sombra);border-left:3px solid var(--azul);}
+.tarjeta.respondida{border-left-color:var(--verde);}
+.tarjeta.propia{border-left-color:var(--dorado);}
+.check-fila{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.check-box{width:20px;height:20px;border:1.5px solid rgba(44,95,138,0.3);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:white;transition:all 0.2s;}
+.check-box.marcado{background:var(--verde);border-color:var(--verde);}
+.check-box.marcado::after{content:"✓";color:white;font-size:12px;font-weight:900;}
+.check-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--texto-tenue);}
+.check-label.respondida-label{color:var(--verde);}
+.meta-pregunta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px;}
+.alias-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--azul);background:var(--azul-claro);padding:3px 10px;}
+.tarjeta.propia .alias-tag{color:var(--dorado);background:#f5edd8;}
+.hora-tag{font-size:11px;color:var(--texto-tenue);letter-spacing:0.5px;}
+.texto-pregunta{font-size:17px;line-height:1.55;margin-bottom:12px;word-break:break-word;color:var(--texto);}
+.acciones-tarjeta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+
+/* ── HISTORIAL ── */
+.panel-historial{background:white;border-top:1px solid var(--azul-borde);padding:16px;margin:0 16px 16px;}
+.panel-historial h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:10px;color:var(--texto-suave);}
+.historial-item{font-size:13px;padding:8px 0;border-bottom:1px solid var(--azul-borde);color:var(--texto-suave);line-height:1.5;}
+.historial-vacio{font-size:13px;color:var(--texto-tenue);font-style:italic;}
+
+/* ── MODALES ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,42,58,0.65);z-index:100;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.visible{display:flex;}
+.modal{background:white;padding:30px 22px;width:100%;max-width:360px;text-align:center;box-shadow:0 8px 40px rgba(26,42,58,0.3);}
+.modal h3{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;margin-bottom:10px;color:var(--texto);}
+.modal p{font-size:14px;color:var(--texto-suave);line-height:1.6;margin-bottom:22px;}
+.modal-botones{display:flex;gap:10px;}
+.modal-botones .btn{margin-top:0;}
+.modal-cancelar{margin-top:14px;background:none;border:none;font-size:13px;color:var(--texto-tenue);cursor:pointer;text-decoration:underline;}
+
+/* ── ADMIN ── */
+.admin-panel{background:var(--fondo);padding:24px 16px 60px;overflow-y:auto;min-height:100vh;}
+.admin-seccion{background:white;padding:20px;margin-bottom:16px;box-shadow:var(--sombra);border-top:3px solid var(--azul);}
+.admin-seccion h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--azul);margin-bottom:16px;font-weight:700;}
+.dash-horario{border:1px solid var(--azul-borde);margin-bottom:14px;overflow:hidden;}
+.dash-header{background:var(--azul);color:white;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;}
+.dash-header-titulo{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;}
+.dash-header-clave{font-size:11px;opacity:0.75;letter-spacing:2px;text-transform:uppercase;}
+.dash-stats{padding:12px 14px;display:flex;gap:24px;flex-wrap:wrap;border-bottom:1px solid var(--azul-borde);}
+.dash-stat{text-align:center;min-width:60px;}
+.dash-stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;line-height:1;}
+.dash-stat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--texto-tenue);margin-top:3px;}
+.dash-pregunta{display:flex;align-items:flex-start;gap:10px;padding:8px 14px;border-bottom:1px solid var(--fondo-alt);}
+.dash-check{width:16px;height:16px;border:1.5px solid #ccc;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:3px;}
+.dash-check.marcado{background:var(--verde);border-color:var(--verde);}
+.dash-check.marcado::after{content:"✓";color:white;font-size:9px;font-weight:900;}
+.dash-pregunta-meta{font-size:11px;color:var(--texto-tenue);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+.dash-pregunta-texto{font-size:14px;color:var(--texto);line-height:1.4;}
+.dash-vacio{padding:10px 14px;font-size:13px;color:var(--texto-tenue);font-style:italic;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--texto);color:white;padding:12px 24px;font-size:14px;font-weight:700;font-family:'Lato',sans-serif;letter-spacing:0.5px;z-index:200;transition:transform 0.3s ease;white-space:nowrap;pointer-events:none;}
+.toast.visible{transform:translateX(-50%) translateY(0);}
+
+@media(min-width:500px){
+  .lista-preguntas,.seccion-enviar{max-width:600px;margin-left:auto;margin-right:auto;width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ P1: INICIO ═══ -->
+<div id="p-horario" class="pantalla activa">
+  <div class="hero-bg">
+    <div class="hero-badge">Alcohólicos Anónimos</div>
+    <div class="hero-numero">42°</div>
+    <div class="hero-aniv">Aniversario</div>
+    <div class="hero-divider"></div>
+    <h1 class="hero-titulo">Grupo Valle de Puebla</h1>
+    <p class="hero-subtitulo">Sesión de Preguntas y Respuestas</p>
+    <div class="relojes-grid">
+
+      <!-- 08:00 -->
+      <button class="reloj-btn" onclick="elegirHorario('8am')">
+        <div class="reloj-wrap">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="36" stroke="#2c5f8a" stroke-width="1.5" opacity="0.35"/>
+            <circle cx="40" cy="40" r="36" fill="none" stroke="#2c5f8a" stroke-width="2" stroke-linecap="round" stroke-dasharray="75.4 226.2" transform="rotate(-90 40 40)"/>
+            <line x1="40" y1="5" x2="40" y2="10" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="70" x2="40" y2="75" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="5" y1="40" x2="10" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="70" y1="40" x2="75" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="40" x2="26.1" y2="48" stroke="#1a3a5c" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="40" y2="18" stroke="#2c5f8a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="2.5" fill="#1a3a5c"/>
+          </svg>
+        </div>
+        <div class="reloj-hora">
+          <span class="hora-num">08:00</span>
+          <span class="hora-sub">HRS</span>
+        </div>
+        <div class="reloj-desc">Mañana</div>
+      </button>
+      <button class="reloj-btn" onclick="elegirHorario('11am')">
+        <div class="reloj-wrap">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="36" stroke="#2c5f8a" stroke-width="1.5" opacity="0.35"/>
+            <circle cx="40" cy="40" r="36" fill="none" stroke="#2c5f8a" stroke-width="2" stroke-linecap="round" stroke-dasharray="103.7 226.2" transform="rotate(-90 40 40)"/>
+            <line x1="40" y1="5" x2="40" y2="10" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="70" x2="40" y2="75" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="5" y1="40" x2="10" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="70" y1="40" x2="75" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="40" x2="32" y2="26.1" stroke="#1a3a5c" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="40" y2="18" stroke="#2c5f8a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="2.5" fill="#1a3a5c"/>
+          </svg>
+        </div>
+        <div class="reloj-hora">
+          <span class="hora-num">11:00</span>
+          <span class="hora-sub">HRS</span>
+        </div>
+        <div class="reloj-desc">Mañana</div>
+      </button>
+
+      <!-- 18:00 -->
+      <button class="reloj-btn" onclick="elegirHorario('6pm')">
+        <div class="reloj-wrap">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="36" stroke="#2c5f8a" stroke-width="1.5" opacity="0.35"/>
+            <circle cx="40" cy="40" r="36" fill="none" stroke="#2c5f8a" stroke-width="2" stroke-linecap="round" stroke-dasharray="169.6 226.2" transform="rotate(-90 40 40)"/>
+            <line x1="40" y1="5" x2="40" y2="10" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="70" x2="40" y2="75" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="5" y1="40" x2="10" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="70" y1="40" x2="75" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="40" x2="40" y2="56" stroke="#1a3a5c" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="40" y2="18" stroke="#2c5f8a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="2.5" fill="#1a3a5c"/>
+          </svg>
+        </div>
+        <div class="reloj-hora">
+          <span class="hora-num">18:00</span>
+          <span class="hora-sub">HRS</span>
+        </div>
+        <div class="reloj-desc">Tarde</div>
+      </button>
+
+      <!-- 20:00 -->
+      <button class="reloj-btn" onclick="elegirHorario('8pm')">
+        <div class="reloj-wrap">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="36" stroke="#2c5f8a" stroke-width="1.5" opacity="0.35"/>
+            <circle cx="40" cy="40" r="36" fill="none" stroke="#2c5f8a" stroke-width="2" stroke-linecap="round" stroke-dasharray="188.5 226.2" transform="rotate(-90 40 40)"/>
+            <line x1="40" y1="5" x2="40" y2="10" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="70" x2="40" y2="75" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="5" y1="40" x2="10" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="70" y1="40" x2="75" y2="40" stroke="#2c5f8a" stroke-width="1.2" opacity="0.4"/>
+            <line x1="40" y1="40" x2="26.1" y2="48" stroke="#1a3a5c" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="40" y2="18" stroke="#2c5f8a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="2.5" fill="#1a3a5c"/>
+          </svg>
+        </div>
+        <div class="reloj-hora">
+          <span class="hora-num">20:00</span>
+          <span class="hora-sub">HRS</span>
+        </div>
+        <div class="reloj-desc">Noche</div>
+      </button>
+
+    </div>
+    <button class="btn-admin-link" onclick="irAdmin()">Administrador</button>
+  </div>
+</div>
+
+<!-- ═══ P2: ACCESO MIEMBRO ═══ -->
+<div id="p-acceso" class="pantalla pantalla-centro" style="background:var(--fondo);">
+  <div class="card">
+    <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:transparent;-webkit-text-stroke:1.5px var(--azul);letter-spacing:-2px;line-height:1;text-align:center;margin-bottom:2px;">42°</div>
+    <p style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--azul);font-weight:700;text-align:center;margin-bottom:4px;">Aniversario</p>
+    <p class="card-pretitulo">Grupo Valle de Puebla</p>
+    <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--azul);font-weight:700;text-align:center;margin-bottom:10px;">Sesión de Preguntas y Respuestas</p>
+    <h2 class="card-titulo" id="acc-titulo">Sesión</h2>
+    <div class="card-divider"></div>
+    <p class="card-desc">Escribe la contraseña que indicó el moderador.</p>
+    <label class="label-campo" for="input-clave">Contraseña del día</label>
+    <input type="text" id="input-clave" placeholder="Escribe aquí…" maxlength="10" autocomplete="off">
+    <p class="nota-campo">No importan mayúsculas, minúsculas ni acentos.</p>
+    <div class="divisor-botones">
+      <button class="btn btn-azul" onclick="verificarAcceso()">Entrar</button>
+      <button class="btn btn-outline" onclick="irLoginMod()">Soy el moderador</button>
+      <button class="btn btn-gris" onclick="ir('p-horario')">← Cambiar horario</button>
+    </div>
+    <p class="error-msg" id="error-acceso">Contraseña incorrecta. Pide la contraseña al moderador.</p>
+  </div>
+</div>
+
+<!-- ═══ P3: LOGIN MODERADOR ═══ -->
+<div id="p-mod-login" class="pantalla pantalla-centro" style="background:var(--fondo);">
+  <div class="card">
+    <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:transparent;-webkit-text-stroke:1.5px var(--azul);letter-spacing:-2px;line-height:1;text-align:center;margin-bottom:2px;">42°</div>
+    <p style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--azul);font-weight:700;text-align:center;margin-bottom:4px;">Aniversario</p>
+    <p class="card-pretitulo" style="color:var(--dorado);">Acceso moderador</p>
+    <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--azul);font-weight:700;text-align:center;margin-bottom:10px;">Sesión de Preguntas y Respuestas</p>
+    <h2 class="card-titulo" id="mod-titulo">Sesión</h2>
+    <div class="card-divider"></div>
+    <p class="card-desc">Ingresa tu contraseña de moderador.</p>
+    <label class="label-campo" for="input-pass">Contraseña moderador</label>
+    <input type="password" id="input-pass" placeholder="••••••••" autocomplete="off">
+    <div class="divisor-botones">
+      <button class="btn btn-dorado" onclick="entrarMod()">Entrar</button>
+      <button class="btn btn-gris" onclick="ir('p-acceso')">← Volver</button>
+    </div>
+    <p class="error-msg" id="error-pass">Contraseña incorrecta.</p>
+  </div>
+</div>
+
+<!-- ═══ P4: PRINCIPAL ═══ -->
+<div id="p-main" class="pantalla">
+  <div class="encabezado">
+    <div class="enc-top">
+      <div class="enc-badge">Alcohólicos Anónimos</div>
+      <div class="enc-titulo">Grupo Valle de Puebla</div>
+      <div class="enc-horario" id="enc-horario-label"></div>
+    </div>
+    <div class="enc-fila">
+      <span class="enc-usuario" id="enc-usuario"></span>
+      <span id="badge-mod" class="badge-mod" style="display:none;">Moderador</span>
+      <button class="btn-salir" onclick="salir()">Salir</button>
+    </div>
+    <div class="enc-clave-mod" id="enc-clave-mod">
+      <div class="enc-clave-label">Contraseña del día</div>
+      <div class="enc-clave-valor" id="enc-clave-valor">—</div>
+      <div class="enc-clave-btns">
+        <button onclick="iniciarNuevaSesion()">Iniciar nueva sesión</button>
+        <button onclick="descargarHistorial()">Descargar historial</button>
+      </div>
+    </div>
+  </div>
+  <div class="seccion-enviar">
+    <textarea id="input-pregunta" placeholder="Escribe tu pregunta aquí…" maxlength="300" oninput="document.getElementById('contador').textContent=this.value.length"></textarea>
+    <div class="contador-texto"><span id="contador">0</span> / 300</div>
+    <button class="btn btn-azul" style="margin-top:12px;" onclick="enviarPregunta()">Enviar pregunta</button>
+  </div>
+  <div class="lista-preguntas" id="lista-preguntas">
+    <div class="sin-preguntas" id="sin-preguntas">
+      <span class="sin-icon">💬</span>
+      <em>Aún no hay preguntas</em><br>Sé el primero en escribir una.
+    </div>
+  </div>
+  <div id="panel-historial" style="display:none;" class="panel-historial">
+    <h3>Preguntas guardadas</h3>
+    <div id="lista-historial"><p class="historial-vacio">Ninguna guardada aún.</p></div>
+  </div>
+</div>
+
+<!-- ═══ P5: LOGIN ADMIN ═══ -->
+<div id="p-admin-login" class="pantalla pantalla-centro" style="background:var(--fondo);">
+  <div class="card">
+    <div class="card-logo" style="border-color:#1a3a5c;background:rgba(26,58,92,0.05);">
+      <span class="card-logo-text" style="-webkit-text-stroke-color:#1a3a5c;font-size:14px;">ADM</span>
+    </div>
+    <p class="card-pretitulo" style="color:#1a3a5c;">Administrador</p>
+    <h2 class="card-titulo">Acceso admin</h2>
+    <div class="card-divider"></div>
+    <p class="card-desc">Solo para el administrador del sistema.</p>
+    <label class="label-campo" for="input-admin-pass">Contraseña</label>
+    <input type="password" id="input-admin-pass" placeholder="••••••••" autocomplete="off">
+    <div class="divisor-botones">
+      <button class="btn btn-azul" onclick="entrarAdmin()">Entrar</button>
+      <button class="btn btn-gris" onclick="ir('p-horario')">← Volver</button>
+    </div>
+    <p class="error-msg" id="error-admin">Contraseña incorrecta.</p>
+  </div>
+</div>
+
+<!-- ═══ P6: PANEL ADMIN ═══ -->
+<div id="p-admin" class="pantalla">
+  <div class="admin-panel">
+    <div style="text-align:center;margin-bottom:24px;">
+      <div class="card-logo" style="margin-bottom:12px;"><span class="card-logo-text">AA</span></div>
+      <p class="card-pretitulo">Panel de administrador</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--texto);font-weight:700;">Grupo Valle de Puebla</h2>
+    </div>
+    <div class="admin-seccion">
+      <h3>Contraseñas de moderadores</h3>
+      <div id="admin-campos"></div>
+      <button class="btn btn-azul" style="margin-top:12px;" onclick="guardarClavesAdmin()">Guardar cambios</button>
+    </div>
+    <div class="admin-seccion">
+      <h3>Dashboard de sesiones</h3>
+      <button class="btn btn-gris" style="padding:10px;margin-bottom:16px;" onclick="cargarDashboard()">↻ Actualizar</button>
+      <div id="dashboard-contenido"><p style="color:var(--texto-tenue);font-size:13px;font-style:italic;">Toca "Actualizar" para cargar los datos.</p></div>
+    </div>
+    <button class="btn btn-gris" onclick="ir('p-horario')">← Salir</button>
+  </div>
+</div>
+
+<!-- ═══ MODAL NUEVA SESIÓN ═══ -->
+<div class="modal-overlay" id="modal-nueva-sesion">
+  <div class="modal">
+    <h3>Nueva sesión</h3>
+    <p>Escribe la contraseña de hoy. Se borrará la anterior y se reiniciará el contador de anónimos. Las preguntas anteriores se conservan.</p>
+    <label class="label-campo" for="input-nueva-clave" style="text-align:left;display:block;margin-bottom:8px;">Nueva contraseña</label>
+    <input type="text" id="input-nueva-clave" placeholder="Ej. luna5" maxlength="10" autocomplete="off" style="margin-bottom:16px;font-size:22px;font-weight:700;letter-spacing:4px;text-transform:uppercase;text-align:center;">
+    <div class="modal-botones">
+      <button class="btn btn-azul" onclick="confirmarNuevaSesion()">Confirmar</button>
+      <button class="btn btn-gris" onclick="cerrarModal('modal-nueva-sesion')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL ANÓNIMO ═══ -->
+<div class="modal-overlay" id="modal-anonimo">
+  <div class="modal">
+    <h3>¿Participar anónimamente?</h3>
+    <p>No escribiste tu nombre. ¿Deseas participar de forma anónima?</p>
+    <div class="modal-botones">
+      <button class="btn btn-azul" onclick="confirmarAnonimo(true)">Sí, anónimo</button>
+      <button class="btn btn-gris" onclick="confirmarAnonimo(false)">Escribir nombre</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL GUARDAR ═══ -->
+<div class="modal-overlay" id="modal-guardar">
+  <div class="modal">
+    <h3>¿Guardar pregunta?</h3>
+    <p>Antes de borrarla, ¿deseas guardarla en el historial de la sesión?</p>
+    <div class="modal-botones">
+      <button class="btn btn-azul" onclick="confirmarBorrado(true)">Sí, guardar</button>
+      <button class="btn btn-rojo" onclick="confirmarBorrado(false)">No, borrar</button>
+    </div>
+    <button class="modal-cancelar" onclick="cerrarModal('modal-guardar')">Cancelar — no borrar</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove, update, set, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCbI898LtjPKAbNEntu1f4c-4vgXs4dcxQ",
+  authDomain: "preguntas-vdp.firebaseapp.com",
+  databaseURL: "https://preguntas-vdp-default-rtdb.firebaseio.com",
+  projectId: "preguntas-vdp",
+  storageBucket: "preguntas-vdp.firebasestorage.app",
+  messagingSenderId: "873406536085",
+  appId: "1:873406536085:web:4bdd93c80316d342343e9c"
+};
+
+const CLAVE_ADMIN = "lalolalona";
+let CLAVES_MOD = { "8am":"4szhgk", "11am":"vmv8vk", "6pm":"lilo", "8pm":"mtpgh7" };
+
+const app = initializeApp(FIREBASE_CONFIG);
+const db = getDatabase(app);
+const clavesModRef = ref(db, "admin/clavesMod");
+
+get(clavesModRef).then(snap => {
+  if (snap.val()) { CLAVES_MOD = { ...CLAVES_MOD, ...snap.val() }; }
+});
+
+const ETIQUETAS = {
+  "8am": "Sesión 08:00 hrs",
+  "11am": "Sesión 11:00 hrs",
+  "6pm": "Sesión 18:00 hrs",
+  "8pm": "Sesión 20:00 hrs"
+};
+
+let horarioActual = "";
+let alias = "";
+let esModerador = false;
+let historial = [];
+let pendienteBorrar = null;
+let dbPregRef = null;
+let dbClaveRef = null;
+
+let userId = localStorage.getItem("aa_userId");
+if (!userId) {
+  userId = "u_" + Math.random().toString(36).substr(2, 9) + Date.now();
+  localStorage.setItem("aa_userId", userId);
+}
+
+function normalizar(str) {
+  return str.trim().toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function ir(id) {
+  document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
+  document.getElementById(id).classList.add("activa");
+}
+window.ir = ir;
+
+function cerrarModal(id) { document.getElementById(id).classList.remove("visible"); }
+window.cerrarModal = cerrarModal;
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("visible");
+  setTimeout(() => t.classList.remove("visible"), 2500);
+}
+
+function esc(t) {
+  return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/`/g,"&#96;");
+}
+
+window.elegirHorario = function(h) {
+  horarioActual = h;
+  dbPregRef = ref(db, "sesiones/" + h + "/preguntas");
+  dbClaveRef = ref(db, "sesiones/" + h + "/clave");
+  document.getElementById("acc-titulo").textContent = ETIQUETAS[h];
+  document.getElementById("mod-titulo").textContent = ETIQUETAS[h];
+  document.getElementById("error-acceso").style.display = "none";
+  document.getElementById("input-clave").value = "";
+  ir("p-acceso");
+};
+
+window.irLoginMod = function() {
+  document.getElementById("error-pass").style.display = "none";
+  document.getElementById("input-pass").value = "";
+  ir("p-mod-login");
+};
+
+window.irAdmin = function() {
+  document.getElementById("error-admin").style.display = "none";
+  document.getElementById("input-admin-pass").value = "";
+  ir("p-admin-login");
+};
+
+window.verificarAcceso = async function() {
+  const claveIngresada = normalizar(document.getElementById("input-clave").value);
+  if (!claveIngresada) { toast("Escribe la contraseña del día"); return; }
+  const snap = await get(dbClaveRef);
+  const claveHoy = normalizar(snap.val() || "");
+  if (!claveHoy) {
+    document.getElementById("error-acceso").textContent = "El moderador aún no ha establecido la contraseña de hoy.";
+    document.getElementById("error-acceso").style.display = "block";
+    return;
+  }
+  if (claveIngresada !== claveHoy) {
+    document.getElementById("error-acceso").textContent = "Contraseña incorrecta. Pide la contraseña al moderador.";
+    document.getElementById("error-acceso").style.display = "block";
+    toast("Contraseña incorrecta");
+    return;
+  }
+  document.getElementById("error-acceso").style.display = "none";
+  const contRef = ref(db, "sesiones/" + horarioActual + "/contadorAnonimos");
+  const snapC = await get(contRef);
+  const num = (snapC.val() || 0) + 1;
+  await set(contRef, num);
+  alias = "Anónimo" + num;
+  esModerador = false;
+  abrirPrincipal();
+};
+
+window.confirmarAnonimo = async function(anonimo) {
+  cerrarModal("modal-anonimo");
+  const contRef = ref(db, "sesiones/" + horarioActual + "/contadorAnonimos");
+  const snap = await get(contRef);
+  const num = (snap.val() || 0) + 1;
+  await set(contRef, num);
+  alias = "Anónimo" + num;
+  esModerador = false;
+  abrirPrincipal();
+};
+
+window.entrarMod = function() {
+  const pass = document.getElementById("input-pass").value;
+  if (pass === CLAVES_MOD[horarioActual]) {
+    document.getElementById("error-pass").style.display = "none";
+    document.getElementById("input-pass").value = "";
+    alias = "Moderador";
+    esModerador = true;
+    abrirPrincipal();
+  } else {
+    document.getElementById("error-pass").style.display = "block";
+  }
+};
+
+function abrirPrincipal() {
+  document.getElementById("enc-horario-label").textContent = ETIQUETAS[horarioActual];
+  document.getElementById("enc-usuario").textContent = alias;
+  document.getElementById("badge-mod").style.display = esModerador ? "inline-block" : "none";
+  document.getElementById("enc-clave-mod").style.display = esModerador ? "block" : "none";
+  document.getElementById("panel-historial").style.display = esModerador ? "block" : "none";
+  historial = [];
+  renderHistorial();
+  ir("p-main");
+  escucharPreguntas();
+  if (esModerador) {
+    onValue(dbClaveRef, snap => {
+      const val = snap.val();
+      document.getElementById("enc-clave-valor").textContent = val ? val.toUpperCase() : "—";
+    });
+  }
+}
+
+window.salir = function() { esModerador = false; alias = ""; ir("p-horario"); };
+
+window.enviarPregunta = function() {
+  const texto = document.getElementById("input-pregunta").value.trim();
+  if (!texto) { toast("Escribe tu pregunta primero"); return; }
+  const ahora = new Date();
+  const fecha = ahora.toLocaleDateString("es-MX", { day: "2-digit", month: "short", year: "numeric" });
+  const hora = ahora.toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit" });
+  push(dbPregRef, {
+    texto, alias, userId,
+    hora: fecha + " " + hora,
+    timestamp: Date.now(),
+    respondida: false
+  }).then(() => {
+    document.getElementById("input-pregunta").value = "";
+    document.getElementById("contador").textContent = "0";
+    toast("✓ Pregunta enviada");
+  });
+};
+
+function escucharPreguntas() {
+  onValue(dbPregRef, snap => { renderPreguntas(snap.val() || {}); });
+}
+
+function renderPreguntas(preguntas) {
+  const lista = document.getElementById("lista-preguntas");
+  const sinP = document.getElementById("sin-preguntas");
+  const entradas = Object.entries(preguntas)
+    .filter(([id, p]) => esModerador || p.userId === userId)
+    .sort((a, b) => b[1].timestamp - a[1].timestamp);
+  if (entradas.length === 0) {
+    sinP.style.display = "block";
+    lista.querySelectorAll(".tarjeta").forEach(t => t.remove());
+    return;
+  }
+  sinP.style.display = "none";
+  lista.querySelectorAll(".tarjeta").forEach(t => t.remove());
+  entradas.forEach(([id, p]) => {
+    const esMia = p.userId === userId;
+    const t = document.createElement("div");
+    t.className = "tarjeta" + (p.respondida ? " respondida" : "") + (esMia && !esModerador ? " propia" : "");
+    t.dataset.id = id;
+    const checkClass = "check-box" + (p.respondida ? " marcado" : "");
+    const labelClass = "check-label" + (p.respondida ? " respondida-label" : "");
+    const btnResponder = esModerador
+      ? "<button class=\"btn-sm " + (p.respondida ? "btn-gris" : "btn-verde") + "\" style=\"margin-left:auto;\" onclick=\"marcarRespondida('" + id + "'," + p.respondida + ")\">" + (p.respondida ? "Desmarcar" : "Marcar respondida") + "</button>"
+      : "";
+    const btnBorrar = (esModerador || esMia)
+      ? "<button class=\"btn-sm btn-rojo\" onclick=\"pedirBorrado('" + id + "',`" + esc(p.texto) + "`)\">Borrar</button>"
+      : "";
+    t.innerHTML =
+      "<div class=\"check-fila\"><div class=\"" + checkClass + "\"></div><span class=\"" + labelClass + "\">" + (p.respondida ? "Respondida" : "Pendiente") + "</span>" + btnResponder + "</div>" +
+      "<div class=\"meta-pregunta\"><span class=\"alias-tag\">" + esc(p.alias) + "</span><span class=\"hora-tag\">" + esc(p.hora) + "</span></div>" +
+      "<div class=\"texto-pregunta\">" + esc(p.texto) + "</div>" +
+      "<div class=\"acciones-tarjeta\">" + btnBorrar + "</div>";
+    lista.appendChild(t);
+  });
+}
+
+window.marcarRespondida = function(id, estado) {
+  update(ref(db, "sesiones/" + horarioActual + "/preguntas/" + id), { respondida: !estado });
+};
+
+window.pedirBorrado = function(id, texto) {
+  pendienteBorrar = { id, texto };
+  document.getElementById("modal-guardar").classList.add("visible");
+};
+
+window.confirmarBorrado = function(guardar) {
+  cerrarModal("modal-guardar");
+  if (!pendienteBorrar) return;
+  if (guardar) {
+    historial.push({ texto: pendienteBorrar.texto, hora: new Date().toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit" }) });
+    renderHistorial();
+    toast("✓ Guardada en historial");
+  }
+  remove(ref(db, "sesiones/" + horarioActual + "/preguntas/" + pendienteBorrar.id));
+  pendienteBorrar = null;
+};
+
+function renderHistorial() {
+  const c = document.getElementById("lista-historial");
+  c.innerHTML = historial.length === 0
+    ? "<p class=\"historial-vacio\">Ninguna guardada aún.</p>"
+    : historial.map((h, i) => "<div class=\"historial-item\"><strong>" + (i+1) + ".</strong> [" + h.hora + "] " + esc(h.texto) + "</div>").join("");
+}
+
+window.descargarHistorial = async function() {
+  const snap = await get(dbPregRef);
+  const pregs = snap.val() || {};
+  const lista = Object.values(pregs).sort((a, b) => b.timestamp - a.timestamp);
+  if (lista.length === 0 && historial.length === 0) { toast("No hay preguntas en esta sesión"); return; }
+  const fecha = new Date().toLocaleDateString("es-MX");
+  let txt = "Grupo Valle de Puebla · A.A.\n" + ETIQUETAS[horarioActual] + " — " + fecha + "\n" + "─".repeat(40) + "\n\n";
+  if (lista.length > 0) {
+    txt += "PREGUNTAS DE LA SESIÓN\n\n";
+    lista.forEach((p, i) => { txt += (i+1) + ". [" + p.hora + "] " + p.alias + "\n" + p.texto + "\nEstatus: " + (p.respondida ? "Respondida" : "Pendiente") + "\n\n"; });
+  }
+  if (historial.length > 0) {
+    txt += "─".repeat(40) + "\nGUARDADAS MANUALMENTE\n\n";
+    historial.forEach((h, i) => { txt += (i+1) + ". [" + h.hora + "]\n" + h.texto + "\n\n"; });
+  }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([txt], { type: "text/plain;charset=utf-8" }));
+  a.download = "preguntas-vdp-" + horarioActual + "-" + fecha.replace(/\//g, "-") + ".txt";
+  a.click();
+};
+
+window.iniciarNuevaSesion = function() {
+  document.getElementById("input-nueva-clave").value = "";
+  document.getElementById("modal-nueva-sesion").classList.add("visible");
+  setTimeout(() => document.getElementById("input-nueva-clave").focus(), 200);
+};
+
+window.confirmarNuevaSesion = async function() {
+  const nueva = document.getElementById("input-nueva-clave").value.trim();
+  if (!nueva) { toast("Escribe la contraseña primero"); return; }
+  if (nueva.length < 3) { toast("Mínimo 3 caracteres"); return; }
+  cerrarModal("modal-nueva-sesion");
+  await set(dbClaveRef, normalizar(nueva));
+  await set(ref(db, "sesiones/" + horarioActual + "/contadorAnonimos"), 0);
+  toast("✓ Nueva sesión iniciada");
+};
+
+window.entrarAdmin = function() {
+  const pass = document.getElementById("input-admin-pass").value;
+  if (pass === CLAVE_ADMIN) {
+    document.getElementById("error-admin").style.display = "none";
+    document.getElementById("input-admin-pass").value = "";
+    renderAdminCampos();
+    ir("p-admin");
+  } else {
+    document.getElementById("error-admin").style.display = "block";
+  }
+};
+
+function renderAdminCampos() {
+  const cont = document.getElementById("admin-campos");
+  cont.innerHTML = Object.entries(CLAVES_MOD).map(([h, clave]) =>
+    "<div style=\"margin-bottom:16px;\"><label class=\"label-campo\">Moderador · " + ETIQUETAS[h] + "</label>" +
+    "<input type=\"text\" id=\"admin-" + h + "\" value=\"" + esc(clave) + "\" maxlength=\"20\" autocomplete=\"off\" style=\"font-size:18px;font-weight:700;letter-spacing:3px;\"></div>"
+  ).join("");
+}
+
+window.guardarClavesAdmin = async function() {
+  const nuevas = {};
+  let valido = true;
+  ["8am","11am","6pm","8pm"].forEach(h => {
+    const el = document.getElementById("admin-" + h);
+    if (el) {
+      const val = el.value.trim().toLowerCase();
+      if (val.length < 3) { valido = false; } else { nuevas[h] = val; }
+    }
+  });
+  if (!valido) { toast("Mínimo 3 caracteres por contraseña"); return; }
+  await set(clavesModRef, nuevas);
+  CLAVES_MOD = { ...CLAVES_MOD, ...nuevas };
+  toast("✓ Contraseñas guardadas");
+};
+
+window.cargarDashboard = async function() {
+  const cont = document.getElementById("dashboard-contenido");
+  cont.innerHTML = "<p style=\"color:var(--texto-tenue);font-size:13px;\">Cargando…</p>";
+  let html = "";
+  for (const h of ["8am","11am","6pm","8pm"]) {
+    const snapPreg = await get(ref(db, "sesiones/" + h + "/preguntas"));
+    const snapClave = await get(ref(db, "sesiones/" + h + "/clave"));
+    const pregs = snapPreg.val() || {};
+    const clave = snapClave.val() || "—";
+    const lista = Object.values(pregs);
+    const total = lista.length;
+    const respondidas = lista.filter(p => p.respondida).length;
+    const pendientes = total - respondidas;
+    const preguntasHTML = total > 0
+      ? lista.sort((a,b) => b.timestamp - a.timestamp).map(p =>
+          "<div class=\"dash-pregunta\"><div class=\"dash-check" + (p.respondida ? " marcado" : "") + "\"></div>" +
+          "<div style=\"flex:1;\"><div class=\"dash-pregunta-meta\">" + esc(p.alias) + " · " + esc(p.hora) + "</div>" +
+          "<div class=\"dash-pregunta-texto\">" + esc(p.texto) + "</div></div></div>"
+        ).join("")
+      : "<div class=\"dash-vacio\">Sin preguntas aún.</div>";
+    html += "<div class=\"dash-horario\"><div class=\"dash-header\"><span class=\"dash-header-titulo\">" + ETIQUETAS[h] + "</span><span class=\"dash-header-clave\">Clave: " + clave.toUpperCase() + "</span></div>" +
+      "<div class=\"dash-stats\"><div class=\"dash-stat\"><div class=\"dash-stat-num\" style=\"color:var(--azul);\">" + total + "</div><div class=\"dash-stat-label\">Total</div></div>" +
+      "<div class=\"dash-stat\"><div class=\"dash-stat-num\" style=\"color:var(--verde);\">" + respondidas + "</div><div class=\"dash-stat-label\">Respondidas</div></div>" +
+      "<div class=\"dash-stat\"><div class=\"dash-stat-num\" style=\"color:var(--rojo);\">" + pendientes + "</div><div class=\"dash-stat-label\">Pendientes</div></div></div>" +
+      preguntasHTML + "</div>";
+  }
+  cont.innerHTML = html;
+};
+</script>
+</body>
+</html>

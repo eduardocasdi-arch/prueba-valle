@@ -1,0 +1,2940 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>42° Aniversario — Grupo Valle de Puebla · AA</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Lato:wght@400;700&amp;family=Poppins:wght@800;900&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Lato:wght@400;700&amp;family=Poppins:wght@800;900&amp;display=swap" rel="stylesheet"/></noscript>
+<style>
+  /* ── DISEÑO ARCHIVO HISTÓRICO ── */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f0f4f8;
+    color: #1a2a3a;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: auto;
+    background: linear-gradient(160deg, #dde8f0 0%, #e8f0f7 40%, #f0f4f8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(44,95,138,0.08) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid #2c5f8a;
+    color: #2c5f8a;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  .hero-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(90px, 22vw, 180px);
+    font-weight: 900;
+    line-height: 0.85;
+    color: transparent;
+    -webkit-text-stroke: 2px #2c5f8a;
+    letter-spacing: -4px;
+    margin-bottom: 10px;
+    animation: fadeUp 1.2s ease both;
+  }
+  .hero-aniv {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 42px);
+    color: #2c5f8a;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: fadeUp 1.2s 0.2s ease both;
+  }
+  .hero-logo-img {
+    width: clamp(180px, 40vw, 280px);
+    height: clamp(180px, 40vw, 280px);
+    border-radius: 50%;
+    box-shadow: 0 8px 28px rgba(44,95,138,0.25);
+    margin-bottom: 24px;
+    animation: fadeUp 1.2s ease both;
+  }
+  .hero-grupo {
+    font-weight: 700;
+    font-size: clamp(18px, 4.5vw, 26px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26,42,58,0.95);
+    margin-bottom: 8px;
+    animation: fadeUp 1.2s 0.4s ease both;
+  }
+  .hero-aa {
+    font-size: clamp(13px, 3vw, 16px);
+    color: #2c5f8a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    animation: fadeUp 1.2s 0.5s ease both;
+  }
+  .hero-dates {
+    font-size: 15px;
+    color: rgba(26,42,58,0.8);
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(44,95,138,0.3);
+    padding-top: 20px;
+    margin-top: 10px;
+    animation: fadeUp 1.2s 0.6s ease both;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECCIONES */
+  section { padding: 60px 20px; max-width: 700px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #2c5f8a;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 6vw, 38px);
+    font-weight: 700;
+    color: #1a2a3a;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+  .divider { width: 60px; height: 2px; background: transparent; margin: 20px 0 30px; }
+  p { color: rgba(26,42,58,0.8); font-size: 20px; margin-bottom: 16px; font-weight: 400; text-align: justify; }
+
+  .section-dark { background: #e2ecf4; padding: 60px 20px; }
+  .section-dark > div { max-width: 700px; margin: 0 auto; }
+  .section-alt { background: linear-gradient(135deg, #dde8f2 0%, #e8f0f8 100%); padding: 60px 20px; border-top: 1px solid rgba(44,95,138,0.2); border-bottom: 1px solid rgba(44,95,138,0.2); }
+  .section-alt > div { max-width: 700px; margin: 0 auto; }
+
+  /* PLACEHOLDER */
+  .placeholder {
+    border: 2px dashed rgba(44,95,138,0.3);
+    border-radius: 4px;
+    padding: 24px;
+    text-align: center;
+    color: rgba(44,95,138,0.5);
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin: 16px 0;
+    background: rgba(44,95,138,0.03);
+  }
+  .placeholder span { display: block; font-size: 22px; margin-bottom: 8px; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 30px 0; background: rgba(44,95,138,0.15); }
+  .stat-box { background: #f0f4f8; padding: 24px 16px; text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: clamp(32px, 8vw, 52px); color: #2c5f8a; line-height: 1; font-weight: 900; }
+  .stat-label { font-size: 11px; color: rgba(26,42,58,0.4); text-transform: uppercase; letter-spacing: 2px; margin-top: 6px; display: block; }
+
+  /* MESA */
+  .mesa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  @media(max-width: 480px) { .mesa-grid { grid-template-columns: 1fr; } }
+  .mesa-card { background: rgba(44,95,138,0.06); border: 1px solid rgba(44,95,138,0.2); border-radius: 2px; padding: 20px; }
+  .mesa-card h3 { font-family: 'Playfair Display', serif; color: #2c5f8a; font-size: 18px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(44,95,138,0.2); }
+  .mesa-item { display: flex; flex-direction: column; padding: 8px 0; border-bottom: 1px solid rgba(26,42,58,0.06); gap: 2px; }
+  .mesa-role { font-size: 12px; color: rgba(26,42,58,0.75); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+  .mesa-name { font-size: 16px; color: #1a2a3a; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .mesa-name a { font-size: 15px; font-weight: 400; color: #2c5f8a; text-decoration: none; white-space: nowrap; margin-left: auto; }
+  .mesa-pending { font-size: 12px; color: rgba(44,95,138,0.4); font-style: italic; text-align: right; }
+
+  /* HORARIOS */
+  .horarios-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+  @media(max-width: 400px) { .horarios-grid { grid-template-columns: 1fr; } }
+  .horario-item { background: rgba(44,95,138,0.06); border-left: 3px solid #2c5f8a; padding: 12px 16px; }
+  .horario-time { font-family: 'Playfair Display', serif; font-size: 22px; color: #2c5f8a; line-height: 1; }
+  .horario-dias { font-size: 12px; color: rgba(26,42,58,0.5); margin-top: 3px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* AUTONOMIA */
+  .autonomia-list { list-style: none; margin-top: 20px; }
+  .autonomia-list li { padding: 14px 0 14px 28px; border-bottom: 1px solid rgba(44,95,138,0.1); color: rgba(26,42,58,0.85); font-size: 19px; font-weight: 400; position: relative; line-height: 1.5; }
+  .autonomia-list li::before { content: '·'; color: #2c5f8a; position: absolute; left: 0; font-size: 28px; line-height: 1.2; }
+
+  /* TESTIMONIOS */
+  .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 24px; }
+  @keyframes cardEntrada {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .testimonio-card { background: rgba(44,95,138,0.05); border: 1px solid rgba(44,95,138,0.15); border-radius: 2px; padding: 14px; text-align: center; opacity: 0; }
+  .testimonio-card.visible { animation: cardEntrada 0.45s ease forwards; }
+  .testimonio-num { font-family: 'Playfair Display', serif; font-size: 38px; color: #0f2340; line-height: 1; margin-bottom: 2px; } .testimonio-aniv { font-size: 10px; color: rgba(15,35,64,0.85); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; font-weight: 800; }
+  .testimonio-name { font-size: 17px; color: #0a1628; font-weight: 800; margin-bottom: 4px; }
+  .testimonio-date { font-size: 15px; color: rgba(26,42,58,0.6); }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 30px; margin-top: 30px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, #2c5f8a, transparent); }
+  .timeline-item { position: relative; margin-bottom: 28px; opacity: 0; transform: translateX(-10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot { position: absolute; left: -25px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: #2c5f8a; border: 2px solid #f0f4f8; }
+  .timeline-date { font-size: 14px; letter-spacing: 2px; color: #2c5f8a; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+  .timeline-text { font-size: 20px; color: rgba(26,42,58,0.85); font-weight: 400; margin: 0; }
+
+  /* FOTOS */
+  .fotos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+  .foto-placeholder { background: rgba(44,95,138,0.05); border: 2px dashed rgba(44,95,138,0.25); border-radius: 4px; aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; color: rgba(44,95,138,0.4); font-size: 12px; text-align: center; padding: 10px; }
+  .foto-placeholder span { font-size: 28px; margin-bottom: 6px; }
+
+  /* ACTIVIDADES */
+  .actividad-item { background: rgba(44,95,138,0.04); border: 1px solid rgba(44,95,138,0.12); padding: 20px; margin-bottom: 14px; border-radius: 2px; }
+  .actividad-item h4 { font-family: 'Playfair Display', serif; color: #2c5f8a; font-size: 17px; margin-bottom: 8px; }
+
+  /* FOOTER */
+  footer { background: #dde8f2; padding: 50px 20px; text-align: center; border-top: 1px solid rgba(44,95,138,0.2); }
+  .footer-phrase { font-family: 'Playfair Display', serif; font-size: clamp(18px, 4vw, 26px); color: #2c5f8a; font-style: italic; margin-bottom: 16px; }
+  .footer-sub { font-size: 13px; color: rgba(26,42,58,0.45); letter-spacing: 2px; text-transform: uppercase; }
+
+  .timeline-num {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: rgba(44,95,138,0.7);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .evento-foto {
+    margin-top: 12px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(44,95,138,0.15);
+    background: rgba(44,95,138,0.04);
+    text-align: center;
+  }
+  .evento-foto img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+  .evento-foto img:hover { opacity: 0.92; }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+  }
+  #lightbox.active { display: flex; }
+  #lightbox img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 4px;
+    object-fit: contain;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  #lightbox-close {
+    position: fixed;
+    top: 16px; right: 20px;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    z-index: 100000;
+  }
+  #lightbox-close:hover { opacity: 1; }
+
+
+  .est-vigente { background: rgba(39,174,96,0.15); color: #1e8449; font-size:11px; font-weight:700; padding:3px 10px; border-radius:50px; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; border:1px solid rgba(39,174,96,0.3); }
+  .est-proximo {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 50px;
+    background: rgba(230,140,0,0.12); color: #b36b00;
+    border: 1px solid rgba(230,140,0,0.3);
+  }
+  /* ── FILTROS ACUERDOS ── */
+  #acuerdos-filtros {
+    display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 16px;
+  }
+  .acuerdo-filtro-btn {
+    padding: 5px 12px; border-radius: 50px;
+    border: 1px solid rgba(44,95,138,0.2);
+    background: rgba(44,95,138,0.06);
+    color: #2c5f8a; font-size: 11px; font-weight: 700;
+    cursor: pointer; transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .acuerdo-filtro-btn.active { background: #2c5f8a; color: #fff; border-color: #2c5f8a; }
+  .est-vencido { background: rgba(231,76,60,0.12); color: #c0392b; font-size:11px; font-weight:700; padding:3px 10px; border-radius:50px; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; border:1px solid rgba(231,76,60,0.3); }
+  .acuerdo-card { background: rgba(44,95,138,0.04); border: 1px solid rgba(44,95,138,0.12); border-radius: 4px; padding: 14px 16px; margin-bottom: 10px; }
+  .acuerdo-num { font-family: 'Playfair Display', serif; font-size: 28px; color: #2c5f8a; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+  .acuerdo-titulo { font-size: 18px; font-weight: 700; color: #1a2a3a; margin-bottom: 8px; line-height: 1.4; }
+  .acuerdo-desc { font-size: 16px; color: rgba(26,42,58,0.85); margin-bottom: 8px; line-height: 1.6; }
+  .acuerdo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .acuerdo-tag { font-size: 13px; background: rgba(44,95,138,0.08); color: #2c5f8a; padding: 4px 10px; border-radius: 10px; font-weight: 700; letter-spacing: 0.5px; }
+  .acuerdo-propone { font-size: 14px; color: rgba(26,42,58,0.6); margin-top: 8px; }
+  .acuerdo-mesa { font-size: 13px; color: rgba(26,42,58,0.5); margin-top: 3px; }
+  body { padding-bottom: 80px; }
+
+  .tab-radio { display: none; }
+  .tab-content { display: none; }
+  #radio-inicio:checked ~ #tab-inicio,
+  #radio-mesa:checked   ~ #tab-mesa,
+  #radio-eventos:checked ~ #tab-eventos,
+  #radio-testim:checked  ~ #tab-testim,
+  #radio-grupo:checked   ~ #tab-grupo { display: block; }
+  #radio-inicio:checked ~ .barra-nav label[for="radio-inicio"],
+  #radio-mesa:checked   ~ .barra-nav label[for="radio-mesa"],
+  #radio-eventos:checked ~ .barra-nav label[for="radio-eventos"],
+  #radio-testim:checked  ~ .barra-nav label[for="radio-testim"],
+  #radio-grupo:checked   ~ .barra-nav label[for="radio-grupo"] { background: rgba(44,95,138,0.5); }
+  #radio-inicio:checked ~ .barra-nav label[for="radio-inicio"] .etiqueta,
+  #radio-mesa:checked   ~ .barra-nav label[for="radio-mesa"] .etiqueta,
+  #radio-eventos:checked ~ .barra-nav label[for="radio-eventos"] .etiqueta,
+  #radio-testim:checked  ~ .barra-nav label[for="radio-testim"] .etiqueta,
+  #radio-grupo:checked   ~ .barra-nav label[for="radio-grupo"] .etiqueta { color: #88c0e8; }
+  #radio-inicio:checked ~ .barra-nav label[for="radio-inicio"] .icono,
+  #radio-mesa:checked   ~ .barra-nav label[for="radio-mesa"] .icono,
+  #radio-eventos:checked ~ .barra-nav label[for="radio-eventos"] .icono,
+  #radio-testim:checked  ~ .barra-nav label[for="radio-testim"] .icono,
+  #radio-grupo:checked   ~ .barra-nav label[for="radio-grupo"] .icono { opacity: 1; }
+
+  .barra-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #1a2a3a;
+    display: flex;
+    height: 65px;
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.3);
+    z-index: 9999;
+  }
+  .btn-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: transparent;
+    cursor: pointer;
+    padding: 6px 2px;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+  }
+  .btn-nav .icono {
+    font-size: 18px;
+    opacity: 0.85;
+  }
+  .btn-nav .etiqueta {
+    font-family: 'Lato', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+  }
+  .btn-nav.activo {
+    background: rgba(44,95,138,0.5);
+  }
+  .btn-nav.activo::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 15%; right: 15%;
+    height: 3px;
+    background: #88c0e8;
+    border-radius: 0 0 4px 4px;
+  }
+  .btn-nav.activo .icono { opacity: 1; }
+  .btn-nav.activo .etiqueta { color: #88c0e8; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    /* Stats block */
+    #stats-block { padding: 12px 10px !important; }
+    .mesa-card { padding: 14px 12px; }
+    .mesa-name { font-size: 14px !important; }
+    .mesa-role { font-size: 11px !important; }
+    /* Acuerdos */
+    .acuerdo-titulo { font-size: 16px; }
+    .acuerdo-desc { font-size: 14px; }
+    .acuerdo-tag { font-size: 12px; }
+    .acuerdo-propone, .acuerdo-mesa { font-size: 13px; }
+    /* Timeline */
+    .timeline { padding-left: 20px; }
+    .timeline-text { font-size: 17px; }
+    .timeline-date { font-size: 12px; }
+    /* Testimonios */
+    .testimonio-card { padding: 10px 8px; }
+    .testimonio-name { font-size: 14px; }
+    .testimonio-date { font-size: 13px; }
+    /* Autonomia */
+    .autonomia-list li { font-size: 17px; }
+    /* General */
+    section { padding: 40px 14px; }
+    h2 { font-size: clamp(22px, 6vw, 32px); }
+    p { font-size: 17px; }
+    /* Hero */
+    .hero { padding: 28px 14px; }
+    /* Footer */
+    footer { padding: 36px 14px; }
+  }
+
+  /* ── TAB STRIPS ── */
+  .tab-strip {
+    height: 6px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .strip-resena    { background: #2c5f8a; }
+  .strip-serv      { background: #1a6b4a; }
+  .strip-eventos   { background: #8b4513; }
+  .strip-testim    { background: #4a2c7a; }
+  .strip-acuerdos  { background: #1a5a6b; }
+  .strip-autonomia { background: #c9a96e; }
+
+  /* ── CLASES UTILITARIAS (reemplaza estilos inline repetidos) ── */
+  .acuerdo-header   { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+  .td-center        { padding:9px 6px; text-align:center; color:rgba(26,42,58,0.85); }
+  .td-dia           { padding:9px 6px; font-weight:700; color:#1a2a3a; }
+  .td-vacio         { padding:9px 6px; text-align:center; color:rgba(26,42,58,0.4); }
+  .th-col           { padding:10px 6px; text-align:center; color:#2c5f8a; font-weight:700; letter-spacing:1px; text-transform:uppercase; font-size:14px; }
+  .th-dia           { padding:10px 6px; text-align:left;   color:#2c5f8a; font-weight:700; letter-spacing:1px; text-transform:uppercase; font-size:14px; }
+  .sublabel         { font-size:12px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#2c5f8a; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid rgba(44,95,138,0.2); }
+  .sep-top          { margin-top:14px; padding-top:12px; border-top:1px solid rgba(44,95,138,0.15); }
+  .mb-24            { margin-bottom:24px; }
+  .mb-8             { margin-bottom:8px; }
+  .tr-alt           { border-bottom:1px solid rgba(44,95,138,0.1); background:rgba(44,95,138,0.03); }
+  .tr-base          { border-bottom:1px solid rgba(44,95,138,0.1); }
+  .video-wrap       { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; margin-top:12px; }
+  .video-wrap iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+  .c-azul           { color:#2c5f8a; }
+
+  /* ── ÍCONO WHATSAPP (SVG inline como máscara CSS, una sola definición) ── */
+  .wa-link {
+    display:inline-flex; align-items:center; gap:4px;
+    font-size:15px; font-weight:400; color:#2c5f8a;
+    text-decoration:none; white-space:nowrap; margin-left:auto;
+  }
+  .wa-link::before {
+    content:'';
+    display:inline-block;
+    width:16px; height:16px; flex-shrink:0;
+    background-color:#2c5f8a;
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.154-1.448A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.214-3.722.875.936-3.629-.234-.373A9.818 9.818 0 1112 21.818z'/%3E%3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.154-1.448A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.214-3.722.875.936-3.629-.234-.373A9.818 9.818 0 1112 21.818z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-size:contain; mask-size:contain;
+  }
+
+  /* ── BOTÓN FLOTANTE COMPARTIR WHATSAPP ── */
+  .wa-share-btn {
+    position: fixed;
+    bottom: 72px;
+    right: 12px;
+    z-index: 200000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #25D366;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 6px 10px 6px 8px;
+    border-radius: 50px;
+    box-shadow: 0 3px 10px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  .wa-share-btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 6px rgba(37,211,102,0.3);
+  }
+  .wa-share-btn svg {
+    width: 14px; height: 14px; flex-shrink: 0;
+  }
+  @media (min-width: 600px) {
+    .wa-share-btn { bottom: 24px; right: 24px; font-size: 12px; padding: 7px 12px 7px 9px; }
+  }
+
+  /* ── MODO OSCURO ── */
+  body.dark { background: #0d1b2a; color: #c8dce8; }
+  body.dark .tab-content { background: #0d1b2a; }
+  body.dark .acuerdo-card,
+  body.dark .testimonio-card { background: rgba(44,95,138,0.15); border-color: rgba(44,95,138,0.3); }
+  body.dark .timeline-text { color: #c8dce8; }
+  body.dark table { color: #c8dce8; }
+  body.dark .tr-base, body.dark .tr-alt { background: rgba(44,95,138,0.1); }
+  body.dark .section-card { background: #112236; }
+
+
+
+  /* ── TARJETA TESTIMONIO ── */
+  /* ── BOTÓN ESCRÍBEME ── */
+  .test-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2c5f8a;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid rgba(44,95,138,0.25);
+    padding: 4px 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+  .test-share-btn:hover { background: rgba(44,95,138,0.06); }
+  .test-msg-count {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 1px 6px;
+    margin-left: 2px;
+    min-width: 16px;
+    text-align: center;
+  }
+  /* ── MURO OVERLAY ── */
+  #muro-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 300000;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+  #muro-overlay.active { display: flex; }
+  #muro-modal {
+    background: #fff;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  }
+  #muro-header {
+    background: #1a3a5c;
+    padding: 16px 18px 14px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  #muro-header .mh-badge {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: #c9a96e; margin-bottom: 4px;
+  }
+  #muro-header .mh-title {
+    font-family: Georgia,serif; font-size: 20px; font-weight: 700;
+    line-height: 1.2; margin-bottom: 2px;
+  }
+  #muro-header .mh-sub {
+    font-size: 11px; color: rgba(180,210,240,0.7);
+  }
+  #muro-close {
+    position: absolute; top: 10px; right: 14px;
+    background: none; border: none; font-size: 20px;
+    cursor: pointer; color: rgba(255,255,255,0.7);
+  }
+  /* Formulario */
+  #muro-form {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid rgba(44,95,138,0.12);
+    flex-shrink: 0;
+    background: #f7fafd;
+  }
+  #muro-form input, #muro-form textarea {
+    width: 100%; box-sizing: border-box;
+    border: 1px solid rgba(44,95,138,0.25);
+    border-radius: 8px; padding: 8px 10px;
+    font-family: inherit; font-size: 13px;
+    color: #1a2a3a; background: #fff;
+    outline: none; resize: none;
+  }
+  #muro-form input { margin-bottom: 8px; }
+  #muro-form input:focus, #muro-form textarea:focus {
+    border-color: #2c5f8a;
+  }
+  #muro-form-row {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-top: 6px;
+  }
+  #muro-wordcount {
+    font-size: 11px; color: rgba(26,42,58,0.4);
+  }
+  #muro-wordcount.over { color: #c0392b; font-weight: 700; }
+  #muro-submit {
+    background: #2c5f8a; color: #fff;
+    border: none; border-radius: 50px;
+    padding: 7px 18px; font-size: 12px;
+    font-weight: 700; cursor: pointer;
+    transition: background 0.15s;
+  }
+  #muro-submit:disabled { background: rgba(44,95,138,0.3); cursor: not-allowed; }
+  #muro-submit:not(:disabled):hover { background: rgba(44,95,138,0.08); }
+  /* ── SELECTOR EMOJIS ── */
+  #emoji-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+    padding: 6px 8px;
+    background: rgba(44,95,138,0.05);
+    border: 1px solid rgba(44,95,138,0.12);
+    border-radius: 10px;
+  }
+  .emoji-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 2px 3px;
+    border-radius: 6px;
+    line-height: 1;
+    transition: transform 0.1s, background 0.1s;
+  }
+  .emoji-btn:hover { background: rgba(44,95,138,0.1); transform: scale(1.25); }
+  .emoji-btn:active { transform: scale(0.95); }
+  /* Mensajes del muro */
+  #muro-mensajes {
+    overflow-y: auto;
+    flex: 1;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #muro-mensajes::-webkit-scrollbar { width: 4px; }
+  #muro-mensajes::-webkit-scrollbar-thumb { background: rgba(44,95,138,0.2); border-radius: 4px; }
+  .muro-card {
+    background: #fff;
+    border: 1px solid rgba(44,95,138,0.15);
+    border-radius: 12px;
+    padding: 10px 13px;
+    box-shadow: 0 1px 4px rgba(44,95,138,0.07);
+  }
+  .muro-card-top {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .muro-card-autor {
+    font-size: 12px; font-weight: 700; color: #2c5f8a;
+  }
+  .muro-card-fecha {
+    font-size: 10px; color: rgba(26,42,58,0.35);
+  }
+  .muro-card-texto {
+    font-size: 13px; color: #1a2a3a; line-height: 1.5;
+  }
+  .muro-card-del {
+    background: none; border: none; cursor: pointer;
+    font-size: 14px; color: rgba(26,42,58,0.25);
+    padding: 0 0 0 6px; line-height: 1;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+  .muro-card-del:hover { color: #c0392b; }
+  #muro-empty {
+    text-align: center; padding: 24px 0;
+    color: rgba(26,42,58,0.35); font-size: 13px;
+  }
+  /* ── CUENTA REGRESIVA ── */
+  #countdown-wrap {
+    background: linear-gradient(135deg, #2a4f6e 0%, #3d7ab0 100%);
+    border-radius: 12px;
+    padding: 10px 10px 9px;
+    margin: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(44,95,138,0.15);
+  }
+  #countdown-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 7px;
+    font-weight: 700;
+  }
+  #countdown-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .cd-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 5px 8px 4px;
+    min-width: 48px;
+  }
+  .cd-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 5.5vw, 28px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+  .cd-unit {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(180,210,240,0.6);
+    margin-top: 3px;
+  }
+  #countdown-celebracion {
+    display: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #c9a96e;
+    padding: 8px 0 4px;
+    line-height: 1.4;
+  }
+  /* ── BUSCADOR EVENTOS ── */
+  #eventos-search-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    padding: 10px 0 8px;
+    margin-bottom: 10px;
+  }
+  body.dark #eventos-search-wrap { background: #0d1b2a; }
+  #eventos-search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(44,95,138,0.07);
+    border: 1px solid rgba(44,95,138,0.2);
+    border-radius: 50px;
+    padding: 7px 14px;
+    margin-bottom: 8px;
+  }
+  #eventos-search-box svg { flex-shrink: 0; opacity: 0.4; }
+  #eventos-search-input {
+    border: none; background: none; outline: none;
+    font-family: inherit; font-size: 13px;
+    color: #1a2a3a; width: 100%;
+  }
+  body.dark #eventos-search-input { color: #c8dce8; }
+  #eventos-search-clear {
+    background: none; border: none; cursor: pointer;
+    font-size: 14px; color: rgba(44,95,138,0.5);
+    padding: 0; line-height: 1; display: none;
+  }
+  #eventos-meses {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mes-btn {
+    background: rgba(44,95,138,0.08);
+    border: 1px solid rgba(44,95,138,0.18);
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #2c5f8a;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .mes-btn:hover, .mes-btn.active {
+    background: #2c5f8a;
+    color: #fff;
+    border-color: #2c5f8a;
+  }
+  #mes-select {
+    flex: 1;
+    border: 1px solid rgba(44,95,138,0.2);
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #2c5f8a;
+    background: rgba(44,95,138,0.05);
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%232c5f8a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 28px;
+  }
+  #mes-select:focus { border-color: #2c5f8a; }
+  /* ── TOGGLE VISTA ── */
+  #vista-toggle {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .vista-btn {
+    flex: 1;
+    padding: 7px 0;
+    border-radius: 50px;
+    border: 1px solid rgba(44,95,138,0.2);
+    background: rgba(44,95,138,0.06);
+    color: #2c5f8a;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .vista-btn.active {
+    background: #2c5f8a;
+    color: #fff;
+    border-color: #2c5f8a;
+  }
+  /* ── GALERÍA ── */
+  #galeria-grid {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-top: 8px;
+  }
+  #galeria-grid.visible { display: grid; }
+  .galeria-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 6px;
+    cursor: pointer;
+    background: rgba(44,95,138,0.08);
+  }
+  .galeria-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s;
+  }
+  .galeria-item:hover img { transform: scale(1.05); }
+  .galeria-item .gal-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    color: #fff;
+    font-size: 9px;
+    padding: 12px 5px 4px;
+    line-height: 1.3;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .galeria-item:hover .gal-label { opacity: 1; }
+  #eventos-noresult {
+    text-align: center;
+    padding: 30px 0;
+    color: rgba(26,42,58,0.35);
+    font-size: 13px;
+    display: none;
+  }
+  #muro-loading {
+    text-align: center; padding: 16px;
+    font-size: 12px; color: rgba(26,42,58,0.4);
+  }
+  #muro-status {
+    font-size: 11px; color: #2c5f8a;
+    text-align: center; padding: 4px 0 8px;
+    min-height: 20px; flex-shrink: 0;
+  }
+
+  /* ─── BOTÓN FLOTANTE NAV (estilo TikTok) ─────────────────────────────────── */
+  .nav-flotante {
+    position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+    z-index: 999999; display: flex; flex-direction: column; align-items: center;
+    gap: 6px; text-decoration: none; cursor: pointer;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+  }
+  .nav-flotante-circulo {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s;
+  }
+  .nav-flotante:active .nav-flotante-circulo { transform: scale(0.9); }
+  .nav-flotante-circulo svg { width: 34px; height: 34px; }
+  .nav-flotante-label {
+    font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 900;
+    color: #2c5f8a; text-align: center;
+    letter-spacing: 0.2px; max-width: 84px; line-height: 1.25;
+    background: rgba(255,255,255,0.92); padding: 4px 10px; border-radius: 8px;
+  }
+  @media (max-width: 380px) {
+    .nav-flotante { right: 8px; }
+    .nav-flotante-circulo { width: 32px; height: 32px; }
+    .nav-flotante-circulo svg { width: 30px; height: 30px; }
+  }
+</style>
+</head>
+<body>
+<a class="nav-flotante" href="https://valledepuebla-busquedaliteratura.netlify.app/">
+  <div class="nav-flotante-circulo">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.8 4L13.8 8.3C12.5 8.4 11.2 8.7 10 9.1C6.5 10.4 4 13.3 2.8 17.5C5 14.7 8.3 12.6 13.8 12.2L13.8 16.5L21 10.25L13.8 4Z" fill="white" stroke="#2c5f8a" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="nav-flotante-label">Buscador Literatura</span>
+</a>
+<input checked="" class="tab-radio" id="radio-inicio" name="tabs" type="radio"/>
+<input class="tab-radio" id="radio-mesa" name="tabs" type="radio"/>
+<input class="tab-radio" id="radio-eventos" name="tabs" type="radio"/>
+<input class="tab-radio" id="radio-testim" name="tabs" type="radio"/>
+<input class="tab-radio" id="radio-grupo" name="tabs" type="radio"/>
+<div class="tab-content" id="tab-inicio">
+<div class="tab-strip strip-resena"></div>
+<!-- HERO -->
+<div class="hero">
+<div class="hero-badge"><strong>Reseña Histórica</strong></div>
+<img alt="Grupo Valle de Puebla — 42° Aniversario" class="hero-logo-img" loading="lazy" onerror="this.style.display='none'" src="https://lh3.googleusercontent.com/d/14x10fZmVBjC4PeGYUBcuA0bfY78QrB14"/>
+<div class="hero-grupo"><strong>Grupo Valle De Puebla<br/>De Alcohólicos Anónimos</strong></div>
+<div class="hero-dates">Fundado el 7 de agosto de 1984 · Celebración agosto 2026</div>
+<div style="margin-top:18px; padding:14px 32px; background:rgba(44,95,138,0.12); border:1px solid rgba(44,95,138,0.25); border-radius:10px; max-width:480px; text-align:center;">
+<div style="font-family:'Playfair Display',serif; font-size:clamp(18px,5vw,26px); font-style:italic; color:#2c5f8a; line-height:1.6; text-align:center;">"En Alcohólicos Anónimos nacen los verdaderos milagros."</div>
+</div>
+</div>
+<!-- CUENTA REGRESIVA + VISITAS -->
+<div id="countdown-wrap">
+<!-- Visitas dentro de la barra -->
+<div style="display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:8px; opacity:0.6; font-size:12px; color:#e8f4ff; letter-spacing:1px;">
+<svg fill="none" height="13" stroke="#e8f4ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+<span id="cnt-visitas" style="font-weight:900; font-family:'Playfair Display',serif; font-size:14px;">…</span>
+<span style="font-weight:600;">visitas</span>
+</div>
+<div id="countdown-label">⏳ Faltan para el 42° Aniversario</div>
+<div id="countdown-boxes">
+<div class="cd-box"><div class="cd-num" id="cd-dias">--</div><div class="cd-unit">Días</div></div>
+<div class="cd-box"><div class="cd-num" id="cd-horas">--</div><div class="cd-unit">Horas</div></div>
+<div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-unit">Min</div></div>
+<div class="cd-box"><div class="cd-num" id="cd-segs">--</div><div class="cd-unit">Seg</div></div>
+</div>
+<div id="countdown-celebracion">🎉 ¡Hoy es nuestro 42° Aniversario!<br/>¡Felicidades Grupo Valle de Puebla! 🎊</div>
+<!-- EVENTO CENA -->
+<div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.2);">
+<div style="display:flex; align-items:center; justify-content:center; gap:16px;">
+<!-- Texto centrado -->
+<div style="font-size:13px; color:rgba(200,225,245,0.95); line-height:1.8; text-align:center; flex:1;">
+<!-- Título y fecha -->
+<div style="text-align:center; margin-bottom:8px;">
+          🍽️ <strong style="color:#f0c060; font-size:16px; text-shadow:0 1px 4px rgba(0,0,0,0.3);">Cena del 42° Aniversario</strong><br/>
+<span style="color:rgba(200,225,245,0.95); font-size:13px;">Sábado 8 de agosto · 6:00 pm</span><br/>
+<span style="color:rgba(200,225,245,0.65); font-size:12px;">Hotel Posada Señorial — Salón Xelhua</span>
+</div>
+<!-- Botones en fila -->
+<div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+<a href="https://lh3.googleusercontent.com/d/15zAW6Rvw4X6DtSGhXJ9iDKS5Aqypt8EB" style="display:inline-flex; align-items:center; gap:5px; background:rgba(201,169,110,0.25); color:#f0c060; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700; text-decoration:none; border:1px solid rgba(201,169,110,0.4); white-space:nowrap;">
+            📸 Ver invitación
+          </a>
+<a href="https://maps.app.goo.gl/KvVc9T4oe9wnEwNaA" rel="noopener" style="display:inline-flex; align-items:center; gap:5px; background:rgba(255,255,255,0.12); color:#fff; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700; text-decoration:none; border:1px solid rgba(255,255,255,0.25); white-space:nowrap;" target="_blank">
+            📍 Cómo llegar
+          </a>
+</div>
+</div>
+<!-- Separador vertical -->
+<div style="width:1px; height:60px; background:rgba(255,255,255,0.2); flex-shrink:0;"></div>
+<!-- Botones -->
+<div style="display:flex; flex-direction:column; gap:6px; align-items:center; flex-shrink:0;">
+<a href="#" id="cal-smart" style="display:inline-flex; align-items:center; justify-content:center;
+                  width:44px; height:44px; border-radius:50%;
+                  background:rgba(255,255,255,0.15);
+                  border:1px solid rgba(255,255,255,0.25);
+                  text-decoration:none; font-size:22px;" title="Agregar al calendario">
+          📅
+        </a>
+</div>
+<script>
+      (function(){
+        var btn = document.getElementById('cal-smart');
+        if (!btn) return;
+        var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        if (isIOS) {
+          btn.href = "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260808T180000%0ADTEND:20260808T220000%0ASUMMARY:Cena+42%C2%B0+Aniversario+GVP%0ADESCRIPTION:Cena+del+42%C2%B0+Aniversario+del+Grupo+Valle+de+Puebla+-+AA%0ALOCATION:Hotel+Posada+Se%C3%B1orial%2C+Sal%C3%B3n+Xelhua%2C+Puebla%0AEND:VEVENT%0AEND:VCALENDAR";
+          btn.setAttribute('download', 'Aniversario_GVP_2026.ics');
+        } else {
+          btn.href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cena+42%C2%B0+Aniversario+GVP&dates=20260808T180000/20260808T220000&details=Cena+del+42%C2%B0+Aniversario+del+Grupo+Valle+de+Puebla+%E2%80%94+AA&location=Hotel+Posada+Se%C3%B1orial%2C+Sal%C3%B3n+Xelhua%2C+Puebla";
+          btn.setAttribute('target', '_blank');
+        }
+      })();
+      </script>
+</div>
+</div>
+</div>
+<!-- STATS -->
+<div class="section-dark">
+<div>
+<div id="stats-block" style="background:#e8f0f7; padding:16px 20px; border-bottom:1px solid rgba(44,95,138,0.1);">
+<div style="max-width:700px; margin:0 auto;">
+<!-- Periodo -->
+<div style="text-align:center; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid rgba(44,95,138,0.15);">
+<div style="font-size:13px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:#2c5f8a;">Agosto 2025 — 14 de julio 2026</div>
+</div>
+<!-- Fila 1: Miembros + Testimonios -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
+<div style="background:rgba(255,255,255,0.7); border-radius:12px; padding:12px 8px; text-align:center; display:flex; flex-direction:column; align-items:center;">
+<div style="font-size:13px; color:rgba(26,42,58,0.8); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; font-weight:700;">Miembros</div>
+<div style="font-family:'Playfair Display',serif; font-size:clamp(20px,5vw,30px); font-weight:900; color:#2c5f8a; line-height:1;">+120 Compañeros</div>
+</div>
+<div onclick="document.getElementById('radio-testim').checked=true;" onmouseout="this.style.background='rgba(255,255,255,0.7)'" onmouseover="this.style.background='rgba(44,95,138,0.15)'" style="background:rgba(255,255,255,0.7); border-radius:12px; padding:12px 8px; text-align:center; display:flex; flex-direction:column; align-items:center; cursor:pointer; transition:background 0.15s;">
+<div style="font-size:13px; color:rgba(26,42,58,0.8); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; line-height:1.3; font-weight:700;">Testimonios<br/>Sobriedad</div>
+<div id="cnt-testimonios" style="font-family:'Playfair Display',serif; font-size:clamp(24px,6vw,36px); font-weight:900; color:#2c5f8a; line-height:1;">35</div>
+<div style="font-size:9px; color:rgba(44,95,138,0.5); margin-top:4px; letter-spacing:1px;">ver →</div>
+</div>
+</div>
+<!-- Fila 2: Juntas de Información (ancho completo) -->
+<div class="juntas-info-row">
+<div class="juntas-info-titulo">Juntas de<br>Información</div>
+<div id="cnt-juntas" class="juntas-info-num">130</div>
+<div class="juntas-mh-wrap">
+<div class="juntas-mh-box" style="background:rgba(136,192,232,0.35);">
+<div style="font-size:17px; font-weight:900; color:#2c5f8a; letter-spacing:2px;">M</div>
+<div id="cnt-mujeres" style="font-family:'Playfair Display',serif; font-size:28px; font-weight:900; color:#2c5f8a; line-height:1.1;">37</div>
+<div style="font-size:15px; color:#1a2a3a; font-weight:700;">28%</div>
+</div>
+<div class="juntas-mh-box" style="background:rgba(44,95,138,0.25);">
+<div style="font-size:17px; font-weight:900; color:#2c5f8a; letter-spacing:2px;">H</div>
+<div id="cnt-hombres" style="font-family:'Playfair Display',serif; font-size:28px; font-weight:900; color:#2c5f8a; line-height:1.1;">93</div>
+<div style="font-size:15px; color:#1a2a3a; font-weight:700;">72%</div>
+</div>
+</div>
+</div>
+<!-- Fila 3: Testimonios por años cumplidos -->
+<div style="background:rgba(255,255,255,0.7); border-radius:12px; padding:12px 16px; margin-top:8px;">
+<div style="font-size:13px; color:rgba(26,42,58,0.8); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; font-weight:700; text-align:center;">Testimonios por años cumplidos</div>
+<div class="tg-grid">
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">1° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">11 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">6H · 5M</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Cami, Guadalupe, Alan, Moni, Laura, Lilo, Héctor, Jorge, Rafa, Monse, Erasmo</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">2° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">5 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">2H · 3M</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Ana, Jhony, Jesy, Benja, Luisa</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">4° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">3 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">3H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Gustavo, Luis Alberto, Salvador P.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">5° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">4 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">4H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Roberto, Octavio, Daniel, Demian</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">7° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Humberto</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">8° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Beto</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">9° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Arturo M.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">10° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Lalo C.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">11° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Gastón</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">12° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1M</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Pily</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">20° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Julián</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">21° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Hugo B.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">26° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Abraham</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">34° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Rodrigo H.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">40° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Salvador C.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">44° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Efraín</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+</div>
+<div style="text-align:center; margin-top:10px; font-size:11px; color:#5a6b7a;">27 hombres · 8 mujeres · 35 testimonios totales</div>
+</div>
+<style>
+.juntas-info-row {
+  background:rgba(255,255,255,0.7); border-radius:12px; padding:12px 16px;
+  display:flex; align-items:center; gap:16px;
+}
+.juntas-info-titulo {
+  font-size:13px; color:rgba(26,42,58,0.8); text-transform:uppercase;
+  letter-spacing:1px; line-height:1.3; font-weight:700; text-align:left;
+  flex-shrink:0;
+}
+.juntas-info-num {
+  font-family:'Playfair Display',serif; font-size:clamp(24px,6vw,36px);
+  font-weight:900; color:#2c5f8a; line-height:1; flex-shrink:0;
+}
+.juntas-mh-wrap { flex:1; display:flex; gap:8px; min-width:0; }
+.juntas-mh-box { flex:1 1 0; min-width:0; border-radius:8px; padding:8px 6px; text-align:center; }
+.tg-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; }
+.tg-card { transition:background 0.15s; }
+.tg-card:active { background:#f4f8fb !important; }
+@media (max-width: 520px) {
+  .tg-grid { grid-template-columns:repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .juntas-info-row { flex-direction:column; align-items:stretch; gap:10px; padding:14px; }
+  .juntas-info-titulo { text-align:center; }
+  .juntas-info-num { text-align:center; }
+  .juntas-mh-wrap { width:100%; }
+}
+</style>
+</div>
+</div>
+</div>
+</div>
+<!-- INTRODUCCION -->
+<section>
+<div class="section-label">Mensaje de apertura</div>
+<h2>Introducción</h2>
+<div class="divider"></div>
+<p>La reseña histórica del Grupo Valle de Puebla de Alcohólicos Anónimos prevalece el legado de todos los compañeros que asisten a esta comunidad espiritual para ayudarse y ayudar a otros en la recuperación de la enfermedad del alcoholismo.</p>
+<p>El único objetivo de un grupo de Alcohólicos Anónimos es llevar el mensaje de recuperación al alcohólico que aún sufre.</p>
+<p>Transmitir el mensaje de recuperación no solo es un acto de servicio hacia el recién llegado; es también una práctica esencial que fortalece la sobriedad continua y el crecimiento interior de quien lo comparte.</p>
+</section>
+<!-- OBJETIVO -->
+<div class="section-dark">
+<div>
+<div class="section-label">Por qué este trabajo</div>
+<h2>Objetivo</h2>
+<div class="divider"></div>
+<p>El objetivo de esta reseña histórica es valorar, por parte de la membresía del Grupo Valle de Puebla, los <strong style="color:#2c5f8a">42 años de autonomía</strong> que han definido su identidad y fortaleza desde su fundación.</p>
+<p>Esta autonomía, sustentada en las Doce Tradiciones, ha sido un sello distintivo que ha permitido la permanencia, el crecimiento y el sentido de pertenencia dentro del grupo.</p>
+<p>Este documento busca dar continuidad al legado que ha guiado al Grupo Valle de Puebla a lo largo de su historia, fortaleciendo la comprensión de su evolución y de los principios que sostienen su labor.</p>
+</div>
+</div>
+<!-- ANTECEDENTES -->
+<section>
+<div class="section-label">Contexto histórico</div>
+<h2>Antecedentes</h2>
+<div class="divider"></div>
+<p>La reseña histórica presentada el año anterior documentó las actividades realizadas con motivo del 41° Aniversario del Grupo Valle de Puebla, así como los hechos más relevantes ocurridos durante el periodo 2024–2025.</p>
+<p>La presente reseña retoma ese punto de partida y da seguimiento a los acontecimientos del periodo 2025–2026, con el propósito de preservar la memoria colectiva del Grupo Valle de Puebla de Alcohólicos Anónimos.</p>
+<p>Este esfuerzo busca fortalecer la identidad del grupo y asegurar que las nuevas generaciones conozcan el camino reciente que ha marcado su desarrollo y su práctica de autonomía.</p>
+</section>
+<!-- SITUACION ACTUAL -->
+<div class="section-dark">
+<div>
+<div class="section-label">Hoy somos</div>
+<h2>Situación Actual</h2>
+<div class="divider"></div>
+<p>El Grupo Valle de Puebla cuenta actualmente con una membresía estimada de <strong style="color:#2c5f8a">más de 120 personas</strong>, integrada por compañeras, compañeros, jóvenes, adultos y miembros de la comunidad LGBT.</p>
+<p>El grupo continúa participando activamente en el pase de mensaje de recuperación en Clínica 1 IMSS, Ortopedia IMSS, Clínica Pacífica, Clínica Ser, Clínica San Agustín y otros espacios.</p>
+<p>Se mantiene vigente el programa de radio <em style="color:#2c5f8a">El Lenguaje del Corazón</em> y el grupo se encuentra actualizando sus redes sociales para ampliar su alcance y facilitar el contacto con personas que buscan información sobre AA.</p>
+</div>
+</div>
+</div>
+<div class="tab-content" id="tab-mesa">
+<div class="tab-strip strip-serv"></div>
+<!-- MESA DE SERVIDORES -->
+<section>
+<div class="section-label">Quiénes nos guían</div>
+<h2>Servidores de la Conciencia del Grupo Valle de Puebla</h2>
+<div class="divider"></div>
+<div class="mesa-grid">
+<!-- 1° Semestre 2026 -->
+<div class="mesa-card" style="grid-column:1/-1; margin-bottom:8px;">
+<h3>1° Semestre 2026</h3>
+<div class="section-label" style="margin-bottom:8px; margin-top:4px;">Mesa de Servicio Actual</div>
+<div class="mesa-item"><span class="mesa-role">Coordinador</span><span class="mesa-name">Arturo <a class="wa-link" href="https://wa.me/522214063411" target="_blank">221 406 341 1</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Tesorera</span><span class="mesa-name">Ana <a class="wa-link" href="https://wa.me/522224078162" target="_blank">222 407 81 62</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Secretaria</span><span class="mesa-name">Monse <a class="wa-link" href="https://wa.me/522221860714" target="_blank">222 1 86 071 4</a></span></div>
+<div class="sep-top">
+<div class="mb-8">Representantes de Servicios Generales</div>
+<div class="mesa-item"><span class="mesa-role">RSG (Representante de Servicios Generales)</span><span class="mesa-name">Hugo <a class="wa-link" href="https://wa.me/525623694921" target="_blank">562 369 4921</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Suplente RSG</span><span class="mesa-name">Jessica <a class="wa-link" href="https://wa.me/527491106142" target="_blank">749 1 1 0 61 42</a></span></div>
+</div>
+<div class="sep-top">
+<div class="mb-8">Representantes</div>
+<div class="mesa-item"><span class="mesa-role">Representante de Información Pública</span><span class="mesa-name">Violeta <a class="wa-link" href="https://wa.me/522213389027" target="_blank">221 338 9027</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante con la Comunidad Profesional</span><span class="mesa-name">Martín <a class="wa-link" href="https://wa.me/522225884418" target="_blank">222 588 441 8</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Instituciones de Tratamiento</span><span class="mesa-name">Javier <a class="wa-link" href="https://wa.me/522225105041" target="_blank">222 51 0 5041</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Correccionales</span><span class="mesa-name">Fernando <a class="wa-link" href="https://wa.me/522221740076" target="_blank">222 1 74 0076</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Literatura</span><span class="mesa-name">Eduardo T. <a class="wa-link" href="https://wa.me/522223307049" target="_blank">222 330 7049</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Eventos y Viajes</span><span class="mesa-name">Benjamín <a class="wa-link" href="https://wa.me/522225259652" target="_blank">222 525 9652</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Plenitud</span><span class="mesa-name">Damián <a class="wa-link" href="https://wa.me/522228521442" target="_blank">222 852 1 442</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Boletín</span><span class="mesa-name">Iván <a class="wa-link" href="https://wa.me/525527278228" target="_blank">55 2727 8228</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Finanzas</span><span class="mesa-name">Abraham <a class="wa-link" href="https://wa.me/522223007780" target="_blank">222 300 7780</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Redes Sociales</span><span class="mesa-name">Roberto <a class="wa-link" href="https://wa.me/525545448445" target="_blank">55 454 48 445</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Representante de Archivo Histórico</span><span class="mesa-name">Eduardo C. <a class="wa-link" href="https://wa.me/522222991129" target="_blank">222 299 1 1 29</a></span></div>
+</div>
+<div class="sep-top">
+<div class="mb-8">Enlaces de Reuniones</div>
+<div class="mesa-item"><span class="mesa-role">Enlace 08:00 hrs.</span><span class="mesa-name">Julián <a class="wa-link" href="https://wa.me/522224945466" target="_blank">222 494 5466</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Enlace 11:00 hrs. y Domingos 12:00 hrs.</span><span class="mesa-name">Salvador C. <a class="wa-link" href="https://wa.me/522225232637" target="_blank">222 523 2637</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Enlace 18:00 hrs.</span><span class="mesa-name">Alejandro <a class="wa-link" href="https://wa.me/522211826832" target="_blank">221 1 82 6832</a></span></div>
+<div class="mesa-item"><span class="mesa-role">Enlace 20:00 hrs.</span><span class="mesa-name">Benjamín R. <a class="wa-link" href="https://wa.me/522224393995" target="_blank">222 439 3995</a></span></div>
+</div>
+<div style="margin-top:28px; padding-top:20px; border-top:1px solid rgba(44,95,138,0.15);">
+<div class="mb-8">Organización interna</div>
+<h3 style="font-family:'Playfair Display',serif; font-size:clamp(16px,4vw,22px); color:#1a2a3a; margin-bottom:14px; line-height:1.3;">Coordinación Diaria</h3>
+<div style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-family:'Lato',sans-serif; font-size:clamp(12px,3vw,14px);">
+<thead>
+<tr style="border-bottom:2px solid #2c5f8a;">
+<th class="th-dia">Día</th>
+<th class="th-col">08:00</th>
+<th class="th-col">11:00</th>
+<th class="th-col">18:00</th>
+<th class="th-col">20:00</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tr-base">
+<td class="td-dia">Lunes</td>
+<td class="td-center">René</td>
+<td class="td-center">Norma</td>
+<td class="td-center">Hermilo</td>
+<td class="td-center">Lalo T.</td>
+</tr>
+<tr class="tr-alt">
+<td class="td-dia">Martes</td>
+<td class="td-center">Ricardo</td>
+<td class="td-center">Dany</td>
+<td class="td-center">Martín</td>
+<td class="td-center">Laura</td>
+</tr>
+<tr class="tr-base">
+<td class="td-dia">Miércoles</td>
+<td class="td-center">Salvador</td>
+<td class="td-center">Héctor</td>
+<td class="td-center">Javier</td>
+<td class="td-center">Ricardo</td>
+</tr>
+<tr class="tr-alt">
+<td class="td-dia">Jueves</td>
+<td class="td-center">Luis Alberto</td>
+<td class="td-center">Sergio</td>
+<td class="td-center">Mike</td>
+<td class="td-center">Cami</td>
+</tr>
+<tr class="tr-base">
+<td class="td-dia">Viernes</td>
+<td class="td-center">Julián</td>
+<td class="td-center">Héctor</td>
+<td class="td-center">Lilo</td>
+<td class="td-center">Iván</td>
+</tr>
+<tr class="tr-alt">
+<td class="td-dia">Sábado</td>
+<td class="td-center">Beto H.</td>
+<td class="td-center">Manuel L.</td>
+<td class="td-center">Lalo C.</td>
+<td class="td-vacio">—</td>
+</tr>
+<tr style="border:2px solid #2c5f8a; background:rgba(44,95,138,0.06);">
+<td style="padding:12px 6px; font-weight:700; color:#1a2a3a; font-size:15px; border-radius:8px 0 0 8px;">Domingo</td>
+<td style="padding:12px 6px; text-align:center; color:#2c5f8a; font-weight:700; font-size:14px;">12:00 hrs.</td>
+<td style="padding:12px 6px; text-align:center; color:rgba(26,42,58,0.85); font-size:14px;">Beto H.</td>
+<td style="padding:12px 6px; text-align:center; color:rgba(26,42,58,0.4);">—</td>
+<td style="padding:12px 6px; text-align:center; color:rgba(26,42,58,0.4); border-radius:0 8px 8px 0;">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- 2° Semestre 2025 -->
+<div class="mesa-card">
+<h3>2° Semestre 2025</h3>
+<div class="section-label" style="margin-bottom:8px; margin-top:4px;">Mesa de Servicio Anterior</div>
+<div class="mesa-item"><span class="mesa-role">Coordinador</span><span class="mesa-name">Salvador C.</span></div>
+<div class="mesa-item"><span class="mesa-role">Tesorero</span><span class="mesa-name">Luis Alberto</span></div>
+<div class="mesa-item"><span class="mesa-role">Secretario</span><span class="mesa-name">Carlos</span></div>
+<div class="sep-top">
+<div class="mb-8">Enlaces de reuniones</div>
+<div class="mesa-item"><span class="mesa-role">8:00 AM</span><span class="mesa-name">Gustavo</span></div>
+<div class="mesa-item"><span class="mesa-role">11:00 AM</span><span class="mesa-name">Vero</span></div>
+<div class="mesa-item"><span class="mesa-role">6:00 PM</span><span class="mesa-name">Laura</span></div>
+<div class="mesa-item"><span class="mesa-role">8:00 PM</span><span class="mesa-name">Ricardo</span></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="tab-content" id="tab-eventos">
+<div class="tab-strip strip-eventos"></div>
+<!-- EVENTOS RELEVANTES -->
+<section>
+<div class="section-label">Vida del grupo</div>
+<h2>Eventos Relevantes</h2>
+<div class="divider"></div>
+<p>Se presentan de manera cronológica los <strong style="color:#2c5f8a">69 eventos relevantes</strong> registrados durante el periodo agosto 2025 — julio 2026.</p>
+<!-- TOGGLE VISTA -->
+<div id="vista-toggle">
+<button class="vista-btn active" id="btn-timeline">📋 Timeline</button>
+<button class="vista-btn" id="btn-galeria">🖼️ Galería</button>
+</div>
+<!-- BUSCADOR + FILTROS -->
+<div id="eventos-search-wrap">
+<div id="eventos-search-box">
+<svg fill="none" height="15" stroke="#2c5f8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="15"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+<input autocomplete="off" id="eventos-search-input" placeholder="Buscar evento…" type="text"/>
+<button id="eventos-search-clear" title="Limpiar">✕</button>
+</div>
+<div id="eventos-meses">
+<button class="mes-btn active" data-mes="">Todos</button>
+<select id="mes-select">
+<option value="">— Filtrar por mes —</option>
+<option value="agosto 2025">Agosto 2025</option>
+<option value="septiembre 2025">Septiembre 2025</option>
+<option value="octubre 2025">Octubre 2025</option>
+<option value="noviembre 2025">Noviembre 2025</option>
+<option value="diciembre 2025">Diciembre 2025</option>
+<option value="enero 2026">Enero 2026</option>
+<option value="febrero 2026">Febrero 2026</option>
+<option value="marzo 2026">Marzo 2026</option>
+<option value="abril 2026">Abril 2026</option>
+<option value="mayo 2026">Mayo 2026</option>
+<option value="junio 2026">Junio 2026</option>
+<option value="julio 2026">Julio 2026</option>
+</select>
+</div>
+</div>
+<div id="eventos-noresult">😔 No se encontraron eventos con esa búsqueda.</div>
+<!-- GALERÍA -->
+<div id="galeria-grid"></div>
+<div id="timeline-wrap">
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #69</div>
+<div class="timeline-date">Martes 14 de julio 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje.</p>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1KAgMeBXrBVEzyGULGKnPNIhDY5o7snJt"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #68</div>
+<div class="timeline-date">Viernes 10 de julio 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #67</div>
+<div class="timeline-date">Jueves 02 de julio 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #66</div>
+<div class="timeline-date">Martes 30 de junio 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #65</div>
+<div class="timeline-date">Viernes 26 de junio 2026</div>
+<p class="timeline-text">Reunión Virtual en el Grupo Valle de Puebla de AA: "La importancia del padrino de servicio y mi experiencia en el comité de carcelarias".</p>
+<div class="evento-foto"><img alt="Reunión Virtual — La importancia del padrino de servicio y mi experiencia en el comité de carcelarias" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/10M7Oe44DVCEONpRpYhZzpfa9jBkzOh_C"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #64</div>
+<div class="timeline-date">Jueves 25 de junio 2026</div>
+<p class="timeline-text">Visita a emisora de Radio "La Intesa". Tema: 24a Semana Nacional de la Persona Alcohólica Privada de la Libertad.</p>
+<div class="evento-foto"><img alt="Visita a emisora de Radio La Intesa - 24a Semana Nacional de la Persona Alcohólica Privada de la Libertad" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1VMy1hR-av7zHydCo7IdtVj1y13ZH1HG-"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #63</div>
+<div class="timeline-date">Miércoles 17 de junio 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje</p>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1VGCK0oPd-pNDC942E7rg5JauwNAt-hKm"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #62</div>
+<div class="timeline-date">Viernes 12 de junio 2026</div>
+<p class="timeline-text">Visita a emisora de Radio "HR". Tema: 17a Semana Nacional de Información en los Medios de Comunicación y Redes Sociales.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #61</div>
+<div class="timeline-date">Jueves 11 de junio 2026</div>
+<p class="timeline-text">Visita a emisora de Radio "La Intesa". Tema: 17a Semana Nacional de Información en los Medios de Comunicación y Redes Sociales.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #60</div>
+<div class="timeline-date">Lunes 08 de junio 2026</div>
+<p class="timeline-text">17a Semana Nacional de Información en los Medios de Comunicación y Redes Sociales.</p>
+<div class="evento-foto"><img alt="17a Semana Nacional de Información en los Medios de Comunicación y Redes Sociales" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1hhB9j8_16xdISkgVDJZMwmBFE_gJxyLJ"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #59</div>
+<div class="timeline-date">Jueves 04 de junio 2026</div>
+<p class="timeline-text">Visita a emisora de Radio "La Intesa". Tema: 17a Semana Nacional de Información en los Medios de Comunicación y Redes Sociales.</p>
+<div class="evento-foto"><img alt="Visita a emisora de Radio La Intesa - 17a Semana Nacional de Información en los Medios de Comunicación y Redes Sociales" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1Ip7MxasaRsyy8B4D_tBvdvrE32Ih_2Mp"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #58</div>
+<div class="timeline-date">Miércoles 03 de junio 2026</div>
+<p class="timeline-text">Compartimiento en el grupo "Unidos por los que vendrán"</p>
+<div class="evento-foto"><img alt="Compartimiento en el grupo Unidos por los que vendrán" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1i86ADnSftToukgTNN4lp3uaM0vpfK_Ek"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #57</div>
+<div class="timeline-date">Domingo 31 de mayo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en 60° Reunión Anual de la Conferencia Mexicana de Servicios Generales de AA.</p>
+<div class="evento-foto"><img alt="60° Reunión Anual de la Conferencia Mexicana de Servicios Generales de AA" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1xUTX6i0XKuFMPkWB6hQ0My9IVzS2RNz3"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #56</div>
+<div class="timeline-date">Miércoles 27 de mayo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en programa de radio. Emisora: Factor Radio.</p>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en programa de radio — Factor Radio" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1J57fFlQX-qkz5B-5-MpsmMiFETozJovv"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #55</div>
+<div class="timeline-date">Domingo 24 de mayo 2026</div>
+<p class="timeline-text">27° Aniversario Grupo San José.</p>
+<div class="evento-foto"><img alt="27° Aniversario Grupo San José" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1ri6eL48cJneKq0DEcd4fJbQSBeZEiLij"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #54</div>
+<div class="timeline-date">Jueves 21 de mayo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en programa de radio. Emisora: La Intensa.</p>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en programa de radio — La Intensa" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/149QCil1ZCrAq4B1QWeyjbYTw7nC44_wc"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #53</div>
+<div class="timeline-date">Jueves 21 de mayo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje.</p>
+<div class="evento-fotos-grid">
+<div class="evento-foto"><img alt="GVP en UMF1 IMSS pase del mensaje" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1iz_wQqsQdsdaLtpfqwrOamd4ELLB1Xa7"/></div>
+<div class="evento-foto"><img alt="GVP en UMF1 IMSS pase del mensaje" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1qAJ1YSGjpqpbtTzpg24cvvrNor8YC50G"/></div>
+</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #52</div>
+<div class="timeline-date">Miércoles 20 de mayo 2026</div>
+<p class="timeline-text">Fundación de la Biblioteca del Grupo Valle de Puebla.</p>
+<div class="evento-foto"><img alt="Fundación de la Biblioteca del Grupo Valle de Puebla" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/19_57O4W62vGmNlZiXYRCRasdMxPbx579"/></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #51</div>
+<div class="timeline-date">Domingo 17 de mayo 2026</div>
+<p class="timeline-text">15° Congreso y 46° Aniversario del Distrito dos.</p>
+<div class="evento-fotos-grid">
+<div class="evento-foto"><img alt="15° Congreso y 46° Aniversario del Distrito dos" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1V1LYIViDQU6S-c7zSp6s5agLcvHJ298z"/></div>
+<div class="evento-foto"><img alt="15° Congreso y 46° Aniversario del Distrito dos" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1R7AMROkEU3zwICsLmCelFCzUkEm-zfzP"/></div>
+</div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #50</div>
+<div class="timeline-date">Lunes 11 de mayo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UMF1 IMSS durante el pase del mensaje.</p>
+<div class="evento-fotos-grid">
+<div class="evento-foto"><img alt="GVP en UMF1 IMSS pase del mensaje" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1pcqXCBLTQHbo29PnOJaRAAdXhaHf8DvH"/></div>
+<div class="evento-foto"><img alt="GVP en UMF1 IMSS pase del mensaje" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1mtPWzjbGAwRbRkyr2671eYmM4DJpf8im"/></div>
+</div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #49</div>
+<div class="timeline-date">Lunes 11 de mayo 2026</div>
+<p class="timeline-text">Con motivo del 42.º Aniversario del Grupo Valle de Puebla de Alcohólicos Anónimos, se realizó el ingreso oficial de su Reseña Histórica al acervo del Museo de la Oficina de Servicios Generales (OSG) en la Ciudad de México.</p>
+<div class="evento-foto"><img alt="Reseña Histórica en el Museo de la OSG en la Ciudad de México" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1f8wCqMJ9vWUspbOXpejRr_reiB6XhXDk"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #48</div>
+<div class="timeline-date">Martes 28 de abril 2026</div>
+<p class="timeline-text">Motivación de Testimonios de Sobriedad por parte del servidor Iván de Boletín.</p>
+<div class="evento-foto"><img alt="Motivación de testimonios por Iván de Boletín" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1px2XUeIA9k_ro_y_7BOrzWg_bqABbE2p"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #47</div>
+<div class="timeline-date">28 de abril 2026</div>
+<p class="timeline-text">Junta de Información Pública en Universidad del Valle de Puebla.</p>
+<div class="evento-foto"><img alt="JIP Universidad del Valle de Puebla" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1oqpD5vZtHT30WXkNclFBydRtFa9S2ib6"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #46</div>
+<div class="timeline-date">26 de abril 2026</div>
+<p class="timeline-text">Día de Campo Grupo Valle de Puebla</p>
+<div class="evento-foto"><img alt="Día de Campo Grupo Valle de Puebla" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1xCqNUoTghIeAnRArsKD5dqTBwvJyzzUA"/></div>
+<div class="video-wrap">
+<iframe allowfullscreen="" loading="lazy" src="https://drive.google.com/file/d/1b-U28jK74Sm5zOnB9i-vx99HdnSwnQf2/preview"></iframe>
+</div>
+<div class="video-wrap">
+<iframe allowfullscreen="" loading="lazy" src="https://drive.google.com/file/d/1hrBBAgxOBapLK99xSrpZkhttBCn2sZxK/preview"></iframe>
+</div>
+<div class="video-wrap">
+<iframe allowfullscreen="" loading="lazy" src="https://drive.google.com/file/d/1DTbKNq9V1mRUWpSByvRQakJLLHwhgz9f/preview"></iframe>
+</div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #45</div>
+<div class="timeline-date">22 de abril 2026</div>
+<p class="timeline-text">Participación del Grupo Valle de Puebla en UPAEP.</p>
+<div class="evento-foto"><img alt="Participación en UPAEP" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1GxjtRy4Hg56hOk2hRalSEH1r4yy8thWn"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #44</div>
+<div class="timeline-date">19 de abril 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla presente en la XXXV Reunión Inter Distrital Distrito 12.</p>
+<div class="evento-foto"><img alt="XXXV Reunión Inter Distrital Distrito 12" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/12-mTMTW5WPSY2a4PMnRaP9d8oRCpWzyr"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #43</div>
+<div class="timeline-date">12 de abril 2026</div>
+<p class="timeline-text">Fallecimiento del compañero Víctor H.</p>
+<div class="evento-foto"><img alt="Fallecimiento del compañero Víctor H." loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1oT3TSXHjbcJZhYru1bI82re-VkPh74ir"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #42</div>
+<div class="timeline-date">2 de abril 2026</div>
+<p class="timeline-text">Elección del lema del 42° Aniversario: En Alcohólicos Anónimos nacen los verdaderos milagros.</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #41</div>
+<div class="timeline-date">23 de marzo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UVM</p>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en UVM" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1zg0xGRp7Cbwod4czvrS5b4Tgp5jzK9W9"/></div>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en UVM" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1Np7WMRfVPOqRJRpJfsKqXTmSETpnoA1A"/></div>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en UVM" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1BbHAYBtohBNlKE4jgbigoXEkR2oIufUt"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #40</div>
+<div class="timeline-date">18 de marzo 2026</div>
+<p class="timeline-text">Compañero Hugo B. invitado de la Central Mexicana de AA al primer informe de la presidenta del DIF Estatal</p>
+<div class="evento-foto"><img alt="Hugo B. DIF Estatal" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/18R8HVDftpixUXvCXWf-_oAKHEZsiqRll"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #39</div>
+<div class="timeline-date">18 de marzo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en UPAEP</p>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla en UPAEP" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1YIU_oyj5WQgkkUFOYQrsyc6AFZMFxaEw"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #38</div>
+<div class="timeline-date">12 de marzo 2026</div>
+<p class="timeline-text">CEMUCH</p>
+<div class="evento-foto"><img alt="CEMUCH" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1GDTFaoCe7SzVlNdJNHzTakk11VvrDRNU"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #37</div>
+<div class="timeline-date">10 de marzo 2026</div>
+<p class="timeline-text">Fallecimiento del compañero Omar Cervante R.</p>
+<div class="evento-foto"><img alt="Fallecimiento del compañero: Omar Cervante R." loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1p6SLaqbWdx49IIQ1jMKvMys4HqywvnOD"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #36</div>
+<div class="timeline-date">6 de marzo 2026</div>
+<p class="timeline-text">Grupo Esperanza de la Fraternidad: "La última frontera: sobriedad emocional". Comparte Hugo B.</p>
+<div class="evento-foto"><img alt="Grupo Esperanza de la Fraternidad" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/198tfSQx7x-ge-nwwHZ8ez5x2RUAAI2kC"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #35</div>
+<div class="timeline-date">6 de marzo 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla en la Escuela Secundaria Federal Número 10</p>
+<div class="evento-foto"><img alt="Escuela Secundaria Federal No. 10" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1NOg5HAsRIevCKgAR57rrsfQvx6CVlD63"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #34</div>
+<div class="timeline-date">20 de febrero 2026</div>
+<p class="timeline-text">38° Congreso Regional Sur-Poniente — Acapulco</p>
+<div class="evento-foto"><img alt="38° Congreso Regional Sur-Poniente Acapulco" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1ELI2YJ8ddsYnUKy4ylDx6TzAxIYGTPfX"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #33</div>
+<div class="timeline-date">18 de febrero 2026</div>
+<p class="timeline-text">Elección Mesa de Servidores. Coordinador: Arturo · Tesorera: Ana · Secretaria: Monse · Enlaces: Julián (8am), Norma (11am), Alejandro (6pm), Camila (8pm)</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #32</div>
+<div class="timeline-date">11 de febrero 2026</div>
+<p class="timeline-text">UPAEP Panel de Adicciones</p>
+<div class="evento-foto"><img alt="UPAEP Panel de Adicciones" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1MrWGKgO0IPNwZGB0as9rBkg13LYWCFW_"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #31</div>
+<div class="timeline-date">30 de enero 2026</div>
+<p class="timeline-text">Exposición del compañero Orlando (Ex Delegado). Tema: "La Séptima Tradición y los Cambios del Grupo"</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #30</div>
+<div class="timeline-date">26 de enero 2026</div>
+<p class="timeline-text">Colocación de portatrípticos para el autodiagnóstico del alcoholismo en la Clínica 1 del IMSS</p>
+<div class="evento-foto"><img alt="Colocación de portatrípticos para el autodiagnósti" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1BsYD0cJjNwK3ACtmRZ4iihQ3E9MVStUX"/></div>
+<div class="evento-foto"><img alt="Colocación de portatrípticos para el autodiagnósti" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1NWMZetvQmyAk2Npigye9Jif_RPrLitKi"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #29</div>
+<div class="timeline-date">20 de enero 2026</div>
+<p class="timeline-text">31.ª Semana Nacional "Compartiendo Esfuerzos" — "Alcohólicos Anónimos y el Sector Salud". Participación de especialistas del Centro de Integración Juvenil (CIJ) de Puebla. Horarios: 8:00 a.m., 11:00 a.m., 6:00 p.m., 8:00 p.m.</p>
+<div class="evento-foto"><img "alcohólicos="" (cij)="" 11:00="" 6:00="" 8:00="" a.m.,="" alt="31.ª Semana Nacional " anónimos="" centro="" compartiendo="" de="" del="" el="" esfuerzos"="" especialistas="" horarios:="" integración="" juvenil="" onerror="this.parentElement.style.display='none'" p.m."="" p.m.,="" participación="" puebla.="" salud".="" sector="" src="31 Semana Nacional Compartiendo Esfuerzos.jpg" y="" —=""/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #28</div>
+<div class="timeline-date">15 de enero 2026</div>
+<p class="timeline-text">Fallecimiento del compañero Efraín</p>
+<div class="evento-foto"><img alt="Fallecimiento del compañero Efraín" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/11FPbYG1v5FNrZ8KWQlbcfe2pk2mDC0hE"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #27</div>
+<div class="timeline-date">12 de enero 2026</div>
+<p class="timeline-text">Grupo Valle de Puebla presente en la asamblea de planeación 2026 del Área Puebla 1</p>
+<div class="evento-foto"><img alt="Grupo Valle de Puebla , presente en la asamblea de" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1VPA1axs-wNzphuRZIUAk9CEfqLJ1QR6c"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #26</div>
+<div class="timeline-date">26 de diciembre 2025</div>
+<p class="timeline-text">Cuento navideño lleno de esperanza, amor y mensaje espiritual, pensado desde el corazón de la recuperación</p>
+<div class="evento-foto"><img alt="Cuento navideño lleno de esperanza, amor y mensaje espiritual, pensado desde el corazón de la recuperación" onerror="this.parentElement.style.display='none'" src="Cuento navideño lleno de esperanza, amor y mensaje espiritual, pensado desde el corazón de la recuperación..jpg"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #25</div>
+<div class="timeline-date">22 de diciembre 2025</div>
+<p class="timeline-text">Generar conciencia ecológica</p>
+<div class="evento-foto"><img alt="Generar conciencia ecológica " loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/15SsZc7LgMaCJtYssnPXJpRwn3Kio7Q-V"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #24</div>
+<div class="timeline-date">19 de diciembre 2025</div>
+<p class="timeline-text">Cena de Navidad Grupo Valle de Puebla</p>
+<div class="evento-foto"><img alt="Cena de Navidad Grupo Valle de Puebla" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1q8T1SsEbLT_LErL0LLai_yCzwrcF9vzB"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #23</div>
+<div class="timeline-date">10 de diciembre 2025</div>
+<p class="timeline-text">Junta de Información Pública en Centro Escolar Morelos: "El consumo del Alcohol y el impacto en el ser humano"</p>
+<div class="evento-foto"><img alt="Junta de Información Pública en Centro Escolar Mor" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1NAD1Y-0Txwc2jskorzzvQfELoIYbOWC8"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #22</div>
+<div class="timeline-date">3 de diciembre 2025</div>
+<p class="timeline-text">Junta de Información Pública en Centro Escolar Morelos: "El consumo del Alcohol y el impacto en el adolescente"</p>
+<div class="evento-foto"><img alt="Junta de Información Pública en Centro Escolar Mor" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1-u3FGNZ0vN0ZuoTdbUuxB5e8AzakEfMR"/></div>
+<div class="evento-foto"><img alt="Junta de Información Pública en Centro Escolar Mor" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1PCstCk12K0R64eeWGRruX65arrVNlIO6"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #21</div>
+<div class="timeline-date">30 de noviembre 2025</div>
+<p class="timeline-text">Primera Reunión de Veteranos y Jóvenes: Archivo Histórico</p>
+<div class="evento-foto"><img alt="Primera Reunión de Veteranos y Jóvenes: Archivo Hi" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1oVNUbm-luQYO0wvrXORlWxRYnKAi81EX"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #20</div>
+<div class="timeline-date">29 de noviembre 2025</div>
+<p class="timeline-text">Primera Reunión de Veteranos y Jóvenes: Archivo Histórico</p>
+<div class="evento-foto"><img alt="Primera Reunión de Veteranos y Jóvenes: Archivo Hi" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1x_dgj5XxdkSv4ozyX2efP9aTH5Wzf5mB"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #19</div>
+<div class="timeline-date">26 de noviembre 2025</div>
+<p class="timeline-text">Junta de Información Pública en Centro Escolar Morelos: "El consumo del Alcohol y el impacto en el adolescente"</p>
+<div class="evento-foto"><img alt="Junta de Información Pública:  Centro Escolar More" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1pxjIZcgZ50LZpGuXzpLydVj3liHszigy"/></div>
+<div class="evento-foto"><img alt="Junta de Información Pública en Centro Escolar Mor" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1aQO9x7XR8SxaL06hOpTlP1XNoY0sz9xR"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #18</div>
+<div class="timeline-date">25 de noviembre 2025</div>
+<p class="timeline-text">Evento de Literatura en Distrito 2</p>
+<div class="evento-foto"><img alt="Evento de Literatura en distrito 2" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/11bFrTjrn20SYBMGWgtOI_pxzPhKbye6t"/></div>
+<div class="evento-foto"><img alt="Evento de Literatura en distrito 2" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/11l1HytbVJ0YHap3BNB4tvaMuXqJ7cQPm"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #17</div>
+<div class="timeline-date">22 de noviembre 2025</div>
+<p class="timeline-text">Reunión Anual de Veteranos</p>
+<div class="evento-foto"><img alt="Reunión Veteranos 25 nov 2025" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1j8J3xOpofzbZnAh0Ti6JAi1K1K541ewj"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #16</div>
+<div class="timeline-date">21 de noviembre 2025</div>
+<p class="timeline-text">Junta de Información Pública: Universidad del Valle de México (UVM)</p>
+<div class="evento-foto"><img alt="JIP UVM 21 nov 2025" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1kI9WzXpNvUxCSbW66LIczUlu8UFgHAlf"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #15</div>
+<div class="timeline-date">19 de noviembre 2025</div>
+<p class="timeline-text">Invitación al Grupo Valle de Puebla a participar en UPAEP al panel de prevención de adicciones</p>
+<div class="evento-foto"><img alt="UPAEP 19 nov 2025" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1GAVpVCFFE7QUFsZuWj7kw42Aiyu6YxJb"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #14</div>
+<div class="timeline-date">17 de noviembre 2025</div>
+<p class="timeline-text">32° Congreso de Área — Puebla Uno</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #13</div>
+<div class="timeline-date">13 de noviembre 2025</div>
+<p class="timeline-text">Junta de Información Pública en Centro Escolar Morelos: El consumo del Alcohol y el impacto en el adolescente</p>
+<div class="evento-foto"><img alt="JIP Centro Escolar Morelos 13 nov 2025" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/142DdoF3rLDStfQRuCq5DX5CJovzErN4e"/></div>
+
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #12</div>
+<div class="timeline-date">12 de noviembre 2025</div>
+<p class="timeline-text">Invitación al Grupo Valle de Puebla a participar en UPAEP al panel de prevención de adicciones</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #11</div>
+<div class="timeline-date">10 de noviembre 2025</div>
+<p class="timeline-text">Inicio de la Semana de Tradiciones por parte del servidor de Literatura en el Grupo Valle de Puebla</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #10</div>
+<div class="timeline-date">8 de noviembre 2025</div>
+<p class="timeline-text">Asistencia del Grupo Valle de Puebla a la Semana de Unidad al Grupo Valle de México</p>
+<div class="evento-foto"><img alt="Semana de Unidad Grupo Valle de México - foto 1" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1eSrYd7b6WIz-L0EONUjUCxtCBoY6xSxi"/></div>
+<div class="evento-foto"><img alt="Semana de Unidad Grupo Valle de México - foto 2" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1dt2LMDBjtMRN5Unm6VgvZ4nLTLqz4zgm"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #9</div>
+<div class="timeline-date">5 de noviembre 2025</div>
+<p class="timeline-text">Invitación al Grupo Valle de Puebla a participar en UPAEP al panel de prevención de adicciones</p>
+<div class="evento-foto"><img alt="UPAEP 19 nov 2025" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1GAVpVCFFE7QUFsZuWj7kw42Aiyu6YxJb"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #8</div>
+<div class="timeline-date">4 de noviembre 2025</div>
+<p class="timeline-text">Junta de Información Pública: Jornada de tutorías en la Escuela Normal Superior Federalizada del Estado de Puebla</p>
+<div class="evento-foto"><img alt="Jornada tutorías Escuela Normal - foto 1" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1OyDqVxDlKkHtWK-xHwWA2NQjPQ89YkB1"/></div>
+<div class="evento-foto"><img alt="Jornada tutorías Escuela Normal - foto 2" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1m2T-oYBC7NGb9YPY3ZO2GCFEETQM44Ca"/></div>
+<div class="evento-foto"><img alt="Jornada tutorías Escuela Normal - foto 3" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1iGIdP630EeICVxp_raVB52ljtddr13cl"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #7</div>
+<div class="timeline-date">31 de octubre 2025</div>
+<p class="timeline-text">Charla del psicólogo Alfonso Chávez: Detección oportuna de adicciones en GVP</p>
+<div class="evento-foto"><img alt="Charla del psicólogo Alfonso Chávez" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1vtJS8rC0aE8ii9TbMobp-niaJpOKxG7x"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #6</div>
+<div class="timeline-date">29 de octubre 2025</div>
+<p class="timeline-text">Invitación al Grupo Valle de Puebla a participar en UPAEP al panel de prevención de adicciones</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #5</div>
+<div class="timeline-date">22 de octubre 2025</div>
+<p class="timeline-text">Invitación al Grupo Valle de Puebla a participar en UPAEP al panel de prevención de adicciones</p>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #4</div>
+<div class="timeline-date">20 de octubre 2025</div>
+<p class="timeline-text">Fallecimiento del compañero Marco Osorio</p>
+<div class="evento-foto"><img alt="Fallecimiento del compañero Marco Osorio" onerror="this.parentElement.style.display='none'" src="Fallecimiento del compañero: Marco Osorio..jpg"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #3</div>
+<div class="timeline-date">4 de agosto 2025</div>
+<p class="timeline-text">Asistencia del Grupo Valle de Puebla al 44° Aniversario del Distrito 3 del Área Puebla 1</p>
+<div class="evento-foto"><img alt="44° Aniversario Distrito 3 Área Puebla 1" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1gnki8s3x3jCWd6RgWGN_ZbSied1hduGc"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #2</div>
+<div class="timeline-date">3 y 24 de septiembre 2025</div>
+<p class="timeline-text">Invitación al Grupo Valle de Puebla a participar en UPAEP al panel de prevención de adicciones</p>
+<div class="evento-foto"><img alt="UPAEP 19 nov 2025" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1kI9WzXpNvUxCSbW66LIczUlu8UFgHAlf"/></div>
+</div><div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-num">Evento #1</div>
+<div class="timeline-date">Domingo 27 de julio 2025</div>
+<p class="timeline-text">Jornada de pintura y limpieza al interior del Grupo Valle de Puebla</p>
+<div class="evento-foto"><img alt="Jornada de pintura y limpieza - foto 1" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1CvgLGAltoGKedzfU-fSweItABWXOQP2w"/></div>
+<div class="evento-foto"><img alt="Jornada de pintura y limpieza - foto 2" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1851BbdM-8F3OcZDxQsSgBaP4CM1-RR7b"/></div>
+<div class="evento-foto"><img alt="Jornada de pintura y limpieza - foto 3" loading="lazy" onerror="this.parentElement.style.display='none'" src="https://lh3.googleusercontent.com/d/1Bf0IeFIKue6z0HnONCenN0ySewQRDG6e"/></div>
+</div></div>
+</div></section>
+</div>
+<div class="tab-content" id="tab-testim">
+<div class="tab-strip strip-testim"></div>
+<!-- TESTIMONIOS -->
+<div class="section-alt">
+<div style="max-width:700px; margin:0 auto; padding:28px 20px;">
+<div class="section-label">Caminos de recuperación</div>
+<h2>Testimonios de Sobriedad</h2>
+<div class="divider"></div>
+<p>Los testimonios de sobriedad constituyen un recurso fundamental mediante el cual los miembros comparten su experiencia con la enfermedad y los avances obtenidos en su recuperación. Su propósito es ofrecer identificación y esperanza tanto a quienes se integran por primera vez como a los miembros con mayor tiempo en el programa, recordando, como señaló Bill W., que "ningún mensaje llega tan hondo al corazón del alcohólico como el ejemplo de otro alcohólico que ha logrado recuperarse".</p>
+<p>Se han realizado <strong style="color:#2c5f8a;">35 testimonios de sobriedad</strong> durante el periodo:</p>
+<div style="background:rgba(44,95,138,0.08); border:1px solid rgba(44,95,138,0.2); border-radius:8px; padding:24px; text-align:center; margin-bottom:28px;">
+<div id="cnt-test-big" style="font-family:'Playfair Display',serif; font-size:64px; font-weight:900; color:#2c5f8a; line-height:1;">35</div>
+<div style="font-size:16px; color:rgba(26,42,58,0.6); letter-spacing:3px; text-transform:uppercase; margin-top:6px;">Testimonios de Sobriedad</div>
+<div style="font-size:14px; color:rgba(26,42,58,0.4); margin-top:4px;">Periodo agosto 2025 — julio 2026</div>
+</div>
+<div style="background:rgba(44,95,138,0.05); border:1px solid rgba(44,95,138,0.15); border-radius:8px; padding:20px 24px; margin-bottom:28px;">
+<div style="font-family:'Playfair Display',Georgia,serif; font-size:16px; font-weight:700; color:#1a2a3a; margin-bottom:12px; text-align:center;">Testimonios por años cumplidos</div>
+<div class="tg-grid">
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">1° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">11 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">6H · 5M</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Cami, Guadalupe, Alan, Moni, Laura, Lilo, Héctor, Jorge, Rafa, Monse, Erasmo</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">2° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">5 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">2H · 3M</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Ana, Jhony, Jesy, Benja, Luisa</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">4° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">3 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">3H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Gustavo, Luis Alberto, Salvador P.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">5° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">4 testimonios</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">4H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Roberto, Octavio, Daniel, Demian</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">7° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Humberto</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">8° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Beto</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">9° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Arturo M.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">10° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Lalo C.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">11° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Gastón</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">12° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1M</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Pily</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">20° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Julián</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">21° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Hugo B.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">26° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Abraham</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">34° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Rodrigo H.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">40° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Salvador C.</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+<div class="tg-card" onclick="var n=this.querySelector('.tg-names');n.style.display=(n.style.display==='block'?'none':'block');" style="background:#fff; border:1px solid rgba(44,95,138,0.12); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; min-height:100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center;"><div style="font-family:'Playfair Display',serif; font-size:27px; font-weight:900; color:#2c5f8a; line-height:1;">44° <span style="font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:#2c5f8a;">Aniv.</span></div><div style="font-size:13px; color:#3d4f5c; margin:4px 0 6px; font-weight:700;">1 testimonio</div><div style="font-size:12px; color:#4a5a68; font-weight:700;">1H</div><div class="tg-names" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid rgba(44,95,138,0.15); font-size:12px; color:#3d4f5c; text-align:left; line-height:1.6; font-weight:600;">Efraín</div><div style="font-size:10px; color:#8a97a3; margin-top:6px; letter-spacing:0.5px; font-weight:600;">toca para ver nombres</div></div>
+</div>
+<div style="text-align:center; margin-top:10px; font-size:12px; color:#5a6b7a;">27 hombres · 8 mujeres · 35 testimonios totales</div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Jul 2026</div>
+<div class="testimonios-grid">
+<div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Cami</div>
+<div class="testimonio-date">vie 03 jul 2026</div>
+</div>
+</div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Jun 2026</div>
+<div class="testimonios-grid">
+<div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Guadalupe</div>
+<div class="testimonio-date">dom 28 jun 2026</div>
+</div>
+<div class="testimonio-card">
+<div class="testimonio-num">5°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Roberto</div>
+<div class="testimonio-date">sáb 20 jun 2026</div>
+</div>
+<div class="testimonio-card">
+<div class="testimonio-num">7°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Humberto</div>
+<div class="testimonio-date">sáb 13 jun 2026</div>
+</div>
+<div class="testimonio-card">
+<div class="testimonio-num">8°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Beto</div>
+<div class="testimonio-date">vie 12 jun 2026</div>
+</div>
+</div>
+</div>
+<div class="mb-24">
+<div class="sublabel">May 2026</div>
+<div class="testimonios-grid">
+
+
+
+
+
+
+<div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Alan</div>
+<div class="testimonio-date">lun 25 may 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">5°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Octavio</div>
+<div class="testimonio-date">mar 19 may 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Moni</div>
+<div class="testimonio-date">jue 14 may 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">40°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Salvador C.</div>
+<div class="testimonio-date">mar 12 may 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">2°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Ana</div>
+<div class="testimonio-date">mar 12 may 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">4°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Gustavo</div>
+<div class="testimonio-date">sáb 09 may 2026</div>
+</div></div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Abr 2026</div>
+<div class="testimonios-grid">
+
+
+<div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Laura</div>
+<div class="testimonio-date">mar 21 abr 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">5°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Daniel</div>
+<div class="testimonio-date">mié 08 abr 2026</div>
+</div></div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Mar 2026</div>
+<div class="testimonios-grid">
+
+
+
+<div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Lilo</div>
+<div class="testimonio-date">mar 24 mar 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">26°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Abraham</div>
+<div class="testimonio-date">sáb 21 mar 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">9°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Arturo M.</div>
+<div class="testimonio-date">jue 12 mar 2026</div>
+</div></div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Feb 2026</div>
+<div class="testimonios-grid">
+<div class="testimonio-card">
+<div class="testimonio-num">11°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Gastón</div>
+<div class="testimonio-date">vie 27 feb 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">34°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Rodrigo H.</div>
+<div class="testimonio-date">mar 17 feb 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">20°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Julián</div>
+<div class="testimonio-date">lun 09 feb 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Héctor</div>
+<div class="testimonio-date">dom 08 feb 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">2°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Jhony</div>
+<div class="testimonio-date">dom 01 feb 2026</div>
+</div></div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Ene 2026</div>
+<div class="testimonios-grid">
+
+
+<div class="testimonio-card">
+<div class="testimonio-num">12°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Pily</div>
+<div class="testimonio-date">lun 26 ene 2026</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">4°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Luis Alberto</div>
+<div class="testimonio-date">sáb 10 ene 2026</div>
+</div></div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Nov 2025</div>
+<div class="testimonios-grid">
+
+
+
+
+
+
+<div class="testimonio-card">
+<div class="testimonio-num">2°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Jesy</div>
+<div class="testimonio-date">vie 28 nov 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">44°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Efraín</div>
+<div class="testimonio-date">sáb 22 nov 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">5°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Demian</div>
+<div class="testimonio-date">lun 17 nov 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">21°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Hugo B.</div>
+<div class="testimonio-date">lun 17 nov 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">2°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Benja</div>
+<div class="testimonio-date">vie 07 nov 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Jorge</div>
+<div class="testimonio-date">lun 03 nov 2025</div>
+</div></div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Oct 2025</div>
+<div class="testimonios-grid">
+
+
+
+
+<div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Rafa</div>
+<div class="testimonio-date">jue 30 oct 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">10°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Lalo C.</div>
+<div class="testimonio-date">vie 24 oct 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">2°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Luisa</div>
+<div class="testimonio-date">vie 17 oct 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Monse</div>
+<div class="testimonio-date">lun 13 oct 2025</div>
+</div></div>
+</div>
+<div class="mb-24">
+<div class="sublabel">Sep 2025</div>
+<div class="testimonios-grid">
+
+
+<div class="testimonio-card">
+<div class="testimonio-num">1°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Erasmo</div>
+<div class="testimonio-date">dom 14 sep 2025</div>
+</div><div class="testimonio-card">
+<div class="testimonio-num">4°</div>
+<div class="testimonio-aniv">Aniversario</div>
+<div class="testimonio-name">Salvador P.</div>
+<div class="testimonio-date">sáb 13 sep 2025</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="tab-grupo">
+<div class="tab-strip strip-autonomia"></div>
+<!-- UBICACIÓN -->
+<section>
+<div class="section-label">Dónde encontrarnos</div>
+<h2>Ubicación del Grupo</h2>
+<div class="divider"></div>
+<p style="margin-bottom:10px; line-height:1.7;">
+    📍 <strong>Av. Juárez No. 2924 Despacho 301 "Edificio Marina"</strong><br/>
+    Col. La Paz · Puebla, Pue. CP 72160
+  </p>
+<div style="border-radius:14px; overflow:hidden; box-shadow:0 2px 12px rgba(44,95,138,0.15); margin-bottom:12px;">
+<iframe allowfullscreen="" height="240" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Aaron+Merino+Fernandez+316,+Puebla,+Mexico&amp;output=embed&amp;z=16" style="border:0; display:block;" width="100%">
+</iframe>
+</div>
+<div style="display:flex; gap:8px; flex-wrap:wrap;">
+<a href="https://maps.app.goo.gl/SFsyGe6vWT9ZAakj6" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#2c5f8a; color:#fff;
+              padding:9px 18px; border-radius:50px; font-size:13px; font-weight:700;
+              text-decoration:none;" target="_blank">
+      📍 Abrir en Google Maps
+    </a>
+<a href="https://wa.me/522211425677" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#25D366; color:#fff;
+              padding:9px 18px; border-radius:50px; font-size:13px; font-weight:700;
+              text-decoration:none;" target="_blank">
+<svg fill="white" height="15" style="flex-shrink:0" viewbox="0 0 24 24" width="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.154-1.448A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.214-3.722.875.936-3.629-.234-.373A9.818 9.818 0 1112 21.818z"></path></svg>
+      Contáctanos
+    </a>
+</div>
+</section>
+<!-- AUTONOMIA -->
+<div class="section-alt">
+<div>
+<div class="section-label">Normas del grupo</div>
+<h2>Autonomía del Grupo</h2>
+<div class="divider"></div>
+<p>La autonomía establecida desde los inicios del Grupo Valle de Puebla continúa siendo su sello distintivo, su fortaleza y su visión de permanencia. A lo largo de más de cuatro décadas ha permitido que el grupo mantenga un funcionamiento estable, respetuoso y orientado exclusivamente al propósito fundamental de AA.</p>
+<ul class="autonomia-list">
+<li>La cafetería es de autoservicio</li>
+<li>Los compañeros evitarán palabras altisonantes en el uso del sillón</li>
+<li>Tendrán prioridad para el uso del sillón los miembros nuevos</li>
+<li>Se evitará la agresión y la terapia dirigida desde el sillón</li>
+<li>No está permitido fumar dentro del salón</li>
+<li>Se sugiere a los compañeros no involucrarse en asuntos ajenos al programa de AA</li>
+<li>El coordinador evitará opinar o dar sugerencias si el compañero no las pide</li>
+<li>Se sugiere no tomar fotos o videos dentro del salón</li>
+</ul>
+<p style="font-size:19px; color:rgba(26,42,58,0.85); margin-top:16px;">* Estos puntos se respetan en los dos salones del Grupo Valle de Puebla: Salón 301 y Salón 105.</p>
+</div>
+</div>
+<!-- HORARIOS -->
+<section>
+<div class="section-label">Únete a nosotros</div>
+<h2>Horarios de Reuniones</h2>
+<div class="divider"></div>
+<div class="horarios-grid">
+<div class="horario-item"><div class="horario-time">8:00 AM</div><div class="horario-dias">Lun – Sáb</div></div>
+<div class="horario-item"><div class="horario-time">11:00 AM</div><div class="horario-dias">Lun – Sáb</div></div>
+<div class="horario-item"><div class="horario-time">6:00 PM</div><div class="horario-dias">Lun – Sáb</div></div>
+<div class="horario-item"><div class="horario-time">8:00 PM</div><div class="horario-dias">Lun – Vie</div></div>
+<div class="horario-item"><div class="horario-time">12:00 PM</div><div class="horario-dias">Domingo</div></div>
+</div>
+</section>
+<footer>
+<div class="footer-phrase">"Solo por Hoy, un día a la vez."</div>
+<br/>
+<div class="footer-sub">42° Aniversario · Grupo Valle de Puebla · Alcohólicos Anónimos · Puebla, México</div>
+<div style="margin-top:8px; font-size:11px; color:rgba(26,42,58,0.3);">Fundado el 7 de agosto de 1984</div>
+</footer>
+</div>
+<nav class="barra-nav">
+<label class="btn-nav" for="radio-inicio">
+<span class="icono">📖</span><span class="etiqueta">Reseña</span>
+</label>
+<label class="btn-nav" for="radio-mesa">
+<span class="icono">👥</span><span class="etiqueta">Servidores</span>
+</label>
+<label class="btn-nav" for="radio-eventos">
+<span class="icono">🗓️</span><span class="etiqueta">Eventos</span>
+</label>
+<label class="btn-nav" for="radio-testim">
+<span class="icono">🪙</span><span class="etiqueta">Testimonios</span>
+</label>
+<a class="btn-nav" href="acuerdos.html" style="text-decoration:none;">
+<span class="icono">🔒</span><span class="etiqueta">Acuerdos</span>
+</a>
+<label class="btn-nav" for="radio-grupo">
+<span class="icono">⚖️</span><span class="etiqueta">Autonomía</span>
+</label>
+</nav>
+<script>
+(function(){
+  var C=[
+    {id:'cnt-testimonios',t:35, d:1800},
+    {id:'cnt-juntas',     t:130,d:2200},
+    {id:'cnt-mujeres',    t:37, d:1600},
+    {id:'cnt-hombres',    t:93, d:1900},
+    {id:'cnt-test-big',   t:35, d:2000}
+  ];
+  function go(el,t,d){
+    if(!el)return;
+    var t0=null,ease=function(x){return 1-Math.pow(1-x,3);};
+    (function step(ts){
+      if(!t0)t0=ts;
+      var p=Math.min((ts-t0)/d,1);
+      el.textContent=Math.round(ease(p)*t);
+      if(p<1)requestAnimationFrame(step); else el.textContent=t;
+    })(0);
+    requestAnimationFrame(function(ts){
+      t0=null;
+      (function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/d,1);el.textContent=Math.round(ease(p)*t);if(p<1)requestAnimationFrame(step);else el.textContent=t;})(ts);
+    });
+  }
+  function run(){C.forEach(function(c){go(document.getElementById(c.id),c.t,c.d);});}
+  var tr=document.getElementById('cnt-testimonios');
+  if(!tr)return;
+  if('IntersectionObserver' in window){
+    var done=false;
+    new IntersectionObserver(function(e,o){if(e[0].isIntersecting&&!done){done=true;o.disconnect();run();}},{threshold:0.05}).observe(tr);
+  } else { run(); }
+})();
+</script>
+<script>
+(function(){
+  var items = document.querySelectorAll('.timeline-item');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  items.forEach(function(item){ obs.observe(item); });
+})();
+</script>
+<script>
+(function(){
+  var radios=['radio-inicio','radio-mesa','radio-eventos','radio-testim','radio-grupo'];
+  var colors=['#2c5f8a','#1a6b4a','#8b4513','#4a2c7a','#1a5a6b','#c9a96e'];
+  function getActive(){ for(var i=0;i<radios.length;i++){ if(document.getElementById(radios[i]).checked) return i; } return 0; }
+  function goTo(idx){
+    if(idx<0) idx=radios.length-1;
+    if(idx>=radios.length) idx=0;
+    document.getElementById(radios[idx]).checked=true;
+    var strip=document.querySelector('.tab-strip');
+    if(strip) strip.style.background=colors[idx];
+  }
+  var tx=0,ty=0,tTouches=0;
+  document.addEventListener('touchstart',function(e){
+    tTouches=e.touches.length;
+    tx=e.changedTouches[0].clientX;
+    ty=e.changedTouches[0].clientY;
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    // Ignorar si hubo más de un dedo (zoom/pinch)
+    if(tTouches>1) return;
+    var dx=e.changedTouches[0].clientX-tx;
+    var dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){
+      goTo(getActive()+(dx<0?1:-1));
+    }
+  },{passive:true});
+
+  // Navigation dots
+  var nav=document.querySelector('.barra-nav');
+  if(nav){
+    var dots=document.createElement('div');
+    dots.style.cssText='display:flex;justify-content:center;gap:6px;padding:4px 0 2px;';
+    radios.forEach(function(r,i){
+      var d=document.createElement('span');
+      d.style.cssText='width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;transition:background 0.2s;';
+      d.setAttribute('data-idx',i);
+      dots.appendChild(d);
+    });
+    nav.appendChild(dots);
+    function updateDots(){
+      var a=getActive();
+      dots.querySelectorAll('span').forEach(function(d,i){
+        d.style.background=i===a?'rgba(255,255,255,0.95)':'rgba(255,255,255,0.35)';
+      });
+    }
+    updateDots();
+    radios.forEach(function(r){
+      document.getElementById(r).addEventListener('change',updateDots);
+    });
+  }
+})();
+</script>
+<!-- BOTÓN FLOTANTE COMPARTIR WHATSAPP -->
+<a class="wa-share-btn" href="https://wa.me/522211425677" rel="noopener" target="_blank">
+<svg fill="white" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.154-1.448A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.214-3.722.875.936-3.629-.234-.373A9.818 9.818 0 1112 21.818z"></path>
+</svg>
+  Contáctanos
+</a>
+<!-- SCRIPT BUSCADOR EVENTOS -->
+<script>
+(function(){
+  var searchInput = document.getElementById('eventos-search-input');
+  var searchClear = document.getElementById('eventos-search-clear');
+  var todosBtn    = document.querySelector('.mes-btn');
+  var mesSelect   = document.getElementById('mes-select');
+  var noResult    = document.getElementById('eventos-noresult');
+  var items       = document.querySelectorAll('#tab-eventos .timeline-item');
+  if (!searchInput || !items.length) return;
+
+  var mesActivo = '';
+
+  function filtrar() {
+    var q = searchInput.value.trim().toLowerCase();
+    searchClear.style.display = q ? 'block' : 'none';
+    var visibles = 0;
+
+    items.forEach(function(item) {
+      var texto = item.textContent.toLowerCase();
+      var passQ   = !q || texto.includes(q);
+      var passMes = !mesActivo || texto.includes(mesActivo);
+      if (passQ && passMes) {
+        item.style.display = '';
+        visibles++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    noResult.style.display = visibles === 0 ? 'block' : 'none';
+  }
+
+  searchInput.addEventListener('input', filtrar);
+
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    searchClear.style.display = 'none';
+    filtrar();
+    searchInput.focus();
+  });
+
+  // Botón Todos
+  todosBtn.addEventListener('click', function() {
+    mesActivo = '';
+    todosBtn.classList.add('active');
+    mesSelect.value = '';
+    filtrar();
+  });
+
+  // Desplegable por mes
+  mesSelect.addEventListener('change', function() {
+    mesActivo = mesSelect.value;
+    todosBtn.classList.toggle('active', mesActivo === '');
+    filtrar();
+  });
+})();
+</script>
+<!-- LIGHTBOX -->
+<div id="lightbox">
+<span id="lightbox-close">✕</span>
+<img alt="" id="lightbox-img" src=""/>
+</div>
+<script>
+/* ── SCROLL POSITION — resize + pinch zoom ── */
+(function(){
+  var saved = 0;
+  var pinching = false;
+  var timer;
+
+  function savePos() { saved = window.scrollY; }
+  function restorePos() {
+    clearTimeout(timer);
+    timer = setTimeout(function(){ window.scrollTo(0, saved); }, 80);
+  }
+
+  // Pinch zoom via visualViewport (móvil)
+  if (window.visualViewport) {
+    var lastScale = window.visualViewport.scale;
+    window.visualViewport.addEventListener('resize', function(){
+      var newScale = window.visualViewport.scale;
+      if (Math.abs(newScale - lastScale) > 0.01) {
+        // Es pinch zoom — guardar posición si escala sube, restaurar si baja
+        if (newScale > lastScale && !pinching) {
+          savePos();
+          pinching = true;
+        } else if (newScale <= 1.05 && pinching) {
+          pinching = false;
+          restorePos();
+        }
+        lastScale = newScale;
+      } else {
+        // Es resize normal de ventana
+        if (!pinching) { savePos(); restorePos(); }
+      }
+    });
+    window.visualViewport.addEventListener('scroll', function(){
+      if (!pinching) savePos();
+    });
+  }
+
+  // Fallback resize para escritorio
+  window.addEventListener('resize', function(){
+    if (!pinching) { savePos(); restorePos(); }
+  });
+
+  // Guardar posición en scroll normal
+  window.addEventListener('scroll', function(){
+    if (!pinching) savePos();
+  }, { passive: true });
+})();
+
+/* ── LIGHTBOX ── */
+(function(){
+  var lb   = document.getElementById('lightbox');
+  var lbImg= document.getElementById('lightbox-img');
+  var lbX  = document.getElementById('lightbox-close');
+  if (!lb) return;
+
+  function open(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('active');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  // Attach to all evento photos
+  document.querySelectorAll('.evento-foto img, .evento-fotos-grid img').forEach(function(img){
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', function(){ open(this.src, this.alt); });
+  });
+
+  lbX.addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+<!-- MODAL TARJETA TESTIMONIO -->
+<div id="muro-overlay">
+<div id="muro-modal">
+<div id="muro-header">
+<button id="muro-close">✕</button>
+<div class="mh-badge">Alcohólicos Anónimos · GVP</div>
+<div class="mh-title" id="muro-title">Escríbele a …</div>
+<div class="mh-sub" id="muro-sub"></div>
+</div>
+<div id="muro-form">
+<input id="muro-nombre" maxlength="60" placeholder="Tu nombre" type="text"/>
+<div id="emoji-bar">
+<button class="emoji-btn" type="button">🫶</button>
+<button class="emoji-btn" type="button">🥰</button>
+<button class="emoji-btn" type="button">🙏</button>
+<button class="emoji-btn" type="button">🕊️</button>
+<button class="emoji-btn" type="button">🌟</button>
+<button class="emoji-btn" type="button">💫</button>
+<button class="emoji-btn" type="button">✨</button>
+<button class="emoji-btn" type="button">🌈</button>
+<button class="emoji-btn" type="button">🌷</button>
+<button class="emoji-btn" type="button">🦋</button>
+<button class="emoji-btn" type="button">🎗️</button>
+<button class="emoji-btn" type="button">🫂</button>
+<button class="emoji-btn" type="button">🥹</button>
+<button class="emoji-btn" type="button">💝</button>
+<button class="emoji-btn" type="button">🌻</button>
+</div>
+<textarea id="muro-texto" placeholder="Tu mensaje de felicitación (máx. 40 palabras)…" rows="3"></textarea>
+<div id="muro-form-row">
+<span id="muro-wordcount">0 / 40 palabras</span>
+<button disabled="" id="muro-submit">Publicar ✉️</button>
+</div>
+</div>
+<div id="muro-status"></div>
+<div id="muro-mensajes">
+<div id="muro-loading">Cargando mensajes…</div>
+</div>
+</div>
+</div>
+<script>
+(function(){
+  // ── CONFIG JSONBIN ──────────────────────────────────────────────────────
+  // Usamos JSONBin.io — gratis, sin backend propio
+  // El BIN_ID se crea automáticamente en el primer uso
+  var MASTER_KEY = '$2a$10$GVPmuroWallSecretKey2026xxxx'; // placeholder — se rellena abajo
+  var MURO_BIN_ID = '6a1f74b0f5f4af5e29afde39'; // BIN fijo permanente
+
+  // ── ESTADO ─────────────────────────────────────────────────────────────
+  var currentDestinatario = '';
+  var currentAnios = '';
+  var currentFecha = '';
+
+  // ── ELEMENTOS ──────────────────────────────────────────────────────────
+  var overlay   = document.getElementById('muro-overlay');
+  var closeBtn  = document.getElementById('muro-close');
+  var titleEl   = document.getElementById('muro-title');
+  var subEl     = document.getElementById('muro-sub');
+  var inputNom  = document.getElementById('muro-nombre');
+  var inputTxt  = document.getElementById('muro-texto');
+  var wordCount = document.getElementById('muro-wordcount');
+
+  // ── INSERTAR EMOJI EN CURSOR ──────────────────────────────────────────
+  document.querySelectorAll('.emoji-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var emoji = btn.textContent;
+      var start = inputTxt.selectionStart;
+      var end   = inputTxt.selectionEnd;
+      var val   = inputTxt.value;
+      inputTxt.value = val.slice(0, start) + emoji + val.slice(end);
+      inputTxt.selectionStart = inputTxt.selectionEnd = start + emoji.length;
+      inputTxt.focus();
+      // Disparar evento input para actualizar contador
+      inputTxt.dispatchEvent(new Event('input'));
+    });
+  });
+  var submitBtn = document.getElementById('muro-submit');
+  var statusEl  = document.getElementById('muro-status');
+  var listEl    = document.getElementById('muro-mensajes');
+  if (!overlay) return;
+
+  // ── CONTAR PALABRAS ────────────────────────────────────────────────────
+  function contarPalabras(txt) {
+    return txt.trim() === '' ? 0 : txt.trim().split(/\s+/).length;
+  }
+
+  inputTxt.addEventListener('input', function() {
+    var n = contarPalabras(inputTxt.value);
+    wordCount.textContent = n + ' / 40 palabras';
+    wordCount.className = n > 40 ? 'over' : '';
+    submitBtn.disabled = !(inputNom.value.trim() && n > 0 && n <= 40);
+  });
+  inputNom.addEventListener('input', function() {
+    var n = contarPalabras(inputTxt.value);
+    submitBtn.disabled = !(inputNom.value.trim() && n > 0 && n <= 40);
+  });
+
+  // ── JSONBIN HELPERS ────────────────────────────────────────────────────
+  function getBinId() { return MURO_BIN_ID; }
+
+  function apiFetch(path, opts) {
+    var headers = Object.assign({
+      'Content-Type': 'application/json',
+      'X-Master-Key': '$2a$10$Y4gn6lOHxb90Gn9lW7WLouXBG4Yb9.tapdc8m2zUhFgK5tEtKe/TS'
+    }, opts.headers || {});
+    return fetch('https://api.jsonbin.io/v3' + path, Object.assign({}, opts, { headers: headers }));
+  }
+
+  // ── CARGAR MENSAJES ────────────────────────────────────────────────────
+  function cargarMensajes() {
+    listEl.innerHTML = '<div id="muro-loading">Cargando mensajes…</div>';
+    var binId = getBinId();
+    apiFetch('/b/' + binId + '/latest', { method: 'GET' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var todos = (d.record && d.record.mensajes) ? d.record.mensajes : [];
+      // Filtrar por destinatario
+      var filtrados = todos.filter(function(m){ return m.para === currentDestinatario; });
+      renderMensajes(filtrados);
+    })
+    .catch(function(){ listEl.innerHTML = '<div id="muro-empty">No hay mensajes aún. ¡Sé el primero en escribir!</div>'; });
+  }
+
+  // Cache de todos los mensajes (para borrar por índice global)
+  var todosLosMensajes = [];
+
+  function renderMensajes(msgs) {
+    if (!msgs.length) {
+      listEl.innerHTML = '<div id="muro-empty">Aún no hay mensajes para ' + currentDestinatario + '. ¡Sé el primero en escribir!</div>';
+      return;
+    }
+    // Más recientes primero, guardando índice global en el array todosLosMensajes
+    var sorted = msgs.slice().sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+    listEl.innerHTML = '';
+    sorted.forEach(function(m) {
+      var fecha = m.ts ? new Date(m.ts).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}) : '';
+      var card = document.createElement('div');
+      card.className = 'muro-card';
+      card.innerHTML =
+        '<div class="muro-card-top">' +
+          '<span class="muro-card-autor">✍️ ' + escHtml(m.autor) + '</span>' +
+          '<div style="display:flex;align-items:center;gap:4px">' +
+            '<span class="muro-card-fecha">' + fecha + '</span>' +
+            '<button class="muro-card-del" title="Borrar mensaje">🗑️</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="muro-card-texto">' + escHtml(m.texto) + '</div>';
+      // Botón borrar
+      card.querySelector('.muro-card-del').addEventListener('click', function() {
+        borrarMensaje(m.ts, m.autor);
+      });
+      listEl.appendChild(card);
+    });
+  }
+
+  // ── BORRAR MENSAJE ─────────────────────────────────────────────────────
+  function borrarMensaje(ts, autor) {
+    var clave = prompt('🔐 Contraseña de administrador:');
+    if (clave === null) return; // canceló
+    if (clave !== 'lalolalona') {
+      alert('Contraseña incorrecta.');
+      return;
+    }
+    if (!confirm('¿Borrar el mensaje de ' + autor + '?')) return;
+
+    var binId = getBinId();
+    if (!binId) return;
+    statusEl.textContent = 'Borrando…';
+
+    apiFetch('/b/' + binId + '/latest', { method: 'GET' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var todos = (d.record && d.record.mensajes) ? d.record.mensajes : [];
+      // Eliminar por timestamp único
+      var nuevos = todos.filter(function(m){ return !(m.ts === ts && m.autor === autor); });
+      return apiFetch('/b/' + binId, {
+        method: 'PUT',
+        body: JSON.stringify({ mensajes: nuevos })
+      });
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(){
+      statusEl.textContent = 'Mensaje borrado. ✓';
+      cargarMensajes();
+      setTimeout(function(){ statusEl.textContent = ''; }, 2500);
+    })
+    .catch(function(){
+      statusEl.textContent = 'Error al borrar. Intenta de nuevo.';
+    });
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── PUBLICAR MENSAJE ───────────────────────────────────────────────────
+  submitBtn.addEventListener('click', function(){
+    var autor = inputNom.value.trim();
+    var texto = inputTxt.value.trim();
+    if (!autor || !texto || contarPalabras(texto) > 40) return;
+
+    submitBtn.disabled = true;
+    statusEl.textContent = 'Publicando…';
+
+    var binId = getBinId();
+    if (!binId) { statusEl.textContent = 'Error: recarga y vuelve a intentar.'; return; }
+
+    // Leer bin actual, agregar mensaje, guardar
+    apiFetch('/b/' + binId + '/latest', { method: 'GET' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var todos = (d.record && d.record.mensajes) ? d.record.mensajes : [];
+      todos.push({
+        para: currentDestinatario,
+        autor: autor,
+        texto: texto,
+        ts: Date.now()
+      });
+      return apiFetch('/b/' + binId, {
+        method: 'PUT',
+        body: JSON.stringify({ mensajes: todos })
+      });
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(){
+      statusEl.textContent = '¡Mensaje publicado! 🎉';
+      inputTxt.value = '';
+      wordCount.textContent = '0 / 40 palabras';
+      submitBtn.disabled = true;
+      cargarMensajes();
+      setTimeout(function(){ statusEl.textContent = ''; }, 3000);
+    })
+    .catch(function(){
+      statusEl.textContent = 'Error al publicar. Intenta de nuevo.';
+      submitBtn.disabled = false;
+    });
+  });
+
+  // ── ABRIR MURO ─────────────────────────────────────────────────────────
+  function abrirMuro(nombre, anios, fecha) {
+    currentDestinatario = nombre;
+    currentAnios = anios;
+    currentFecha = fecha;
+    titleEl.textContent = 'Escríbele a ' + nombre;
+    subEl.textContent = anios + ' de sobriedad · ' + fecha;
+    inputNom.value = '';
+    inputTxt.value = '';
+    wordCount.textContent = '0 / 40 palabras';
+    wordCount.className = '';
+    submitBtn.disabled = true;
+    statusEl.textContent = '';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    cargarMensajes();
+  }
+
+  function cerrarMuro() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', cerrarMuro);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) cerrarMuro(); });
+
+  // ── BOTÓN EN CADA TARJETA ──────────────────────────────────────────────
+  document.querySelectorAll('.testimonio-card').forEach(function(card){
+    var num    = (card.querySelector('.testimonio-num')  ||{}).textContent || '';
+    var nombre = (card.querySelector('.testimonio-name') ||{}).textContent || '';
+    var fecha  = (card.querySelector('.testimonio-date') ||{}).textContent || '';
+    var btn = document.createElement('button');
+    btn.className = 'test-share-btn';
+    btn.innerHTML = '💙 Escríbeme… <span class="test-msg-count" id="mc-' + nombre.replace(/\s+/g,'_') + '">...</span>';
+    btn.addEventListener('click', function(){ abrirMuro(nombre, num, fecha); });
+    card.appendChild(btn);
+  });
+})();
+</script>
+<!-- CUENTA REGRESIVA SCRIPT -->
+<script>
+(function(){
+  var aniversario = new Date('2026-08-07T00:00:00');
+  var boxes  = document.getElementById('countdown-boxes');
+  var celebr = document.getElementById('countdown-celebracion');
+  var label  = document.getElementById('countdown-label');
+
+  function pad(n){ return n < 10 ? '0' + n : n; }
+
+  function tick(){
+    var ahora = new Date();
+    var diff  = aniversario - ahora;
+
+    if (diff <= 0) {
+      // Día del aniversario
+      boxes.style.display  = 'none';
+      label.style.display  = 'none';
+      celebr.style.display = 'block';
+      return;
+    }
+
+    var dias  = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    var segs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cd-dias').textContent  = pad(dias);
+    document.getElementById('cd-horas').textContent = pad(horas);
+    document.getElementById('cd-mins').textContent  = pad(mins);
+    document.getElementById('cd-segs').textContent  = pad(segs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+<!-- GALERÍA DE EVENTOS -->
+<script>
+(function(){
+  var btnTimeline = document.getElementById('btn-timeline');
+  var btnGaleria  = document.getElementById('btn-galeria');
+  var timelineWrap = document.getElementById('timeline-wrap');
+  var galeriaGrid  = document.getElementById('galeria-grid');
+  var searchWrap   = document.getElementById('eventos-search-wrap');
+  var noResult     = document.getElementById('eventos-noresult');
+  if (!btnTimeline || !galeriaGrid) return;
+
+  // Recolectar todas las fotos del timeline con su texto de evento
+  function buildGaleria() {
+    if (galeriaGrid.children.length > 0) return; // ya construida
+    var items = document.querySelectorAll('#timeline-wrap .timeline-item');
+    items.forEach(function(item) {
+      var label = (item.querySelector('.timeline-text') || {}).textContent || '';
+      var fecha = (item.querySelector('.timeline-date') || {}).textContent || '';
+      item.querySelectorAll('.evento-foto img').forEach(function(img) {
+        var div = document.createElement('div');
+        div.className = 'galeria-item';
+        div.style.display = 'none'; // oculto hasta que cargue la foto
+        var i = document.createElement('img');
+        i.src = img.src;
+        i.alt = img.alt || label;
+        i.loading = 'lazy';
+        // Solo mostrar si la imagen carga bien
+        i.onload = function() { div.style.display = ''; };
+        i.onerror = function() { div.remove(); };
+        var lbl = document.createElement('div');
+        lbl.className = 'gal-label';
+        lbl.textContent = fecha + ' · ' + label.substring(0,60) + (label.length>60?'…':'');
+        div.appendChild(i);
+        div.appendChild(lbl);
+        // Abrir lightbox al tocar
+        div.addEventListener('click', function() {
+          var lb = document.getElementById('lightbox');
+          var lbImg = document.getElementById('lightbox-img');
+          if (lb && lbImg) {
+            lbImg.src = img.src;
+            lb.classList.add('active');
+          }
+        });
+        galeriaGrid.appendChild(div);
+      });
+    });
+  }
+
+  btnGaleria.addEventListener('click', function() {
+    btnGaleria.classList.add('active');
+    btnTimeline.classList.remove('active');
+    buildGaleria();
+    galeriaGrid.classList.add('visible');
+    timelineWrap.style.display = 'none';
+    searchWrap.style.display = 'none';
+    if (noResult) noResult.style.display = 'none';
+  });
+
+  btnTimeline.addEventListener('click', function() {
+    btnTimeline.classList.add('active');
+    btnGaleria.classList.remove('active');
+    galeriaGrid.classList.remove('visible');
+    timelineWrap.style.display = '';
+    searchWrap.style.display = '';
+  });
+})();
+</script>
+<!-- SCRIPT FILTROS ACUERDOS -->
+<script>
+(function(){
+  var filtros = document.querySelectorAll('.acuerdo-filtro-btn');
+  var grid    = document.getElementById('acuerdos-grid');
+  if (!filtros.length || !grid) return;
+
+  filtros.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filtros.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filtro');
+
+      // Obtener todas las cards
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.acuerdo-card'));
+
+      // Filtrar
+      var visibles = cards.filter(function(c){
+        var estado = c.getAttribute('data-estado') || 'vigente';
+        return f === 'todos' || estado === f;
+      });
+      var ocultas = cards.filter(function(c){
+        var estado = c.getAttribute('data-estado') || 'vigente';
+        return !(f === 'todos' || estado === f);
+      });
+
+      // Ordenar: vencidos y próximos → ascendente (más viejo primero)
+      //          todos y vigentes   → descendente (más nuevo primero)
+      visibles.sort(function(a, b){
+        var na = parseInt(a.querySelector('.acuerdo-num').textContent) || 0;
+        var nb = parseInt(b.querySelector('.acuerdo-num').textContent) || 0;
+        return (f === 'vencido' || f === 'proximo') ? na - nb : nb - na;
+      });
+
+      // Rearmar el DOM
+      visibles.forEach(function(c){ c.style.display = ''; grid.appendChild(c); });
+      ocultas.forEach(function(c){ c.style.display = 'none'; grid.appendChild(c); });
+    });
+  });
+})();
+</script>
+<!-- ANIMACIÓN TARJETAS TESTIMONIOS -->
+<script>
+(function(){
+  var cards = document.querySelectorAll('.testimonio-card');
+  if (!cards.length) return;
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var card = entry.target;
+          // Delay escalonado según posición
+          var idx = Array.prototype.indexOf.call(cards, card);
+          card.style.animationDelay = (idx % 10) * 60 + 'ms';
+          card.classList.add('visible');
+          observer.unobserve(card);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(function(card) {
+      observer.observe(card);
+    });
+  } else {
+    // Fallback: mostrar todas sin animación
+    cards.forEach(function(card) { card.classList.add('visible'); });
+  }
+})();
+</script>
+<!-- CONTADORES MENSAJES MURO -->
+<script>
+(function(){
+  var MURO_BIN   = '6a1f74b0f5f4af5e29afde39';
+  var MASTER_KEY = '$2a$10$Y4gn6lOHxb90Gn9lW7WLouXBG4Yb9.tapdc8m2zUhFgK5tEtKe/TS';
+
+  fetch('https://api.jsonbin.io/v3/b/' + MURO_BIN + '/latest', {
+    headers: { 'X-Master-Key': MASTER_KEY }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    var mensajes = (d.record && Array.isArray(d.record.mensajes)) ? d.record.mensajes : [];
+    // Contar mensajes por destinatario
+    var conteos = {};
+    mensajes.forEach(function(m){
+      conteos[m.para] = (conteos[m.para] || 0) + 1;
+    });
+    // Actualizar badges
+    document.querySelectorAll('.test-msg-count').forEach(function(badge){
+      var id = badge.id.replace('mc-','').replace(/_/g,' ');
+      var n = conteos[id] || 0;
+      badge.textContent = n > 0 ? n : '0';
+      badge.style.background = n > 0 ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.15)';
+    });
+  })
+  .catch(function(){
+    document.querySelectorAll('.test-msg-count').forEach(function(b){ b.textContent = '0'; });
+  });
+})();
+</script>
+<!-- CONTADOR DE VISITAS (CounterAPI v1 — sin cuenta, sin API key) -->
+<script>
+(function(){
+  var NAMESPACE = 'gvp-archivo-historico-42aniv';
+  var NOMBRE    = 'visitas';
+  var BASE = 'https://api.counterapi.dev/v1/' + NAMESPACE + '/' + NOMBRE;
+  var el = document.getElementById('cnt-visitas');
+  if (!el) return;
+
+  var yaContado = sessionStorage.getItem('gvp_visita_contada');
+
+  function mostrar(n) {
+    el.textContent = (typeof n === 'number' && n >= 1000)
+      ? (n / 1000).toFixed(1).replace('.0', '') + 'k'
+      : n;
+  }
+
+  // Si ya se contó esta sesión, solo lee el valor actual (no suma de nuevo)
+  var url = yaContado ? BASE : (BASE + '/up');
+
+  fetch(url)
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var n = (d && typeof d.count === 'number') ? d.count : null;
+      if (n === null) { el.textContent = '—'; return; }
+      if (!yaContado) sessionStorage.setItem('gvp_visita_contada', '1');
+      mostrar(n + 260); // +260 visitas históricas previas (registradas en JSONBin antes de migrar a CounterAPI)
+    })
+    .catch(function(){ el.textContent = '—'; });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Buscador Plenitud AA · Grupo Valle de Puebla</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Poppins:wght@800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { font-family: 'Lato', sans-serif; background: #eef4fa; color: #555; overflow-x: hidden; }
+
+/* HEADER */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: linear-gradient(135deg, #2c5f8a 0%, #3a78aa 100%);
+  padding: 14px 16px 12px; text-align: center;
+  box-shadow: 0 3px 12px rgba(44,95,138,0.3);
+}
+header h1 { font-size: 14px; font-weight: 900; color: #fff; letter-spacing: 2px; text-transform: uppercase; line-height: 1.45; }
+header p  { font-size: 11px; color: rgba(255,255,255,0.8); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; font-weight: 700; }
+.hspace { height: 82px; }
+
+/* CARRUSEL — igual que el test que funcionó */
+.wrap { width: 100%; overflow: hidden; }
+.carrusel { display: flex; transition: transform 0.4s ease; }
+.pantalla { min-width: 100%; width: 100%; min-height: 100vh; padding-bottom: 100px; flex-shrink: 0; background: #eef4fa; overflow-x: hidden; }
+
+/* DOTS */
+.dots { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 400; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #b0cfe8; cursor: pointer; transition: all 0.2s; }
+.dot.activo { background: #2c5f8a; width: 22px; border-radius: 4px; }
+
+/* FLECHA ANIMADA */
+.flecha-scroll {
+  position: fixed; bottom: 100px; right: 16px; z-index: 300;
+  font-size: 28px; color: #2c5f8a; cursor: pointer;
+  animation: pulso 1.4s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(44,95,138,0.3));
+}
+@keyframes pulso { 0%,100%{transform:translateX(0);opacity:0.7} 50%{transform:translateX(8px);opacity:1} }
+
+/* ─── PANTALLA 1 ─────────────────────────────────────────────────── */
+.instruccion { text-align:center; font-size:14px; font-weight:700; color:#2c5f8a; padding:8px 16px 4px; }
+.search-wrap { padding:8px 16px 6px; }
+.search-box { position:relative; }
+.search-box input {
+  width:100%; padding:13px 48px 13px 20px; font-size:16px; font-family:'Lato',sans-serif;
+  border:none; border-radius:28px; background:white; color:#333; outline:none;
+  box-shadow:0 2px 10px rgba(44,95,138,0.13);
+}
+.search-box input::placeholder { color:#6e8fa8; font-weight:700; }
+.search-icon { position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:24px; color:#2c5f8a; pointer-events:none; }
+.clear-btn { position:absolute; right:48px; top:50%; transform:translateY(-50%); background:none; border:none; font-size:15px; color:#aac4d8; cursor:pointer; display:none; }
+.back-btn { display:none; background:none; border:none; color:#8aadca; font-size:13px; font-family:'Lato',sans-serif; font-weight:700; padding:6px 16px 0; cursor:pointer; letter-spacing:1px; }
+/* ─── BOTÓN FLOTANTE NAV (estilo TikTok) ─────────────────────────────────── */
+.nav-flotante {
+  position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+  z-index: 999999; display: flex; flex-direction: column; align-items: center;
+  gap: 6px; text-decoration: none; cursor: pointer;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+}
+.nav-flotante-circulo {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s;
+}
+.nav-flotante:active .nav-flotante-circulo { transform: scale(0.9); }
+.nav-flotante-circulo svg { width: 34px; height: 34px; }
+.nav-flotante-label {
+  font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 900;
+  color: #2c5f8a; text-align: center;
+  letter-spacing: 0.2px; max-width: 84px; line-height: 1.25;
+  background: rgba(255,255,255,0.92); padding: 4px 10px; border-radius: 8px;
+}
+@media (max-width: 380px) {
+  .nav-flotante { right: 8px; }
+  .nav-flotante-circulo { width: 32px; height: 32px; }
+  .nav-flotante-circulo svg { width: 30px; height: 30px; }
+}
+.libro-sticky-nombre { font-size:17px; font-weight:900; color:white; letter-spacing:1px; text-transform:uppercase; }
+.libro-sticky-sub { font-size:12px; color:rgba(255,255,255,0.8); font-weight:700; margin-top:2px; }
+.home-section { padding:4px 16px 10px; }
+.books-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.book-card { background:white; border-radius:14px; padding:16px 14px; cursor:pointer; box-shadow:0 2px 8px rgba(44,95,138,0.12); transition:transform 0.12s; border-left:5px solid #8aadca; }
+.book-card:active { transform:scale(0.97); }
+.book-card.color-lmb{border-left-color:#9b8ec4}.book-card.color-lc{border-left-color:#6ab09a}
+.book-card.color-cp{border-left-color:#c49a6a}.book-card.color-c1{border-left-color:#6a9bc4}
+.book-card.color-c2{border-left-color:#7ab06a}.book-card.color-c3{border-left-color:#c4a06a}
+.book-card.color-c4{border-left-color:#c46a6a}.book-card.color-c5{border-left-color:#6ac4b0}
+.book-card.color-c6{border-left-color:#a06ac4}.book-card.color-c7{border-left-color:#c4c46a}
+.book-card.color-c8{border-left-color:#6a8ac4}.book-card.color-c9{border-left-color:#c46a9b}
+.book-card.color-c10{border-left-color:#6ac46a}.book-card.color-c11{border-left-color:#c4956a}
+.book-card.color-c12{border-left-color:#956ac4}
+.book-card.color-c13{border-left-color:#5a8ac4}
+.book-card-title { font-size:15px; font-weight:900; color:#1a3f5c; line-height:1.3; margin-bottom:3px; }
+.book-card-plenitud { font-size:10px; font-weight:900; color:#8aadca; letter-spacing:3px; text-transform:uppercase; margin-bottom:4px; }
+.book-card-sub { font-size:13px; color:#3a6080; font-weight:700; line-height:1.4; }
+.book-card-count { font-size:11px; font-weight:900; color:#2c5f8a; margin-top:10px; }
+.filters { display:flex; gap:8px; padding:8px 16px 6px; overflow-x:auto; scrollbar-width:none; }
+.filters::-webkit-scrollbar { display:none; }
+.chip { font-family:'Lato',sans-serif; font-size:11px; font-weight:700; padding:6px 14px; border:1.5px solid #b0cfe8; white-space:nowrap; cursor:pointer; background:white; color:#8aadca; border-radius:25px; transition:all 0.15s; }
+.chip.active { background:#8aadca; color:white; border-color:#8aadca; }
+.stats { font-size:13px; letter-spacing:1px; color:#6e8fa8; font-weight:700; padding:6px 20px; }
+.results { padding:4px 0 20px; }
+.result { background:white; margin:6px 12px; border-radius:14px; padding:14px 16px; box-shadow:0 1px 5px rgba(44,95,138,0.08); animation:fadeIn 0.15s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)} }
+.badge { font-size:11px; font-weight:900; letter-spacing:1px; text-transform:uppercase; color:white; background:#8aadca; display:inline-block; padding:3px 12px; border-radius:25px; margin-bottom:8px; }
+.badge.lmb{background:#9b8ec4}.badge.lc{background:#6ab09a}.badge.cp{background:#c49a6a}
+.badge.c1{background:#6a9bc4}.badge.c2{background:#7ab06a}.badge.c3{background:#c4a06a}
+.badge.c4{background:#c46a6a}.badge.c5{background:#6ac4b0}.badge.c6{background:#a06ac4}
+.badge.c7{background:#c4c46a}.badge.c8{background:#6a8ac4}.badge.c9{background:#c46a9b}
+.badge.c10{background:#6ac46a}.badge.c11{background:#c4956a}.badge.c12{background:#956ac4}.badge.c13{background:#5a8ac4}
+.seccion { font-size:13px; color:#2c5f8a; font-weight:900; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:5px; }
+.titulo { font-size:16px; font-weight:700; color:#1a3f5c; line-height:1.4; }
+.titulo mark { background:#d6eaf8; color:#2c5f8a; border-radius:4px; padding:0 2px; }
+.pagina { font-size:14px; font-weight:900; color:white; background:#2c5f8a; display:inline-block; margin-top:10px; padding:4px 14px; border-radius:20px; }
+.seccion-header { background:#eef4fa; padding:12px 16px 8px; margin-top:14px; border-left:4px solid #2c5f8a; }
+.seccion-header-nombre { font-size:13px; font-weight:900; color:#2c5f8a; letter-spacing:1.5px; text-transform:uppercase; }
+.seccion-header-count { font-size:12px; color:#6e8fa8; font-weight:700; margin-top:2px; }
+.result-libro { background:white; margin:3px 12px; border-radius:10px; padding:14px 16px; box-shadow:0 1px 4px rgba(44,95,138,0.07); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.result-libro-titulo { font-size:16px; font-weight:700; color:#1a3f5c; line-height:1.4; flex:1; }
+.result-libro-pagina { font-size:14px; font-weight:900; color:white; background:#2c5f8a; border-radius:20px; padding:5px 14px; white-space:nowrap; flex-shrink:0; }
+.btn-fav { background:none; border:none; font-size:20px; cursor:pointer; padding:0 0 0 8px; flex-shrink:0; color:#ccc; transition:color 0.2s; }
+.btn-fav.guardado { color:#f5a623; }
+
+/* ─── PANTALLA 2 ─────────────────────────────────────────────────── */
+.p2-head { background:linear-gradient(135deg,#1a3f5c,#2c5f8a); padding:16px; text-align:center; }
+.p2-head h2 { font-size:15px; font-weight:900; color:white; letter-spacing:2px; text-transform:uppercase; }
+.p2-head p  { font-size:11px; color:rgba(255,255,255,0.75); letter-spacing:1px; margin-top:4px; }
+.p2-filtros { padding:12px 16px 0; }
+.p2-filtros label { font-size:11px; font-weight:900; color:#2c5f8a; letter-spacing:1.5px; text-transform:uppercase; display:block; margin-bottom:6px; }
+.p2-select { width:100%; padding:11px 16px; font-size:14px; font-weight:700; font-family:'Lato',sans-serif; color:#1a3f5c; background:white; border:2px solid #b0cfe8; border-radius:14px; outline:none; cursor:pointer; box-shadow:0 2px 8px rgba(44,95,138,0.1); margin-bottom:10px; }
+.p2-search-wrap { padding:0 16px 0; }
+.p2-search-box { position:relative; }
+.p2-search-box input { width:100%; padding:14px 50px 14px 20px; font-size:16px; font-family:'Lato',sans-serif; border:2px solid #b0cfe8; border-radius:28px; background:white; color:#333; outline:none; }
+.p2-search-box input::placeholder { color:#6e8fa8; font-weight:700; }
+.p2-search-box input:focus { border-color:#2c5f8a; }
+.p2-icon { position:absolute; right:18px; top:50%; transform:translateY(-50%); font-size:24px; color:#2c5f8a; pointer-events:none; }
+.p2-clear { position:absolute; right:50px; top:50%; transform:translateY(-50%); background:none; border:none; font-size:15px; color:#aac4d8; cursor:pointer; display:none; }
+.p2-stats { font-size:13px; font-weight:700; color:#6e8fa8; padding:8px 20px 4px; }
+/* BUSCADOR PERMANENTE DEBAJO DE LOS 4 CUADROS */
+.p2-buscador-fijo {
+  padding: 0 16px 12px;
+}
+
+.p2-colecciones {
+  display: grid; grid-template-columns: repeat(2,1fr);
+  gap: 12px; padding: 16px;
+}
+.p2-col-card {
+  background: white; border-radius: 16px; padding: 20px 14px;
+  text-align: center; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(44,95,138,0.12);
+  border-top: 5px solid #2c5f8a;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.p2-col-card:active { transform: scale(0.96); }
+.p2-col-card:nth-child(1){ border-top-color:#6a9bc4; }
+.p2-col-card:nth-child(2){ border-top-color:#c49a6a; }
+.p2-col-card:nth-child(3){ border-top-color:#6ab09a; }
+.p2-col-card:nth-child(4){ border-top-color:#9b8ec4; }
+.p2-col-icon { font-size: 28px; margin-bottom: 8px; }
+.p2-col-nombre { font-size: 13px; font-weight: 900; color: #1a3f5c; letter-spacing: 1px; line-height: 1.3; margin-bottom: 6px; }
+.p2-col-sub { font-size: 11px; color: #8aadca; font-weight: 700; }
+
+/* CABECERA ACORDEÓN */
+.p2-acordeon-header { background: #f4f8fc; padding: 10px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #e0eaf4; }
+.p2-back-col { background: none; border: none; color: #2c5f8a; font-family:'Lato',sans-serif; font-size: 13px; font-weight: 900; cursor: pointer; padding: 0; white-space: nowrap; }
+.p2-acordeon-titulo { font-size: 13px; font-weight: 900; color: #2c5f8a; text-transform: uppercase; letter-spacing: 1px; }
+
+.p2-results { padding:4px 0 20px; }
+/* Tarjeta de SUBTEMA colapsada */
+.p2-sub-card {
+  background: white; margin: 8px 12px; border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(44,95,138,0.1); overflow: hidden;
+}
+.p2-sub-header {
+  padding: 14px 18px; border-left: 6px solid #2c5f8a;
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; user-select: none; transition: background 0.15s;
+}
+.p2-sub-header:active { background: #f4f8fc; }
+.p2-sub-info { flex: 1; }
+.p2-sub-nombre {
+  font-size: 14px; font-weight: 900; color: #2c5f8a;
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px;
+}
+.p2-sub-nombre mark { background: #d6eaf8; color: #1a3f5c; border-radius: 3px; padding: 0 2px; text-transform: none; }
+.p2-sub-meta { font-size: 11px; color: #8aadca; font-weight: 700; }
+.p2-sub-arrow { font-size: 18px; color: #b0cfe8; transition: transform 0.2s; flex-shrink: 0; margin-left: 8px; }
+.p2-sub-arrow.abierto { transform: rotate(90deg); }
+/* Temas dentro del subtema */
+.p2-sub-temas { display: none; border-top: 1px solid #eef4fa; }
+.p2-sub-temas.visible { display: block; }
+.p2-tema {
+  padding: 12px 18px; border-bottom: 1px solid #f4f8fc;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.p2-tema:last-child { border-bottom: none; }
+.p2-tema-titulo { font-size: 15px; font-weight: 700; color: #1a3f5c; line-height: 1.4; }
+.p2-tema-titulo mark { background: #d6eaf8; color: #2c5f8a; border-radius: 4px; padding: 0 2px; }
+.p2-tema-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.p2-tema-info { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.p2-tema-libro {
+  background: #2c5f8a; color: white;
+  padding: 3px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 900;
+  white-space: nowrap;
+  overflow: visible;
+  max-width: none;
+}
+.p2-tema-pag { font-size: 13px; font-weight: 900; color: white; background: #2c5f8a; padding: 3px 12px; border-radius: 20px; }
+.p2-fav { background:none; border:none; font-size:20px; cursor:pointer; color:#ccc; transition:color 0.2s; flex-shrink:0; }
+.p2-fav.guardado { color:#f5a623; }
+.p2-empty,.p3-empty { text-align:center; padding:3rem 1rem; }
+.p2-empty .icon,.p3-empty .icon { font-size:2.5rem; margin-bottom:1rem; opacity:0.4; }
+.p2-empty p,.p3-empty p { font-size:14px; color:#aac4d8; line-height:1.6; }
+
+/* ─── PANTALLA 3 ─────────────────────────────────────────────────── */
+.p3-head { background:linear-gradient(135deg,#5a3a8a,#7a5aaa); padding:16px; text-align:center; }
+.p3-head h2 { font-size:15px; font-weight:900; color:white; letter-spacing:2px; text-transform:uppercase; }
+.p3-head p  { font-size:11px; color:rgba(255,255,255,0.75); letter-spacing:1px; margin-top:4px; }
+.p3-tabs { display:flex; margin:12px 16px 0; border-radius:12px; overflow:hidden; }
+.p3-tab { flex:1; padding:10px; text-align:center; font-size:12px; font-weight:900; letter-spacing:1px; text-transform:uppercase; cursor:pointer; background:#e8e0f4; color:#8a6ab0; transition:all 0.2s; }
+.p3-tab.activo { background:#5a3a8a; color:white; }
+.p3-sec { display:none; padding:12px 0; }
+.p3-sec.activa { display:block; }
+.fav-item { background:white; margin:6px 12px; border-radius:14px; padding:14px 16px; box-shadow:0 1px 6px rgba(44,95,138,0.09); border-left:5px solid #8aadca; }
+.fav-item.rec { border-left-color:#f5a623; }
+.fav-libro { font-size:11px; font-weight:900; color:#8aadca; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+.fav-seccion { font-size:12px; font-weight:700; color:#2c5f8a; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; }
+.fav-titulo { font-size:15px; font-weight:700; color:#1a3f5c; line-height:1.4; margin-bottom:8px; }
+.fav-row { display:flex; align-items:center; justify-content:space-between; }
+.fav-pag { font-size:13px; font-weight:900; color:white; background:#2c5f8a; padding:4px 14px; border-radius:20px; }
+.fav-votos { font-size:13px; font-weight:900; color:#2c5f8a; background:#eef4fa; border:1.5px solid #b0cfe8; padding:4px 14px; border-radius:20px; }
+.fav-del { background:none; border:none; font-size:18px; color:#ccc; cursor:pointer; }
+
+/* MODAL */
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999; align-items:center; justify-content:center; }
+.modal-overlay.activo { display:flex; }
+.modal-box { background:white; border-radius:18px; padding:28px 24px 20px; margin:0 24px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.2); }
+.modal-titulo { font-size:17px; font-weight:900; color:#2c5f8a; margin-bottom:8px; }
+.modal-texto  { font-size:14px; color:#6e8fa8; margin-bottom:24px; line-height:1.5; }
+.modal-botones { display:flex; gap:12px; }
+.modal-btn { flex:1; padding:12px; border:none; border-radius:25px; font-family:'Lato',sans-serif; font-size:14px; font-weight:900; cursor:pointer; }
+.modal-btn-salir  { background:#2c5f8a; color:white; }
+.modal-btn-quedar { background:#eef4fa; color:#2c5f8a; }
+</style>
+</head>
+<body>
+<a class="nav-flotante" href="https://archivohistoricogrupovalledepuebla.netlify.app/">
+  <div class="nav-flotante-circulo">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.8 4L13.8 8.3C12.5 8.4 11.2 8.7 10 9.1C6.5 10.4 4 13.3 2.8 17.5C5 14.7 8.3 12.6 13.8 12.2L13.8 16.5L21 10.25L13.8 4Z" fill="white" stroke="#2c5f8a" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="nav-flotante-label">Archivo Histórico</span>
+</a>
+
+<header>
+  <h1>GRUPO VALLE DE PUEBLA<br>DE ALCOHÓLICOS ANÓNIMOS</h1>
+  <p>BUSCADOR DE LITERATURA</p>
+</header>
+<div class="hspace"></div>
+
+<!-- CARRUSEL -->
+<div class="wrap">
+<div class="carrusel" id="car">
+
+<!-- PANTALLA 1 -->
+<div class="pantalla" id="p1">
+  <div class="instruccion" id="instruccion">Selecciona un libro o usa el buscador</div>
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="search" id="q" placeholder="Busca un tema: miedo, perdón, servicio…" autocomplete="off"/>
+      <button class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+  <button class="back-btn" id="backBtn" type="button" onclick="volverInicio();return false;">← Todos los libros</button>
+  <div class="libro-sticky" id="libroSticky">
+    <div class="libro-sticky-nombre" id="libroNombre"></div>
+    <div class="libro-sticky-sub"    id="libroSub"></div>
+  </div>
+  <div class="filters" id="filters" style="display:none">
+    <span class="chip active" onclick="setFilter('todos',this)">Todos</span>
+    <span class="chip" onclick="setFilter('Criterios Profesionales',this)">Criterios Prof.</span>
+    <span class="chip" onclick="setFilter('El Lenguaje del Corazón',this)">Lenguaje del Corazón</span>
+    <span class="chip" onclick="setFilter('Lo Mejor de Bill',this)">Lo Mejor de Bill</span>
+    <span class="chip" onclick="setFilter('compendio',this)">Compendios</span>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="home-section" id="homeSection">
+    <div class="books-grid" id="booksGrid"></div>
+  </div>
+  <div class="results" id="results"></div>
+</div>
+
+<!-- PANTALLA 2 -->
+<div class="pantalla" id="p2">
+  <div class="p2-head">
+    <h2>📂 Subtemas</h2>
+    <p>Selecciona una colección para explorar</p>
+  </div>
+
+  <!-- CUATRO CUADROS -->
+  <div class="p2-colecciones" id="p2Colecciones">
+    <div class="p2-col-card" onclick="seleccionarColeccion('compendios')">
+      <div class="p2-col-icon">📚</div>
+      <div class="p2-col-nombre">COMPENDIOS</div>
+      <div class="p2-col-sub">Volúmenes 1 al 12</div>
+    </div>
+    <div class="p2-col-card" onclick="seleccionarColeccion('criterios')">
+      <div class="p2-col-icon">🏥</div>
+      <div class="p2-col-nombre">CRITERIOS<br>PROFESIONALES</div>
+      <div class="p2-col-sub">Revistas 09–181</div>
+    </div>
+    <div class="p2-col-card" onclick="seleccionarColeccion('lenguaje')">
+      <div class="p2-col-icon">💙</div>
+      <div class="p2-col-nombre">EL LENGUAJE<br>DEL CORAZÓN</div>
+      <div class="p2-col-sub">Escritos de Bill W.</div>
+    </div>
+    <div class="p2-col-card" onclick="seleccionarColeccion('bill')">
+      <div class="p2-col-icon">✍️</div>
+      <div class="p2-col-nombre">LO MEJOR<br>DE BILL</div>
+      <div class="p2-col-sub">Selección de escritos</div>
+    </div>
+  </div>
+
+  <!-- BUSCADOR PERMANENTE DEBAJO DE LOS CUADROS -->
+  <div class="p2-buscador-fijo" id="p2BuscadorFijo">
+    <div class="p2-search-box">
+      <input type="search" id="p2qGlobal" placeholder="Busca en todos los libros…" autocomplete="off" oninput="buscarGlobal()"/>
+      <button class="p2-clear" id="p2clearGlobal" onclick="limpiarGlobal()">✕</button>
+      <span class="p2-icon">🔍</span>
+    </div>
+    <div class="p2-stats" id="p2statsGlobal"></div>
+    <div class="p2-results" id="p2resultsGlobal"></div>
+  </div>
+
+  <!-- ACORDEÓN DE SUBTEMAS -->
+  <div class="p2-acordeon" id="p2Acordeon" style="display:none">
+    <div class="p2-acordeon-header">
+      <button class="p2-back-col" onclick="volverColecciones()">← Colecciones</button>
+      <div class="p2-acordeon-titulo" id="p2AcordeonTitulo"></div>
+    </div>
+    <div class="p2-search-wrap" style="padding:8px 16px 4px">
+      <div class="p2-search-box">
+        <input type="search" id="p2q" placeholder="Busca un subtema o tema…" autocomplete="off" oninput="renderSubtemas()"/>
+        <button class="p2-clear" id="p2clear" onclick="limpiarP2()">✕</button>
+        <span class="p2-icon">🔍</span>
+      </div>
+    </div>
+    <div class="p2-stats" id="p2stats"></div>
+    <div class="p2-results" id="p2results"></div>
+  </div>
+</div>
+
+<!-- PANTALLA 3 -->
+<div class="pantalla" id="p3">
+  <div class="p3-head">
+    <h2>⭐ Favoritos</h2>
+    <p>Mis temas y recomendados del grupo</p>
+  </div>
+  <div class="p3-tabs">
+    <div class="p3-tab activo" onclick="tabFav('mis')">⭐ Mis favoritos</div>
+    <div class="p3-tab"       onclick="tabFav('grupo')">📌 Del Grupo</div>
+  </div>
+  <div class="p3-sec activa" id="tabMis"><div id="cMis"></div></div>
+  <div class="p3-sec"        id="tabGrupo">
+    <div id="cGrp"></div>
+  </div>
+</div>
+
+</div><!-- /carrusel -->
+</div><!-- /wrap -->
+
+<!-- FLECHA ANIMADA -->
+<div class="flecha-scroll" id="flechaScroll" onclick="ir(1)">➤</div>
+
+<!-- DOTS -->
+<div class="dots">
+  <div class="dot activo" id="d0" onclick="ir(0)"></div>
+  <div class="dot"        id="d1" onclick="ir(1)"></div>
+  <div class="dot"        id="d2" onclick="ir(2)"></div>
+</div>
+
+<!-- BTN SUBIR -->
+
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalSalir">
+  <div class="modal-box">
+    <div class="modal-titulo">¿Salir del buscador?</div>
+    <div class="modal-texto">¿Deseas salir del Buscador de Plenitud?</div>
+    <div class="modal-botones">
+      <button class="modal-btn modal-btn-quedar" onclick="cerrarModal()">QUEDARME</button>
+      <button class="modal-btn modal-btn-salir"  onclick="confirmarSalir()">SALIR</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATOS ────────────────────────────────────────────────────────────────────
+const temas = [
+  {libro:"Compendio 1",seccion:"Vivir en plenitud",titulo:"El último mensaje de Bill",pagina:9},
+  {libro:"Compendio 1",seccion:"Vivir en plenitud",titulo:"Mi importancia",pagina:11},
+  {libro:"Compendio 1",seccion:"Vivir en plenitud",titulo:"Reparando daños",pagina:13},
+  {libro:"Compendio 1",seccion:"Llevando el mensaje",titulo:"Plenitud",pagina:15},
+  {libro:"Compendio 1",seccion:"Llevando el mensaje",titulo:"Importancia del enunciado de Alcohólicos Anónimos",pagina:16},
+  {libro:"Compendio 1",seccion:"Llevando el mensaje",titulo:"El milagro de Plenitud AA",pagina:23},
+  {libro:"Compendio 1",seccion:"Llevando el mensaje",titulo:"Carta de unidad",pagina:24},
+  {libro:"Compendio 1",seccion:"Reflexiones",titulo:"Las 24 horas más preciadas",pagina:26},
+  {libro:"Compendio 1",seccion:"Reflexiones",titulo:"Egoísmo",pagina:27},
+  {libro:"Compendio 1",seccion:"Reflexiones",titulo:"¿Egoísta yo?",pagina:29},
+  {libro:"Compendio 1",seccion:"Reflexiones",titulo:"Agradecimiento",pagina:32},
+  {libro:"Compendio 1",seccion:"Reflexiones",titulo:"Experiencias espirituales",pagina:33},
+  {libro:"Compendio 1",seccion:"Reflexiones",titulo:"Espíritus vs. Espiritum",pagina:36},
+  {libro:"Compendio 1",seccion:"Reflexiones",titulo:"¿Existe un Poder superior?",pagina:44},
+  {libro:"Compendio 1",seccion:"Tradiciones",titulo:"El anonimato (primera parte)",pagina:47},
+  {libro:"Compendio 1",seccion:"Tradiciones",titulo:"El anonimato (segunda parte)",pagina:57},
+  {libro:"Compendio 1",seccion:"Tradiciones",titulo:"El anonimato (última parte)",pagina:64},
+  {libro:"Compendio 1",seccion:"Tradiciones",titulo:"El milagro de un día",pagina:69},
+  {libro:"Compendio 1",seccion:"Tradiciones",titulo:"Nuestro Segundo Legado según lo veo yo",pagina:72},
+  {libro:"Compendio 1",seccion:"Tradiciones",titulo:"¿Qué me hicieron sentir las tradiciones?",pagina:78},
+  {libro:"Compendio 1",seccion:"Páginas de la historia",titulo:"La correspondencia Bill W.-Yale",pagina:79},
+  {libro:"Compendio 1",seccion:"Páginas de la historia",titulo:"La correspondencia Bill W.-Carl Jung",pagina:87},
+  {libro:"Compendio 1",seccion:"Páginas de la historia",titulo:"Cómo nació «Yo soy responsable»",pagina:94},
+  {libro:"Compendio 1",seccion:"Recuperación",titulo:"Las cuatro paradojas de Alcohólicos Anónimos",pagina:94},
+  {libro:"Compendio 1",seccion:"La mujer en AA",titulo:"Para la mujer alcohólica, la lucha es más difícil",pagina:96},
+  {libro:"Compendio 1",seccion:"La mujer en AA",titulo:"Aquella mañana…",pagina:99},
+  {libro:"Compendio 1",seccion:"La mujer en AA",titulo:"Carta de Liz",pagina:103},
+  {libro:"Compendio 1",seccion:"La mujer en AA",titulo:"Más que una mujer",pagina:106},
+  {libro:"Compendio 1",seccion:"La mujer en AA",titulo:"El Tercer Paso vence la depresión y la desesperación",pagina:108},
+  {libro:"Compendio 1",seccion:"Criterios profesionales",titulo:"El síndrome de la borrachera seca",pagina:110},
+  {libro:"Compendio 1",seccion:"Criterios profesionales",titulo:"El valor terapéutico de los Doce Pasos (primera parte)",pagina:116},
+  {libro:"Compendio 1",seccion:"Criterios profesionales",titulo:"El valor terapéutico de los Doce Pasos (última parte)",pagina:123},
+  {libro:"Compendio 1",seccion:"Criterios profesionales",titulo:"Del Subcomité de Alcoholismo de la OMS (primera parte)",pagina:129},
+  {libro:"Compendio 1",seccion:"Criterios profesionales",titulo:"Del Subcomité de Alcoholismo de la OMS (segunda parte)",pagina:138},
+  {libro:"Compendio 1",seccion:"Criterios profesionales",titulo:"Del Subcomité de Alcoholismo de la OMS (tercera parte)",pagina:146},
+  {libro:"Compendio 1",seccion:"Criterios profesionales",titulo:"Del Subcomité de Alcoholismo de la OMS (última parte)",pagina:152},
+  {libro:"Compendio 1",seccion:"Ecos de…",titulo:"El Movimiento Washingtoniano",pagina:161},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"Los servicios generales y la Cuarta Tradición (primera parte)",pagina:168},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"Los servicios generales y la Cuarta Tradición (segunda parte)",pagina:175},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"Los servicios generales y la Cuarta Tradición (última parte)",pagina:183},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"Recuperación, unidad y servicio",pagina:191},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"Experiencias espirituales dentro del servicio de AA",pagina:196},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"La autoridad moral del líder debe fincarse en el servicio",pagina:199},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"Comité o juntas de servicio dentro de AA",pagina:204},
+  {libro:"Compendio 1",seccion:"Servicio",titulo:"Importancia del RSG en AA",pagina:208},
+  {libro:"Compendio 1",seccion:"Los amigos de AA",titulo:"Hombres nuevos",pagina:211},
+  {libro:"Compendio 1",seccion:"Los amigos de AA",titulo:"Un pensamiento de un viejo amigo",pagina:215},
+  {libro:"Compendio 1",seccion:"Sesión de estudio",titulo:"Guía para juntas de preguntas y respuestas",pagina:217},
+  {libro:"Compendio 1",seccion:"Sesión de estudio",titulo:"Humildad",pagina:219},
+  {libro:"Compendio 1",seccion:"Sesión de estudio",titulo:"Soberbia-humildad (conclusión)",pagina:221},
+  {libro:"Compendio 1",seccion:"Instituciones",titulo:"Alcohólicos Anónimos e instituciones",pagina:224},
+  {libro:"Compendio 1",seccion:"Instituciones",titulo:"De un grupo institucional a la revista Plenitud AA",pagina:228},
+  {libro:"Compendio 1",seccion:"Apadrinamiento",titulo:"El amadrinamiento",pagina:229},
+  {libro:"Compendio 1",seccion:"Apadrinamiento",titulo:"El Cuarto Paso no se logra sin el Quinto Paso",pagina:234},
+  {libro:"Compendio 1",seccion:"Herramientas",titulo:"Frases y proverbios",pagina:237},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Mi experiencia en la práctica del Octavo y Noveno Pasos",pagina:239},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Ayer y hoy de un alcohólico",pagina:242},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Por qué dejé de beber",pagina:246},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"El primer paso",pagina:249},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Génesis",pagina:252},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Solo unas palabras en mi aniversario",pagina:255},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Desde la tribuna",pagina:257},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Consciencia",pagina:260},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Hay que hacer algo nuevo de la navidad",pagina:262},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"La historia de un sacerdote",pagina:264},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"El último mensaje del Dr. Bob",pagina:275},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Las Doce Tradiciones",pagina:277},
+  {libro:"Compendio 1",seccion:"La tribuna es tuya",titulo:"Los Doce Pasos",pagina:279},
+  {libro:"Compendio 2",seccion:"Vivir en plenitud",titulo:"El despertar espiritual",pagina:11},
+  {libro:"Compendio 2",seccion:"Vivir en plenitud",titulo:"Mi tiempo de hoy",pagina:12},
+  {libro:"Compendio 2",seccion:"Vivir en plenitud",titulo:"Lo que Alcohólicos Anónimos da",pagina:15},
+  {libro:"Compendio 2",seccion:"Vivir en plenitud",titulo:"¡No puedo… es que soy endeble emocional!",pagina:16},
+  {libro:"Compendio 2",seccion:"Llevando el mensaje",titulo:"¡Lleven el mensaje a los mixes!",pagina:19},
+  {libro:"Compendio 2",seccion:"Llevando el mensaje",titulo:"Un trago no ayuda en nada",pagina:27},
+  {libro:"Compendio 2",seccion:"Llevando el mensaje",titulo:"Detener pronto el alcoholismo con la ayuda de AA",pagina:30},
+  {libro:"Compendio 2",seccion:"Llevando el mensaje",titulo:"Cómo ayudar a los sordos con problemas de alcoholismo",pagina:32},
+  {libro:"Compendio 2",seccion:"Llevando el mensaje",titulo:"Alcohólicos Anónimos presta ayuda y esperanza a los sordos",pagina:33},
+  {libro:"Compendio 2",seccion:"La familia",titulo:"¿Y la familia?",pagina:36},
+  {libro:"Compendio 2",seccion:"Compartimiento",titulo:"Año nuevo en las montañas",pagina:38},
+  {libro:"Compendio 2",seccion:"Compartimiento",titulo:"Cuando los negativos se cuelan",pagina:42},
+  {libro:"Compendio 2",seccion:"Compartimiento",titulo:"Yo nunca anduve pidiendo el 20",pagina:45},
+  {libro:"Compendio 2",seccion:"Páginas de la historia",titulo:"Cuando Lois arrojó su zapato",pagina:47},
+  {libro:"Compendio 2",seccion:"Páginas de la historia",titulo:"Noviembre, mes de las tradiciones",pagina:54},
+  {libro:"Compendio 2",seccion:"Historia de AA en México",titulo:"Los primeros grupos",pagina:55},
+  {libro:"Compendio 2",seccion:"Historia de AA en México",titulo:"El primer alcohólico anónimo de habla hispana",pagina:59},
+  {libro:"Compendio 2",seccion:"Historia de AA en México",titulo:"El mensaje llega a Jalisco",pagina:66},
+  {libro:"Compendio 2",seccion:"Historia de AA en México",titulo:"Los primeros boletines en español",pagina:71},
+  {libro:"Compendio 2",seccion:"Historia de AA en México",titulo:"Así era Harry",pagina:82},
+  {libro:"Compendio 2",seccion:"Recuperación",titulo:"Recuperación y fe",pagina:89},
+  {libro:"Compendio 2",seccion:"Recuperación",titulo:"A vueltas con el Cuarto Paso",pagina:91},
+  {libro:"Compendio 2",seccion:"Recuperación",titulo:"Así mi espíritu descansa",pagina:94},
+  {libro:"Compendio 2",seccion:"La mujer en AA",titulo:"Alcoholismo, precipicio hacia el dolor",pagina:101},
+  {libro:"Compendio 2",seccion:"La mujer en AA",titulo:"Ya no quiero dormir en la perrera",pagina:107},
+  {libro:"Compendio 2",seccion:"La mujer en AA",titulo:"¿Por qué me quedé en Alcohólicos Anónimos?",pagina:112},
+  {libro:"Compendio 2",seccion:"Los jóvenes en AA",titulo:"Tan joven… ¿y ya alcohólico?",pagina:118},
+  {libro:"Compendio 2",seccion:"Criterios profesionales",titulo:"Ego y rendición",pagina:121},
+  {libro:"Compendio 2",seccion:"Criterios profesionales",titulo:"El camino secreto de un trago de alcohol",pagina:135},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"La alegría de servir",pagina:142},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"Servicio, oportunidad de amar",pagina:144},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"¡Servicio para recién nacidos!",pagina:147},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"Séptima tradición XIX asamblea mexicana",pagina:151},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"La OSG para mí",pagina:157},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"¿Cómo llegué al servicio?",pagina:159},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"Los servidores no somos gatos",pagina:161},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"Lo que Plenitud AA es para mi junta, servidora y madrina a domicilio",pagina:165},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"¿Qué hace un RP (representante de Plenitud)?",pagina:168},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"Dinero, poder y prestigio",pagina:170},
+  {libro:"Compendio 2",seccion:"Servicio",titulo:"¿Sirve el servicio?",pagina:175},
+  {libro:"Compendio 2",seccion:"Los amigos de AA",titulo:"El buena gente",pagina:183},
+  {libro:"Compendio 2",seccion:"Los amigos de AA",titulo:"El programa nació para hacer crecer",pagina:187},
+  {libro:"Compendio 2",seccion:"Los amigos de AA",titulo:"Alcohólicos Anónimos, el clero y los religiosos",pagina:191},
+  {libro:"Compendio 2",seccion:"Sesión de estudio",titulo:"Las Doce Promesas de Alcohólicos Anónimos",pagina:195},
+  {libro:"Compendio 2",seccion:"Reflexiones",titulo:"Simple y sencillamente, dar (retorno a lo fundamental)",pagina:203},
+  {libro:"Compendio 2",seccion:"Reflexiones",titulo:"¿Cómo me gustaría que fuera la terapia en mi grupo?",pagina:205},
+  {libro:"Compendio 2",seccion:"Reflexiones",titulo:"Ausencia de la mujer en Alcohólicos Anónimos",pagina:209},
+  {libro:"Compendio 2",seccion:"Reflexiones",titulo:"Reflexiona ¡hoy!",pagina:216},
+  {libro:"Compendio 2",seccion:"Instituciones",titulo:"Islas Marías y Alcohólicos Anónimos",pagina:216},
+  {libro:"Compendio 2",seccion:"Instituciones",titulo:"En la cárcel y en la cama",pagina:225},
+  {libro:"Compendio 2",seccion:"Instituciones",titulo:"Para el espíritu no hay barreras",pagina:226},
+  {libro:"Compendio 2",seccion:"Apadrinamiento",titulo:"Entre la vida y la muerte, los riesgos del apadrinamiento",pagina:231},
+  {libro:"Compendio 2",seccion:"Las herramientas de AA",titulo:"Catorce frases",pagina:238},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"Navidad antes, Navidad después",pagina:239},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"¡Papá, no vayas a tomar!",pagina:241},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"Aprender para no sufrir",pagina:245},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"El regalo de un hijo",pagina:248},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"Volví a nacer",pagina:252},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"¿Arquitecto de mi propio destino?",pagina:253},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"En AA se suma y se resta al mismo tiempo",pagina:257},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"Mi versión del solo por hoy",pagina:260},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"Como el viejo violín",pagina:262},
+  {libro:"Compendio 2",seccion:"La tribuna es tuya",titulo:"Mejor el perro que yo",pagina:265},
+  {libro:"Compendio 3",seccion:"Vivir en plenitud",titulo:"La Oración de la Serenidad",pagina:11},
+  {libro:"Compendio 3",seccion:"Vivir en plenitud",titulo:"Las tensiones, la ansiedad y las 24 horas",pagina:18},
+  {libro:"Compendio 3",seccion:"Vivir en plenitud",titulo:"Factores que ayudan a una sobriedad feliz",pagina:21},
+  {libro:"Compendio 3",seccion:"Vivir en plenitud",titulo:"Semblanza de humildad",pagina:22},
+  {libro:"Compendio 3",seccion:"Llevando el mensaje",titulo:"Una visita a la Unión Soviética",pagina:23},
+  {libro:"Compendio 3",seccion:"Llevando el mensaje",titulo:"Alguien nos está esperando",pagina:34},
+  {libro:"Compendio 3",seccion:"Llevando el mensaje",titulo:"Sesionando en las Islas Marías",pagina:35},
+  {libro:"Compendio 3",seccion:"Llevando el mensaje",titulo:"Si no fue Dios… ¿entonces quién?",pagina:41},
+  {libro:"Compendio 3",seccion:"La familia",titulo:"A mi padre en su primer aniversario",pagina:43},
+  {libro:"Compendio 3",seccion:"La familia",titulo:"Sentimiento de una madre",pagina:45},
+  {libro:"Compendio 3",seccion:"La familia",titulo:"Las puertas del triunfo",pagina:46},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Primer Paso",pagina:47},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Segundo Paso",pagina:51},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Tercer Paso",pagina:53},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Cuarto Paso",pagina:56},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Quinto Paso",pagina:63},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Sexto Paso",pagina:66},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Séptimo Paso",pagina:72},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Octavo Paso",pagina:75},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Noveno Paso",pagina:78},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Décimo Paso",pagina:84},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Undécimo Paso",pagina:87},
+  {libro:"Compendio 3",seccion:"Sesión de estudio",titulo:"Duodécimo Paso",pagina:92},
+  {libro:"Compendio 3",seccion:"Compartimiento",titulo:"La campana maravillosa",pagina:94},
+  {libro:"Compendio 3",seccion:"Compartimiento",titulo:"Un vacío en el corazón",pagina:102},
+  {libro:"Compendio 3",seccion:"Páginas de la historia",titulo:"Los cofundadores",pagina:108},
+  {libro:"Compendio 3",seccion:"Páginas de la historia",titulo:"Lois y Bill",pagina:113},
+  {libro:"Compendio 3",seccion:"Páginas de la historia",titulo:"Carl Gustav Jung, doctor de almas",pagina:122},
+  {libro:"Compendio 3",seccion:"Páginas de la historia",titulo:"El segundo despertar de Bill W.",pagina:129},
+  {libro:"Compendio 3",seccion:"Páginas de la historia",titulo:"El Libro Grande cumple 50 años",pagina:134},
+  {libro:"Compendio 3",seccion:"Páginas de la historia",titulo:"Historia de Alcohólicos Anónimos en México",pagina:139},
+  {libro:"Compendio 3",seccion:"Recuperación",titulo:"Reuniones para principiantes",pagina:145},
+  {libro:"Compendio 3",seccion:"Recuperación",titulo:"Quince puntos para ayudar al alcohólico confrontado con el deseo de tomarse un trago",pagina:152},
+  {libro:"Compendio 3",seccion:"Recuperación",titulo:"¿Quién soy?",pagina:155},
+  {libro:"Compendio 3",seccion:"Recuperación",titulo:"Madurez emocional",pagina:159},
+  {libro:"Compendio 3",seccion:"Recuperación",titulo:"La necesidad de creer",pagina:161},
+  {libro:"Compendio 3",seccion:"Recuperación",titulo:"Las sorprendentes Doce Promesas",pagina:162},
+  {libro:"Compendio 3",seccion:"La mujer en AA",titulo:"¿Quién es un alcohólico?",pagina:167},
+  {libro:"Compendio 3",seccion:"La mujer en AA",titulo:"Mujer, acércate sin temor a Alcohólicos Anónimos",pagina:180},
+  {libro:"Compendio 3",seccion:"La mujer en AA",titulo:"¡Quería salvarme… quería vivir!",pagina:182},
+  {libro:"Compendio 3",seccion:"La mujer en AA",titulo:"A los 80",pagina:186},
+  {libro:"Compendio 3",seccion:"La mujer en AA",titulo:"Carta navideña",pagina:188},
+  {libro:"Compendio 3",seccion:"Criterios profesionales",titulo:"Un doctor que habla claro",pagina:190},
+  {libro:"Compendio 3",seccion:"Criterios profesionales",titulo:"La bebida, el abuso del alcohol y el alcoholismo en la familia",pagina:195},
+  {libro:"Compendio 3",seccion:"Criterios profesionales",titulo:"Repercusiones del alcoholismo en la familia",pagina:199},
+  {libro:"Compendio 3",seccion:"Criterios profesionales",titulo:"Autoconmiseración por acción constructiva",pagina:205},
+  {libro:"Compendio 3",seccion:"Criterios profesionales",titulo:"Encuesta sobre los miembros de AA en México",pagina:211},
+  {libro:"Compendio 3",seccion:"Ecos de…",titulo:"IV Convención Nacional de AA: gracias Dios, gracias Bill, gracias Bob",pagina:216},
+  {libro:"Compendio 3",seccion:"Ecos de…",titulo:"Plenitud AA cumple 10 años",pagina:221},
+  {libro:"Compendio 3",seccion:"Servicio",titulo:"Servicio: ¿despertar espiritual?",pagina:223},
+  {libro:"Compendio 3",seccion:"Servicio",titulo:"El servicio a través del amor y la humildad",pagina:228},
+  {libro:"Compendio 3",seccion:"Servicio",titulo:"Alcohólicos Anónimos y sus responsabilidades",pagina:235},
+  {libro:"Compendio 3",seccion:"Servicio",titulo:"El contrato",pagina:239},
+  {libro:"Compendio 3",seccion:"Servicio",titulo:"La mujer y el servicio en AA",pagina:241},
+  {libro:"Compendio 3",seccion:"Los amigos de AA",titulo:"Alcohólicos Anónimos es el camino a la humildad",pagina:243},
+  {libro:"Compendio 3",seccion:"Los amigos de AA",titulo:"Un regalo de Dios al mundo",pagina:247},
+  {libro:"Compendio 3",seccion:"Los amigos de AA",titulo:"No tomes la primera copa",pagina:249},
+  {libro:"Compendio 3",seccion:"Reflexiones",titulo:"Regreso a lo fundamental: comenzando conmigo mismo",pagina:253},
+  {libro:"Compendio 3",seccion:"Reflexiones",titulo:"¿Por qué no se quedan los nuevos?",pagina:258},
+  {libro:"Compendio 3",seccion:"Reflexiones",titulo:"El programa de AA no es religioso, sino espiritual",pagina:263},
+  {libro:"Compendio 3",seccion:"Reflexiones",titulo:"La terapia grupal de AA",pagina:266},
+  {libro:"Compendio 3",seccion:"Reflexiones",titulo:"Seamos amistosos con nuestros amigos",pagina:271},
+  {libro:"Compendio 3",seccion:"Apadrinamiento",titulo:"Todavía es el mensaje básico",pagina:275},
+  {libro:"Compendio 3",seccion:"Apadrinamiento",titulo:"La clásica mancuerna",pagina:277},
+  {libro:"Compendio 3",seccion:"Apadrinamiento",titulo:"Terapia de café",pagina:281},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"Son muchos los caminos para llegar",pagina:284},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"Alcohólicos Anónimos es también para jóvenes",pagina:290},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"Nunca soñé que sería libre",pagina:293},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"Regreso a mi responsabilidad",pagina:297},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"Ayer y hoy",pagina:299},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"Alcohólicos Anónimos es… amor",pagina:308},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"Una mirada a mi interior",pagina:311},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"El armario de la ira",pagina:312},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"¿Por qué siento gratitud?",pagina:316},
+  {libro:"Compendio 3",seccion:"La tribuna es tuya",titulo:"¿El número uno? Sí… ¡pero en beber tequila!",pagina:319},
+  {libro:"Compendio 4",seccion:"Vivir en plenitud",titulo:"Cómo cultivar la tolerancia",pagina:11},
+  {libro:"Compendio 4",seccion:"Vivir en plenitud",titulo:"El libro de Joaquín",pagina:12},
+  {libro:"Compendio 4",seccion:"Vivir en plenitud",titulo:"¿Es inútil el dolor?",pagina:14},
+  {libro:"Compendio 4",seccion:"Vivir en plenitud",titulo:"Los locos que tienen la razón",pagina:17},
+  {libro:"Compendio 4",seccion:"Vivir en plenitud",titulo:"Viaje a través de las Doce Promesas",pagina:19},
+  {libro:"Compendio 4",seccion:"Vivir en plenitud",titulo:"De buen humor",pagina:26},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"¡Debemos llevar el mensaje a Cuba!",pagina:27},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Cuba abre sus puertas al mensaje de AA",pagina:30},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Alcohólicos Anónimos en Cuba: sueño realizado",pagina:34},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Cuando cualquiera, dondequiera…",pagina:39},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Cómo llegó el mensaje a Chupaderos",pagina:42},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"La importancia del mensaje",pagina:47},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Gratitud a todos los AA de México",pagina:50},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Las peripecias de un Libro Grande",pagina:52},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Volver a empezar",pagina:54},
+  {libro:"Compendio 4",seccion:"Llevando el mensaje",titulo:"Amanecer feliz en Panixtlahuaca",pagina:60},
+  {libro:"Compendio 4",seccion:"La familia",titulo:"¿Y la familia?",pagina:65},
+  {libro:"Compendio 4",seccion:"Compartimiento",titulo:"Pregúntale a un alcohólico anónimo si Dios ha muerto",pagina:69},
+  {libro:"Compendio 4",seccion:"Compartimiento",titulo:"Regreso a lo fundamental",pagina:73},
+  {libro:"Compendio 4",seccion:"Compartimiento",titulo:"En el yunque del dolor",pagina:77},
+  {libro:"Compendio 4",seccion:"Páginas de la historia",titulo:"La última charla extensa del doctor Bob",pagina:84},
+  {libro:"Compendio 4",seccion:"Páginas de la historia",titulo:"Los inciertos orígenes de la Oración de la Serenidad",pagina:96},
+  {libro:"Compendio 4",seccion:"Páginas de la historia",titulo:"Alcohólicos Anónimos en México llega a la mayoría de edad",pagina:101},
+  {libro:"Compendio 4",seccion:"Páginas de la historia",titulo:"La Fundación Stepping Stones",pagina:111},
+  {libro:"Compendio 4",seccion:"Recuperación",titulo:"Un cambio de juicios y actitudes",pagina:116},
+  {libro:"Compendio 4",seccion:"Recuperación",titulo:"Solo 20 preguntas",pagina:118},
+  {libro:"Compendio 4",seccion:"Recuperación",titulo:"¿Cómo disfrutar la vida sin alcohol?",pagina:121},
+  {libro:"Compendio 4",seccion:"Recuperación",titulo:"Programa de preguntas sorpresa para reuniones de AA",pagina:125},
+  {libro:"Compendio 4",seccion:"La mujer en AA",titulo:"El alcoholismo femenino",pagina:131},
+  {libro:"Compendio 4",seccion:"La mujer en AA",titulo:"Todo sea por el béisbol",pagina:132},
+  {libro:"Compendio 4",seccion:"La mujer en AA",titulo:"Encontré lo que no estaba buscando",pagina:134},
+  {libro:"Compendio 4",seccion:"La mujer en AA",titulo:"La mujer dentro de AA",pagina:137},
+  {libro:"Compendio 4",seccion:"La mujer en AA",titulo:"¿Por qué no se quedan las damas en AA?",pagina:146},
+  {libro:"Compendio 4",seccion:"La mujer en AA",titulo:"Primavera a los 40",pagina:148},
+  {libro:"Compendio 4",seccion:"La mujer en AA",titulo:"¿Y tú en qué paso vas?",pagina:150},
+  {libro:"Compendio 4",seccion:"Criterios profesionales",titulo:"Teoría del resentimiento",pagina:154},
+  {libro:"Compendio 4",seccion:"Criterios profesionales",titulo:"El perdón, característica humana superior",pagina:162},
+  {libro:"Compendio 4",seccion:"Criterios profesionales",titulo:"Hijos de alcohólicos",pagina:165},
+  {libro:"Compendio 4",seccion:"Criterios profesionales",titulo:"Me casé con un alcohólico… ¿qué hacer? (primera parte)",pagina:170},
+  {libro:"Compendio 4",seccion:"Criterios profesionales",titulo:"Me casé con un alcohólico… ¿qué hacer? (segunda parte)",pagina:172},
+  {libro:"Compendio 4",seccion:"Criterios profesionales",titulo:"Puntos de vista sobre el alcoholismo en la mujer",pagina:175},
+  {libro:"Compendio 4",seccion:"Servicio",titulo:"Falta de interés en los servicios de estructura",pagina:183},
+  {libro:"Compendio 4",seccion:"Servicio",titulo:"¡Gracias, Bill!",pagina:190},
+  {libro:"Compendio 4",seccion:"Servicio",titulo:"Mientras lavas tu mano izquierda…",pagina:192},
+  {libro:"Compendio 4",seccion:"Servicio",titulo:"La recuperación en el servidor",pagina:195},
+  {libro:"Compendio 4",seccion:"Servicio",titulo:"Servidores, no senadores",pagina:200},
+  {libro:"Compendio 4",seccion:"Los amigos de AA",titulo:"Alcohólicos Anónimos en un mundo cambiante",pagina:175},
+  {libro:"Compendio 4",seccion:"Los amigos de AA",titulo:"Que encuentren diamantes",pagina:179},
+  {libro:"Compendio 4",seccion:"Los amigos de AA",titulo:"El impacto del alcoholismo en la vida espiritual del alcohólico",pagina:183},
+  {libro:"Compendio 4",seccion:"Los amigos de AA",titulo:"Tú no eres Dios. El AA Grapevine es nuestro padrino de siempre",pagina:192},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (primera parte)",pagina:210},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (segunda parte)",pagina:218},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (tercera parte)",pagina:226},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (cuarta parte)",pagina:232},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (quinta parte)",pagina:237},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (sexta parte)",pagina:243},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (séptima parte)",pagina:251},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande (octava parte)",pagina:260},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía para recuperarse de una recaída (primera parte)",pagina:263},
+  {libro:"Compendio 4",seccion:"Sesión de estudio",titulo:"Una guía para recuperarse de una recaída (segunda parte)",pagina:276},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"¿A cuántos hemos ahuyentado?",pagina:286},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"El malestar común",pagina:288},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"Es sencillo aceptar cuando no te queda de otra",pagina:290},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"Fumar… ¿un placer o un problema?",pagina:294},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"Las tradiciones y mi egoísmo",pagina:297},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"Los principios espirituales como yo los entiendo",pagina:299},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"Manos que dan, nunca están vacías",pagina:302},
+  {libro:"Compendio 4",seccion:"Reflexiones",titulo:"Mitos en AA",pagina:304},
+  {libro:"Compendio 4",seccion:"Instituciones",titulo:"Nuestro presente es gratitud",pagina:308},
+  {libro:"Compendio 4",seccion:"Instituciones",titulo:"Un 10 de mayo en las Islas Marías",pagina:313},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"De las tinieblas a la luz",pagina:315},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"El demonio de la negación",pagina:317},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"El hombre no vale por lo que tiene, sino por lo que sirve",pagina:322},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"Para aquel niño que fui y que aún no ha muerto",pagina:324},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"¿Qué pasa con los recaídos?",pagina:325},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"Tuve que rendirme ante Dios",pagina:328},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"Un pastel para Lupe",pagina:329},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"El espíritu de la Séptima Tradición",pagina:332},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"Doce Pasos",pagina:334},
+  {libro:"Compendio 4",seccion:"La tribuna es tuya",titulo:"Doce Tradiciones",pagina:335},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"Palabras de bienvenida",pagina:11},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"Por primera vez",pagina:12},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"Una trampa para tramposos",pagina:14},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"El incrédulo",pagina:17},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"El plan de las 24 horas",pagina:27},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"¡Lagunas mentales!",pagina:35},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"Un despertar espiritual en la corcholata",pagina:40},
+  {libro:"Compendio 5",seccion:"Al recién llegado",titulo:"Al recién llegado",pagina:43},
+  {libro:"Compendio 5",seccion:"Reflexiones",titulo:"¿Qué está sucediendo con nuestros grupos?",pagina:45},
+  {libro:"Compendio 5",seccion:"Reflexiones",titulo:"Alcohólicos Anónimos no es una terapia de grupo",pagina:50},
+  {libro:"Compendio 5",seccion:"Reflexiones",titulo:"Los diosibonos",pagina:52},
+  {libro:"Compendio 5",seccion:"Reflexiones",titulo:"La depresión",pagina:56},
+  {libro:"Compendio 5",seccion:"Reflexiones",titulo:"¿Ruptura conyugal? Sugerencias",pagina:60},
+  {libro:"Compendio 5",seccion:"Reflexiones",titulo:"Cómo liberarme del egoísmo",pagina:63},
+  {libro:"Compendio 5",seccion:"Reflexiones",titulo:"Los borrachos vistos desde la acera de enfrente",pagina:67},
+  {libro:"Compendio 5",seccion:"Recuperación",titulo:"Los alcohólicos y el suicidio",pagina:74},
+  {libro:"Compendio 5",seccion:"Recuperación",titulo:"Mi verdadero fondo de sufrimiento",pagina:79},
+  {libro:"Compendio 5",seccion:"Recuperación",titulo:"Mi Quinto Paso",pagina:83},
+  {libro:"Compendio 5",seccion:"Recuperación",titulo:"El gran día",pagina:88},
+  {libro:"Compendio 5",seccion:"Alcohólicos Anónimos en todas partes",titulo:"Experiencias de AA en Cuba",pagina:90},
+  {libro:"Compendio 5",seccion:"Alcohólicos Anónimos en todas partes",titulo:"La literatura de AA en Cuba",pagina:94},
+  {libro:"Compendio 5",seccion:"Alcohólicos Anónimos en todas partes",titulo:"Ahora estoy en paz…",pagina:96},
+  {libro:"Compendio 5",seccion:"Instituciones",titulo:"Experimentando el cambio",pagina:98},
+  {libro:"Compendio 5",seccion:"Instituciones",titulo:"Los AA pioneros también trabajamos en las instituciones",pagina:99},
+  {libro:"Compendio 5",seccion:"Instituciones",titulo:"Caminando hacia una nueva vida",pagina:103},
+  {libro:"Compendio 5",seccion:"Instituciones",titulo:"Dios y el grupo no están jugando a ayudarme",pagina:107},
+  {libro:"Compendio 5",seccion:"Instituciones",titulo:"Fue necesario perder la libertad para encontrarla",pagina:109},
+  {libro:"Compendio 5",seccion:"Instituciones",titulo:"Alcohólicos Anónimos en instituciones",pagina:111},
+  {libro:"Compendio 5",seccion:"Los jóvenes en AA",titulo:"Las juntas son el calmante de mi enfermedad",pagina:113},
+  {libro:"Compendio 5",seccion:"Los jóvenes en AA",titulo:"Tragedia de nuestros jóvenes alcohólicos",pagina:117},
+  {libro:"Compendio 5",seccion:"Los jóvenes en AA",titulo:"Una tragedia que los jóvenes nos podemos evitar",pagina:124},
+  {libro:"Compendio 5",seccion:"Los jóvenes en AA",titulo:"Los jóvenes en Alcohólicos Anónimos",pagina:129},
+  {libro:"Compendio 5",seccion:"Vivir en plenitud",titulo:"Las 12 gratitudes",pagina:130},
+  {libro:"Compendio 5",seccion:"Vivir en plenitud",titulo:"Mi amigo me estaba escuchando (cómo reparar daños a un difunto)",pagina:131},
+  {libro:"Compendio 5",seccion:"Vivir en plenitud",titulo:"Me cayó el 20",pagina:137},
+  {libro:"Compendio 5",seccion:"Vivir en plenitud",titulo:"Un yo que busca un tú para formar un nosotros",pagina:142},
+  {libro:"Compendio 5",seccion:"Vivir en plenitud",titulo:"La materia prima de AA es el amor",pagina:144},
+  {libro:"Compendio 5",seccion:"Vivir en plenitud",titulo:"El compañero que más se aprecia",pagina:146},
+  {libro:"Compendio 5",seccion:"Vivir en plenitud",titulo:"En acción",pagina:149},
+  {libro:"Compendio 5",seccion:"Compartir es la clave",titulo:"¡No lo puedo creer, hasta el diablo me pasó el mensaje!",pagina:152},
+  {libro:"Compendio 5",seccion:"Compartir es la clave",titulo:"El bribón chofer",pagina:156},
+  {libro:"Compendio 5",seccion:"Compartir es la clave",titulo:"El moribundo y el recaído",pagina:159},
+  {libro:"Compendio 5",seccion:"Compartir es la clave",titulo:"Tocar fondo y despertar",pagina:162},
+  {libro:"Compendio 5",seccion:"Compartir es la clave",titulo:"Las tradiciones",pagina:166},
+  {libro:"Compendio 5",seccion:"Apadrinamiento",titulo:"El apadrinamiento es el lenguaje del corazón",pagina:170},
+  {libro:"Compendio 5",seccion:"Apadrinamiento",titulo:"El apadrinamiento, ¿un arte en extinción?",pagina:171},
+  {libro:"Compendio 5",seccion:"Apadrinamiento",titulo:"Mi primera junta",pagina:174},
+  {libro:"Compendio 5",seccion:"Páginas de la historia",titulo:"Tres décadas de AA",pagina:178},
+  {libro:"Compendio 5",seccion:"Páginas de la historia",titulo:"Cincuenta años de tradiciones de AA en México",pagina:183},
+  {libro:"Compendio 5",seccion:"Páginas de la historia",titulo:"Cuando AA llegó a la mayoría de edad en México (segunda parte)",pagina:190},
+  {libro:"Compendio 5",seccion:"Páginas de la historia",titulo:"Convenciones Nacionales",pagina:195},
+  {libro:"Compendio 5",seccion:"Páginas de la historia",titulo:"Entrevista a Robert Smith, Smitty, y su esposa Betty",pagina:199},
+  {libro:"Compendio 5",seccion:"Páginas de la historia",titulo:"Los alcohólicos y Dios",pagina:204},
+  {libro:"Compendio 5",seccion:"Páginas de la historia",titulo:"A 46 años de la muerte del Doctor Bob",pagina:212},
+  {libro:"Compendio 5",seccion:"Los grandes amigos de AA",titulo:"Adivina adivinador, apuesto a que me conoces",pagina:214},
+  {libro:"Compendio 5",seccion:"Los grandes amigos de AA",titulo:"El escuadrón de la muerte",pagina:216},
+  {libro:"Compendio 5",seccion:"Los grandes amigos de AA",titulo:"Servidores, artistas anónimos",pagina:218},
+  {libro:"Compendio 5",seccion:"Criterios profesionales",titulo:"Causas del alcoholismo (primera parte)",pagina:221},
+  {libro:"Compendio 5",seccion:"Criterios profesionales",titulo:"Causas del alcoholismo (última parte)",pagina:226},
+  {libro:"Compendio 5",seccion:"Alcohólicos Anónimos en Navidad",titulo:"Quiero ser niño en Navidad",pagina:232},
+  {libro:"Compendio 5",seccion:"Alcohólicos Anónimos en Navidad",titulo:"La Oración de la Serenidad: una interpretación personal",pagina:236},
+  {libro:"Compendio 5",seccion:"Alcohólicos Anónimos en Navidad",titulo:"Navidad en Alcohólicos Anónimos",pagina:242},
+  {libro:"Compendio 5",seccion:"Llevando el mensaje",titulo:"El mensajero nocturno",pagina:244},
+  {libro:"Compendio 5",seccion:"Llevando el mensaje",titulo:"El visitante madrugador: una experiencia en los mixes",pagina:246},
+  {libro:"Compendio 5",seccion:"Llevando el mensaje",titulo:"Alcohólicos Anónimos en Chiapas",pagina:249},
+  {libro:"Compendio 5",seccion:"Llevando el mensaje",titulo:"El cerrito y yo",pagina:260},
+  {libro:"Compendio 5",seccion:"Llevando el mensaje",titulo:"Alcohólicos Anónimos en Morelos",pagina:261},
+  {libro:"Compendio 5",seccion:"Llevando el mensaje",titulo:"Vamos a la Convención Nacional",pagina:266},
+  {libro:"Compendio 5",seccion:"La mujer en AA",titulo:"La acción para el cambio",pagina:268},
+  {libro:"Compendio 5",seccion:"La mujer en AA",titulo:"Una niña de familia acomodada",pagina:274},
+  {libro:"Compendio 5",seccion:"La mujer en AA",titulo:"La mujer en Alcohólicos Anónimos",pagina:278},
+  {libro:"Compendio 5",seccion:"La tribuna es tuya",titulo:"Primer Paso: puerta hacia la libertad",pagina:280},
+  {libro:"Compendio 5",seccion:"La tribuna es tuya",titulo:"Dios, al fin te encuentro",pagina:282},
+  {libro:"Compendio 5",seccion:"La tribuna es tuya",titulo:"El problema de los eruditos",pagina:286},
+  {libro:"Compendio 5",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande. Mi Quinto Paso",pagina:289},
+  {libro:"Compendio 5",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande. Mi Sexto y Séptimo pasos",pagina:293},
+  {libro:"Compendio 5",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande. Mi Octavo Paso",pagina:298},
+  {libro:"Compendio 5",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande. Mi Noveno Paso",pagina:307},
+  {libro:"Compendio 5",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande. Mi Décimo Paso",pagina:313},
+  {libro:"Compendio 5",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande. Mi Undécimo Paso",pagina:318},
+  {libro:"Compendio 5",seccion:"Sesión de estudio",titulo:"Una guía diseñada del Libro Grande. Mi Paso Doce",pagina:323},
+  {libro:"Compendio 6",seccion:"Hablando de…",titulo:"Escapando del alcoholismo",pagina:11},
+  {libro:"Compendio 6",seccion:"Hablando de…",titulo:"Las maravillas del Libro Grande",pagina:14},
+  {libro:"Compendio 6",seccion:"Hablando de…",titulo:"¿Quién cierra los grupos?",pagina:16},
+  {libro:"Compendio 6",seccion:"Hablando de…",titulo:"Cómo dirigir nuestras vidas en AA",pagina:19},
+  {libro:"Compendio 6",seccion:"Hablando de…",titulo:"La primavera no es eterna",pagina:23},
+  {libro:"Compendio 6",seccion:"Al recién llegado",titulo:"El nuevo me salvó la vida",pagina:25},
+  {libro:"Compendio 6",seccion:"Al recién llegado",titulo:"El arquitecto sin zapatos",pagina:27},
+  {libro:"Compendio 6",seccion:"Al recién llegado",titulo:"Ojalá esta sea tu noche de suerte",pagina:29},
+  {libro:"Compendio 6",seccion:"Al recién llegado",titulo:"No bebo, porque… ¿qué les digo…?",pagina:32},
+  {libro:"Compendio 6",seccion:"Al recién llegado",titulo:"Padrinazo",pagina:34},
+  {libro:"Compendio 6",seccion:"Reflexiones",titulo:"¿Por qué no se quedan los viejos?",pagina:36},
+  {libro:"Compendio 6",seccion:"Reflexiones",titulo:"Limpiar de escombros el pasado",pagina:38},
+  {libro:"Compendio 6",seccion:"Reflexiones",titulo:"Tranquilidad de espíritu",pagina:44},
+  {libro:"Compendio 6",seccion:"Reflexiones",titulo:"Ahora mi actitud es otra",pagina:57},
+  {libro:"Compendio 6",seccion:"Reflexiones",titulo:"Sabiduría",pagina:60},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"Del resentimiento al perdón",pagina:62},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"El dolor del crecimiento",pagina:67},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"El día tiene 24 horas, no 36",pagina:72},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"Serenidad para aceptar",pagina:76},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"La fortaleza que se levanta de la derrota",pagina:82},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"Un Poder superior",pagina:85},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"Los que están más cerca de Dios",pagina:88},
+  {libro:"Compendio 6",seccion:"Recuperación",titulo:"La Cuarta Tradición",pagina:92},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en todas partes",titulo:"La fiesta",pagina:94},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en todas partes",titulo:"¿Alcohólico yo?",pagina:99},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en todas partes",titulo:"Un mensaje sin fronteras",pagina:105},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en instituciones",titulo:"De la penumbra a la luz",pagina:107},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en instituciones",titulo:"El día de mi graduación",pagina:114},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en instituciones",titulo:"El nacimiento de Alcohólicos Anónimos",pagina:118},
+  {libro:"Compendio 6",seccion:"Vivir en plenitud",titulo:"Carta de Dios a un alcohólico",pagina:122},
+  {libro:"Compendio 6",seccion:"Vivir en plenitud",titulo:"¿Cuál es la voluntad de Dios?",pagina:124},
+  {libro:"Compendio 6",seccion:"Vivir en plenitud",titulo:"Fortaleza para aceptar Su voluntad",pagina:127},
+  {libro:"Compendio 6",seccion:"Vivir en plenitud",titulo:"Sobriedad con los cinco sentidos",pagina:130},
+  {libro:"Compendio 6",seccion:"Vivir en plenitud",titulo:"A prueba de fe",pagina:132},
+  {libro:"Compendio 6",seccion:"Vivir en plenitud",titulo:"Te conocí tres veces",pagina:136},
+  {libro:"Compendio 6",seccion:"Vivir en plenitud",titulo:"A propósito del XXIII aniversario de Plenitud AA",pagina:139},
+  {libro:"Compendio 6",seccion:"Compartir es la clave",titulo:"Campeón sin corona",pagina:143},
+  {libro:"Compendio 6",seccion:"Compartir es la clave",titulo:"Carta a mi querida",pagina:151},
+  {libro:"Compendio 6",seccion:"Compartir es la clave",titulo:"Música para un esqueleto sin alma",pagina:153},
+  {libro:"Compendio 6",seccion:"Compartir es la clave",titulo:"Ese día abrieron el grupo",pagina:155},
+  {libro:"Compendio 6",seccion:"Compartir es la clave",titulo:"El listón amarillo",pagina:158},
+  {libro:"Compendio 6",seccion:"Compartir es la clave",titulo:"Los agentes y su grupo Plenitud",pagina:160},
+  {libro:"Compendio 6",seccion:"Compartir es la clave",titulo:"Herramientas y buenos deseos",pagina:164},
+  {libro:"Compendio 6",seccion:"Apadrinamiento",titulo:"La experiencia del apadrinamiento",pagina:168},
+  {libro:"Compendio 6",seccion:"Apadrinamiento",titulo:"¿Cómo me gustaría que fuera mi padrino?",pagina:171},
+  {libro:"Compendio 6",seccion:"Páginas de la historia",titulo:"Los congresos nacionales",pagina:173},
+  {libro:"Compendio 6",seccion:"Páginas de la historia",titulo:"Las primeras convenciones",pagina:179},
+  {libro:"Compendio 6",seccion:"Páginas de la historia",titulo:"Dos desahuciados que salvan la vida de millones",pagina:185},
+  {libro:"Compendio 6",seccion:"Páginas de la historia",titulo:"Una vida útil y feliz",pagina:207},
+  {libro:"Compendio 6",seccion:"Páginas de la historia",titulo:"La última charla extensa del doctor Bob",pagina:216},
+  {libro:"Compendio 6",seccion:"Páginas de la historia",titulo:"Recordando al doctor Bob",pagina:229},
+  {libro:"Compendio 6",seccion:"Los grandes amigos de AA",titulo:"Un milagro para poder creer",pagina:232},
+  {libro:"Compendio 6",seccion:"Los grandes amigos de AA",titulo:"La civilización del amor",pagina:236},
+  {libro:"Compendio 6",seccion:"Criterios profesionales",titulo:"¿Por qué fracasan los psiquiatras al tratar a los alcohólicos?",pagina:241},
+  {libro:"Compendio 6",seccion:"Criterios profesionales",titulo:"La personalidad del alcohólico",pagina:249},
+  {libro:"Compendio 6",seccion:"Criterios profesionales",titulo:"Las recaídas y la naturaleza humana",pagina:255},
+  {libro:"Compendio 6",seccion:"Criterios profesionales",titulo:"Yo, el alcohol",pagina:258},
+  {libro:"Compendio 6",seccion:"Criterios profesionales",titulo:"Evasión del Cuarto Paso",pagina:264},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en Navidad",titulo:"Recuerdos de Navidad",pagina:267},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en Navidad",titulo:"Un bendito castigo navideño",pagina:272},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Pasando el mensaje por gratitud, no seamos una casa abandonada",pagina:274},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"El ángel anónimo",pagina:276},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Un deseo de buena voluntad",pagina:279},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"El alcoholismo avanza entre las mujeres",pagina:281},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Mujer, valórate a ti misma",pagina:288},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Alas rotas",pagina:293},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Yesenia",pagina:296},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Rectificando el camino",pagina:301},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Sigo aquí",pagina:303},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"El programa me curó la epilepsia",pagina:307},
+  {libro:"Compendio 6",seccion:"Llevando el mensaje",titulo:"Padrino de tolerancia",pagina:310},
+  {libro:"Compendio 6",seccion:"La tribuna es tuya",titulo:"Luz y sombra",pagina:312},
+  {libro:"Compendio 6",seccion:"La tribuna es tuya",titulo:"¿Veterano yo?",pagina:314},
+  {libro:"Compendio 6",seccion:"La tribuna es tuya",titulo:"Mi compromiso con Dios",pagina:316},
+  {libro:"Compendio 6",seccion:"La tribuna es tuya",titulo:"¿Cómo le va, señor don Perro?",pagina:319},
+  {libro:"Compendio 6",seccion:"La tribuna es tuya",titulo:"Un delicioso manjar",pagina:322},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Alcohólicos Anónimos en las comunidades indígenas",pagina:324},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Renegué de ser purépecha",pagina:326},
+  {libro:"Compendio 6",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Un viaje a través de las Doce Promesas",pagina:332},
+  {libro:"Compendio 6",seccion:"Los que nos antecedieron",titulo:"Miguelito, el hombre feliz",pagina:333},
+  {libro:"Compendio 6",seccion:"Los que nos antecedieron",titulo:"El lago de los cisnes",pagina:341},
+  {libro:"Compendio 6",seccion:"Los que nos antecedieron",titulo:"El ave de las tempestades, El fundador de CRAMAC",pagina:351},
+  {libro:"Compendio 6",seccion:"Los que nos antecedieron",titulo:"La Segunda Promesa",pagina:358},
+  {libro:"Compendio 6",seccion:"Temas básicos de información pública",titulo:"La opinión de la religión",pagina:359},
+  {libro:"Compendio 6",seccion:"Temas básicos de información pública",titulo:"¿Quién es un alcohólico?",pagina:364},
+  {libro:"Compendio 6",seccion:"Temas básicos de información pública",titulo:"Un ministro religioso frente al alcoholismo",pagina:367},
+  {libro:"Compendio 6",seccion:"Temas básicos de información pública",titulo:"La Tercera Promesa",pagina:372},
+  {libro:"Compendio 6",seccion:"Temas sobre tradiciones",titulo:"La regla 62",pagina:373},
+  {libro:"Compendio 6",seccion:"Temas sobre tradiciones",titulo:"Las Doce Tradiciones… una visión personal",pagina:374},
+  {libro:"Compendio 6",seccion:"Temas sobre tradiciones",titulo:"Feliz aniversario, Pichirilo",pagina:379},
+  {libro:"Compendio 6",seccion:"Temas sobre tradiciones",titulo:"El mensaje llegó",pagina:381},
+  {libro:"Compendio 6",seccion:"Temas sobre tradiciones",titulo:"La Cuarta Promesa",pagina:385},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Reuniones para el recién llegado",pagina:11},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Reencuentro espiritual",pagina:13},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Reflexiones",pagina:14},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Comunicación",pagina:15},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"La invasión de las dos letras",pagina:17},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Año del mensaje a la juventud",pagina:20},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Saber agradecer",pagina:23},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Cómo admití mi Primer Paso",pagina:24},
+  {libro:"Compendio 7",seccion:"Los recién llegados",titulo:"Quinta Promesa",pagina:29},
+  {libro:"Compendio 7",seccion:"Reflexiones",titulo:"¿Qué es la literatura de Alcohólicos Anónimos?",pagina:30},
+  {libro:"Compendio 7",seccion:"Reflexiones",titulo:"Más sabe el diablo por viejo…",pagina:31},
+  {libro:"Compendio 7",seccion:"Reflexiones",titulo:"El bienestar de un veterano",pagina:33},
+  {libro:"Compendio 7",seccion:"Reflexiones",titulo:"Riqueza espiritual",pagina:35},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Sexta Promesa",pagina:37},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Nuestro objetivo primordial y los grupos con un propósito especial",pagina:38},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Practicando la unidad",pagina:42},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Los tres regalos de Dios",pagina:46},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Un tema tabú: las malas conductas",pagina:48},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Un fenómeno de la tradición",pagina:55},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Autonomía: libertad, no libertinaje",pagina:57},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"La responsabilidad ante el grupo",pagina:59},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"No fumar durante la sesión",pagina:62},
+  {libro:"Compendio 7",seccion:"Temas sobre tradiciones",titulo:"Séptima Promesa",pagina:64},
+  {libro:"Compendio 7",seccion:"Vivir en plenitud",titulo:"El valor del tiempo",pagina:65},
+  {libro:"Compendio 7",seccion:"Vivir en plenitud",titulo:"Reflexionando",pagina:67},
+  {libro:"Compendio 7",seccion:"Vivir en plenitud",titulo:"Octava Promesa",pagina:72},
+  {libro:"Compendio 7",seccion:"Páginas de la historia",titulo:"Los verdaderos fundadores de Alcohólicos Anónimos",pagina:73},
+  {libro:"Compendio 7",seccion:"Páginas de la historia",titulo:"De mis memorias",pagina:84},
+  {libro:"Compendio 7",seccion:"Páginas de la historia",titulo:"Despertar espiritual y servicio",pagina:92},
+  {libro:"Compendio 7",seccion:"Páginas de la historia",titulo:"Novena Promesa",pagina:99},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"Es que no había literatura",pagina:100},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"Readaptación a la sociedad",pagina:105},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"¿Alguna vez has tenido una borrachera seca?",pagina:108},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"Las Doce Paradojas de Alcohólicos Anónimos",pagina:111},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"El apadrinamiento y el fortalecimiento espiritual",pagina:116},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"Más allá de no beber, honestidad y honradez",pagina:120},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"¿Cómo salgo de todo esto? La importancia de mi inventario",pagina:123},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"Sobriedad o autoengaño",pagina:125},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"El secreto de las juntas",pagina:128},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"Un proyecto de vida",pagina:130},
+  {libro:"Compendio 7",seccion:"Recuperación",titulo:"Décima Promesa",pagina:134},
+  {libro:"Compendio 7",seccion:"Servicio",titulo:"Yo los necesito a ellos",pagina:135},
+  {libro:"Compendio 7",seccion:"Servicio",titulo:"La mujer en el servicio",pagina:136},
+  {libro:"Compendio 7",seccion:"Servicio",titulo:"O me pongo humilde o me pongo borracho. Entre la soberbia y la humildad",pagina:139},
+  {libro:"Compendio 7",seccion:"Servicio",titulo:"Decimaprimera Promesa",pagina:143},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"Apadrinamiento y despertar espiritual",pagina:144},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"Marty Mann",pagina:147},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"Los sentimientos de culpa",pagina:154},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"Alcohol, el primer amor de una jovencita",pagina:156},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"En busca de la dignidad",pagina:160},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"¿Qué hacer para que se queden las mujeres?",pagina:163},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"Dar todo lo que tenemos para poderlo conservar",pagina:168},
+  {libro:"Compendio 7",seccion:"La mujer en AA",titulo:"Decimasegunda Promesa",pagina:174},
+  {libro:"Compendio 7",seccion:"Los amigos de AA",titulo:"Alcohólicos Anónimos en un mundo cambiante",pagina:175},
+  {libro:"Compendio 7",seccion:"Los amigos de AA",titulo:"Que encuentren diamantes",pagina:179},
+  {libro:"Compendio 7",seccion:"Los amigos de AA",titulo:"El impacto del alcoholismo en la vida espiritual del alcohólico",pagina:183},
+  {libro:"Compendio 7",seccion:"Los amigos de AA",titulo:"Tú no eres Dios. El AA Grapevine es nuestro padrino de siempre",pagina:192},
+  {libro:"Compendio 7",seccion:"Criterios profesionales",titulo:"El médico, permanente apoyador de AA",pagina:205},
+  {libro:"Compendio 7",seccion:"Criterios profesionales",titulo:"No se puede aplaudir con una sola mano",pagina:212},
+  {libro:"Compendio 7",seccion:"Criterios profesionales",titulo:"Factores de riesgo en el consumo del alcohol",pagina:217},
+  {libro:"Compendio 7",seccion:"Criterios profesionales",titulo:"Mi gratitud hacia Alcohólicos Anónimos",pagina:221},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos y las prisiones",titulo:"Cárcel de concreto",pagina:224},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos y las prisiones",titulo:"El día de la libertad",pagina:225},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos y las prisiones",titulo:"Día cero",pagina:230},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos y las prisiones",titulo:"Preso en libertad",pagina:233},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos y las prisiones",titulo:"Aceptando la realidad",pagina:236},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos y las prisiones",titulo:"El Dios que yo buscaba",pagina:239},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos y las prisiones",titulo:"Dios me va dando lo que necesito",pagina:245},
+  {libro:"Compendio 7",seccion:"Los jóvenes en AA",titulo:"El rock and roll y la sobriedad",pagina:248},
+  {libro:"Compendio 7",seccion:"Los jóvenes en AA",titulo:"Un mensaje para los jóvenes",pagina:251},
+  {libro:"Compendio 7",seccion:"Los jóvenes en AA",titulo:"El precio de la juventud",pagina:252},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en todas partes",titulo:"Sin fronteras",pagina:256},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en todas partes",titulo:"El alcohólico curado",pagina:259},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en todas partes",titulo:"Detrás del telón",pagina:263},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en todas partes",titulo:"El espíritu de Bill W. en Cuba",pagina:267},
+  {libro:"Compendio 7",seccion:"Llevando el mensaje",titulo:"¿Cuál es el mensaje que deseamos transmitir?",pagina:273},
+  {libro:"Compendio 7",seccion:"Llevando el mensaje",titulo:"La razón por la cual fuimos escogidos",pagina:275},
+  {libro:"Compendio 7",seccion:"Llevando el mensaje",titulo:"Dios lleva las riendas",pagina:277},
+  {libro:"Compendio 7",seccion:"Llevando el mensaje",titulo:"La luz con una velita",pagina:282},
+  {libro:"Compendio 7",seccion:"Llevando el mensaje",titulo:"El mensaje en una taza",pagina:283},
+  {libro:"Compendio 7",seccion:"Llevando el mensaje",titulo:"El juramento",pagina:284},
+  {libro:"Compendio 7",seccion:"Compartir es la clave",titulo:"Joven profesionista, pero alcohólico",pagina:295},
+  {libro:"Compendio 7",seccion:"Compartir es la clave",titulo:"Los siete niveles de la humildad",pagina:299},
+  {libro:"Compendio 7",seccion:"Compartir es la clave",titulo:"Utilizando el lenguaje del corazón",pagina:302},
+  {libro:"Compendio 7",seccion:"Compartir es la clave",titulo:"En casa del herrero",pagina:304},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Mi resentimiento en las etnias",pagina:308},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Vivo en las etnias",pagina:311},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Hacia un nuevo horizonte (primera parte)",pagina:315},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Hacia un nuevo horizonte (última parte)",pagina:320},
+  {libro:"Compendio 7",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Encuentro de dos rostros",pagina:325},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"A veces creo estar soñando",pagina:333},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"Cómo caí en el infierno",pagina:338},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"Ira y dolor",pagina:341},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"La crisis",pagina:342},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"Iba a derrumbarme tarde o temprano",pagina:347},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"Dios llama al hombre",pagina:349},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"El barman con el monstruo en la mano",pagina:350},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"Doce Pasos",pagina:356},
+  {libro:"Compendio 7",seccion:"La tribuna es tuya",titulo:"Doce Tradiciones",pagina:357},
+  {libro:"Compendio 8",seccion:"Hablando de…",titulo:"Una buena información pública para que se quede el recién llegado",pagina:13},
+  {libro:"Compendio 8",seccion:"Hablando de…",titulo:"Buscamos a través de la meditación",pagina:15},
+  {libro:"Compendio 8",seccion:"Hablando de…",titulo:"2005: año de la mujer en los servicios generales",pagina:18},
+  {libro:"Compendio 8",seccion:"Hablando de…",titulo:"Los primeros 29 años de nuestra junta impresa",pagina:21},
+  {libro:"Compendio 8",seccion:"Hablando de…",titulo:"¡Éramos solo tres!",pagina:22},
+  {libro:"Compendio 8",seccion:"Hablando de…",titulo:"¿Qué tenemos que hacer?",pagina:25},
+  {libro:"Compendio 8",seccion:"Compartir es la clave",titulo:"Sugerencias cuando se sufre una recaída",pagina:28},
+  {libro:"Compendio 8",seccion:"Compartir es la clave",titulo:"Levántate y anda",pagina:31},
+  {libro:"Compendio 8",seccion:"Compartir es la clave",titulo:"El bienestar común en el grupo",pagina:33},
+  {libro:"Compendio 8",seccion:"Compartir es la clave",titulo:"Admisión y rendición (el dilema de la derrota)",pagina:34},
+  {libro:"Compendio 8",seccion:"Compartir es la clave",titulo:"Una Navidad diferente",pagina:35},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"Una fuga de mi realidad",pagina:39},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"El alcohol me dominó",pagina:41},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"Jóvenes en acción",pagina:49},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"Eres muy joven",pagina:52},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"La oveja negra",pagina:54},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"Recuerdos",pagina:55},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"El alcoholismo no respeta",pagina:57},
+  {libro:"Compendio 8",seccion:"Los jóvenes en AA",titulo:"El bosque del espíritu",pagina:59},
+  {libro:"Compendio 8",seccion:"Recuperación",titulo:"Vegetando en el grupo",pagina:61},
+  {libro:"Compendio 8",seccion:"Recuperación",titulo:"Los cinco puntos básicos (primera parte)",pagina:63},
+  {libro:"Compendio 8",seccion:"Recuperación",titulo:"Los cinco puntos básicos (última parte)",pagina:69},
+  {libro:"Compendio 8",seccion:"Recuperación",titulo:"Si la lujuria te excede",pagina:74},
+  {libro:"Compendio 8",seccion:"Recuperación",titulo:"Un punto de vista sobre el libro AA (primera parte)",pagina:75},
+  {libro:"Compendio 8",seccion:"Recuperación",titulo:"Un punto de vista sobre el libro AA (última parte)",pagina:80},
+  {libro:"Compendio 8",seccion:"Criterios profesionales",titulo:"El síndrome de la borrachera seca: el síndrome del avestruz",pagina:84},
+  {libro:"Compendio 8",seccion:"Criterios profesionales",titulo:"El síndrome de la borrachera seca: para no cambiar",pagina:93},
+  {libro:"Compendio 8",seccion:"Criterios profesionales",titulo:"El síndrome de la borrachera seca: los adoradores del becerro de oro",pagina:100},
+  {libro:"Compendio 8",seccion:"Criterios profesionales",titulo:"El síndrome de la borrachera seca: ni pichan ni cachan ni dejan batear",pagina:110},
+  {libro:"Compendio 8",seccion:"Criterios profesionales",titulo:"El síndrome de la borrachera seca: los doce síntomas de la sobriedad",pagina:119},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"El alcohol solo fue un síntoma de la enfermedad",pagina:126},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"Amadrinamiento de la mujer",pagina:128},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"Tengo una tarea para toda la vida",pagina:130},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"¿Por qué no se quedan las mujeres en AA?",pagina:131},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"Mis Doce Pasos con la muerte (primera parte)",pagina:134},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"Mis Doce Pasos con la muerte (última parte)",pagina:139},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"La clave ha sido servir",pagina:144},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"Once años de un sueño",pagina:147},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"Adiós a un buen amigo",pagina:151},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"IX Encuentro Purépecha Pamatácuaro, Michoacán",pagina:153},
+  {libro:"Compendio 8",seccion:"La mujer en AA",titulo:"Israel: 30 años de AA",pagina:156},
+  {libro:"Compendio 8",seccion:"Unidad",titulo:"Conciencia de grupo",pagina:158},
+  {libro:"Compendio 8",seccion:"Unidad",titulo:"Las tradiciones dentro y fuera de AA",pagina:160},
+  {libro:"Compendio 8",seccion:"Unidad",titulo:"Obediencia: antídoto para la ingobernabilidad",pagina:163},
+  {libro:"Compendio 8",seccion:"Unidad",titulo:"Yo soy responsable",pagina:165},
+  {libro:"Compendio 8",seccion:"Unidad",titulo:"El líder que nuestro grupo necesita",pagina:167},
+  {libro:"Compendio 8",seccion:"Unidad",titulo:"La autoridad fundamental",pagina:169},
+  {libro:"Compendio 8",seccion:"Unidad",titulo:"Ahora me toca a mí",pagina:170},
+  {libro:"Compendio 8",seccion:"Nuestros veteranos comparten",titulo:"La alegría de vivir en Villa de Reyes",pagina:173},
+  {libro:"Compendio 8",seccion:"Nuestros veteranos comparten",titulo:"Paso Once",pagina:175},
+  {libro:"Compendio 8",seccion:"Nuestros veteranos comparten",titulo:"Los disciplinarios del alcohólico",pagina:177},
+  {libro:"Compendio 8",seccion:"Nuestros veteranos comparten",titulo:"Hoy sé quién soy",pagina:180},
+  {libro:"Compendio 8",seccion:"Nuestros veteranos comparten",titulo:"Experiencia de un emigrante",pagina:182},
+  {libro:"Compendio 8",seccion:"Nuestros veteranos comparten",titulo:"De todas maneras, seguí fumando",pagina:184},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"¿Por qué yo sí?",pagina:186},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"Mi servicio: obligación o responsabilidad",pagina:189},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"Cuando más oscura está la noche",pagina:190},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"Reencuentro con Islas Marías",pagina:192},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"¿Por qué el poco interés en la lectura de los Doce Conceptos?",pagina:194},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"De la pulquería a la Conferencia",pagina:196},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"Está en mí atraer a la mujer al servicio",pagina:198},
+  {libro:"Compendio 8",seccion:"Servicio",titulo:"El alcohólico debe tener tres cosas",pagina:200},
+  {libro:"Compendio 8",seccion:"Ecos de…",titulo:"Apadrinamiento responsable",pagina:201},
+  {libro:"Compendio 8",seccion:"Ecos de…",titulo:"El respeto se gana",pagina:204},
+  {libro:"Compendio 8",seccion:"Ecos de…",titulo:"Apadrinamiento en todos los niveles",pagina:207},
+  {libro:"Compendio 8",seccion:"Ecos de…",titulo:"La historia del esfuerzo solitario",pagina:210},
+  {libro:"Compendio 8",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Por algo estoy aquí",pagina:216},
+  {libro:"Compendio 8",seccion:"Alcohólicos Anónimos en prisiones",titulo:"En el CERESO conocí el programa de AA",pagina:219},
+  {libro:"Compendio 8",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Aprendiendo a vivir",pagina:220},
+  {libro:"Compendio 8",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Cuando desperté era demasiado tarde",pagina:221},
+  {libro:"Compendio 8",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Dios me habló con aplausos",pagina:223},
+  {libro:"Compendio 8",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Dios me brindó otra oportunidad",pagina:225},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Tercer Paso",pagina:228},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Cuarto Paso",pagina:230},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Quinto Paso",pagina:232},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Sexto Paso",pagina:234},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Séptimo Paso",pagina:236},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Octavo Paso",pagina:238},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Noveno Paso",pagina:240},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Décimo Paso",pagina:242},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Undécimo Paso",pagina:244},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"Duodécimo Paso",pagina:246},
+  {libro:"Compendio 8",seccion:"La historieta",titulo:"La mujer en Alcohólicos Anónimos",pagina:248},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"Los verdaderos fundadores de AA (segunda parte)",pagina:251},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"Reseña del libro AA en la historia de AA",pagina:259},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"Lois y Anne, mujeres clave en la historia de AA",pagina:260},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"El hombre en la cama",pagina:267},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"Clinton Duffy y la prisión de San Quintín",pagina:272},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"Alcohólicos Anónimos en las Islas Marías",pagina:274},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"Los que estamos dentro",pagina:276},
+  {libro:"Compendio 8",seccion:"Sección especial",titulo:"¿Y las mujeres?",pagina:279},
+  {libro:"Compendio 8",seccion:"Llevando el mensaje",titulo:"Alcohólicos Anónimos o el infierno",pagina:284},
+  {libro:"Compendio 8",seccion:"Llevando el mensaje",titulo:"La sombra del padrino",pagina:287},
+  {libro:"Compendio 8",seccion:"Llevando el mensaje",titulo:"Te estamos esperando",pagina:290},
+  {libro:"Compendio 8",seccion:"Llevando el mensaje",titulo:"El profe",pagina:293},
+  {libro:"Compendio 8",seccion:"Llevando el mensaje",titulo:"Los doceavos del Güiro",pagina:296},
+  {libro:"Compendio 8",seccion:"Llevando el mensaje",titulo:"¡Mi bendito milagro!",pagina:298},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Menores infractores y consumo de alcohol",pagina:13},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Mujeres en reclusión",pagina:19},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Manteniéndose sobrio dentro y fuera de un centro de reclusión",pagina:22},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Setenta y dos años de AA en el mundo",pagina:27},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Por la gratitud de estar vivos (primera parte)",pagina:30},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Por la gratitud de estar vivos (última parte)",pagina:35},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Año nuevo, vida nueva",pagina:40},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"El camino más corto",pagina:46},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"Treinta y un aniversario de Plenitud AA",pagina:48},
+  {libro:"Compendio 9",seccion:"Hablando de…",titulo:"El secreto de Alcohólicos Anónimos",pagina:52},
+  {libro:"Compendio 9",seccion:"Historia de AA",titulo:"Ser obediente",pagina:58},
+  {libro:"Compendio 9",seccion:"Historia de AA",titulo:"La primera mujer alcohólica",pagina:61},
+  {libro:"Compendio 9",seccion:"Historia de AA",titulo:"La importancia del apadrinamiento",pagina:63},
+  {libro:"Compendio 9",seccion:"Historia de AA",titulo:"Yo en mi aniversario, y él en su féretro",pagina:66},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"Se llama delirium",pagina:67},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"Un punto de vista sobre el libro Alcohólicos Anónimos",pagina:68},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"La semilla cayó en tierra fértil",pagina:75},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"Verás la sonrisa de tus hijos",pagina:78},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"¿Práctica espiritual o religiosa? (primera parte)",pagina:79},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"¿Práctica espiritual o religiosa? (última parte)",pagina:82},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"Reflexiones sobre el apadrinamiento",pagina:86},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"Lo bueno de lo malo",pagina:90},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"Prisionero del alcohol",pagina:95},
+  {libro:"Compendio 9",seccion:"Recuperación",titulo:"¿Qué es el apadrinamiento?",pagina:97},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"Bueno, ¿cuál es la formulita?",pagina:100},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"Los defectos de carácter",pagina:103},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"Cómo perder un ahijado",pagina:105},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"El resentimiento es veneno puro",pagina:106},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"A la manera de Dios",pagina:107},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"Una vez alcohólico, alcohólico para toda la vida",pagina:108},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"Mis Tres Legados (primera parte)",pagina:109},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"Mis Tres Legados (última parte)",pagina:114},
+  {libro:"Compendio 9",seccion:"Nuestros veteranos comparten",titulo:"Servicio, base y fortaleza de la recuperación",pagina:120},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"Lo que hace a un líder",pagina:121},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"Las tradiciones me disciplinaron",pagina:124},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"De ello depende mi vida",pagina:125},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"Solo el amor transforma",pagina:126},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"¿Quién tiene tiempo para ir a una junta?",pagina:129},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"Una visión hacia el futuro",pagina:132},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"Inventario de grupo",pagina:139},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"El tiempo de todos",pagina:150},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"El grupo vacío",pagina:152},
+  {libro:"Compendio 9",seccion:"Unidad",titulo:"Mi segunda oportunidad",pagina:155},
+  {libro:"Compendio 9",seccion:"Servicio",titulo:"El don de darse a los demás",pagina:157},
+  {libro:"Compendio 9",seccion:"Servicio",titulo:"Esto implica tiempo y un poco de dinero",pagina:158},
+  {libro:"Compendio 9",seccion:"Servicio",titulo:"Dar en la forma que recibes",pagina:160},
+  {libro:"Compendio 9",seccion:"Servicio",titulo:"Un salvaje al servicio de Dios",pagina:162},
+  {libro:"Compendio 9",seccion:"Servicio",titulo:"No dejemos solos a los solitarios",pagina:164},
+  {libro:"Compendio 9",seccion:"Servicio",titulo:"El liderazgo, una necesidad vital",pagina:166},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"¿Y ahora qué hice?",pagina:168},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Recuperando mi dignidad",pagina:170},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Dios me transmitió el mensaje",pagina:171},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Una segunda oportunidad",pagina:172},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Dios me iluminó",pagina:176},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Tómalo como un regalo de Dios",pagina:177},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"La razón de mi existencia",pagina:178},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Ya no estoy sola",pagina:181},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Tienes que seguir sirviendo",pagina:182},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Podemos abrir muchas puertas",pagina:184},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Soy mujer y también soy alcohólica",pagina:186},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Como simple objeto sexual",pagina:188},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"El derecho a ser feliz",pagina:189},
+  {libro:"Compendio 9",seccion:"La mujer en AA",titulo:"Soy un milagro de Dios",pagina:193},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"A los muertos no les afecta nada",pagina:194},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"La voluntad es poder",pagina:199},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"La atención del enfermo",pagina:203},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"Alcohólicos Anónimos, una obra de amor",pagina:206},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"Una virtud esquiva",pagina:211},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"El diamante bajo el estiércol (primera parte)",pagina:214},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"El diamante bajo el estiércol (última parte)",pagina:220},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"Pretextos para beber y razones para no hacerlo",pagina:225},
+  {libro:"Compendio 9",seccion:"Criterios profesionales",titulo:"La terapia de Dios",pagina:227},
+  {libro:"Compendio 9",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Todo por el alcohol",pagina:230},
+  {libro:"Compendio 9",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Todo empezó ese día",pagina:231},
+  {libro:"Compendio 9",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Un hombre de solo por hoy",pagina:232},
+  {libro:"Compendio 9",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Compartir lo que sientes",pagina:234},
+  {libro:"Compendio 9",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Lo mejor que me ha pasado",pagina:236},
+  {libro:"Compendio 9",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Recurrí al curador de almas",pagina:239},
+  {libro:"Compendio 9",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Las sorpresas de una Convención Nacional",pagina:242},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"Setenta y cuatro años de liberar el espíritu",pagina:11},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"Un gran reto contra el alcoholismo",pagina:13},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"El milagro de Alcohólicos Anónimos",pagina:16},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"Una visión para ti",pagina:20},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"Alcoholismo y violencia",pagina:24},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"El doctor Jekyll y el señor Hyde",pagina:32},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"¿Sabes cómo se originó nuestro nombre?",pagina:37},
+  {libro:"Compendio 10",seccion:"Hablando de…",titulo:"Unidad: esperanza de vida",pagina:41},
+  {libro:"Compendio 10",seccion:"Recuperación",titulo:"No perdí la fe",pagina:45},
+  {libro:"Compendio 10",seccion:"Recuperación",titulo:"Un conducto de Dios",pagina:46},
+  {libro:"Compendio 10",seccion:"Recuperación",titulo:"Mi lugar está en AA",pagina:48},
+  {libro:"Compendio 10",seccion:"Recuperación",titulo:"Aceptar y reconocer",pagina:49},
+  {libro:"Compendio 10",seccion:"Recuperación",titulo:"La mano salvadora",pagina:51},
+  {libro:"Compendio 10",seccion:"Recuperación",titulo:"Recordando a Jack Alexander",pagina:53},
+  {libro:"Compendio 10",seccion:"Nuestros veteranos comparten",titulo:"El jardín de nuestra fortaleza",pagina:54},
+  {libro:"Compendio 10",seccion:"Nuestros veteranos comparten",titulo:"Mi nuevo caminar",pagina:57},
+  {libro:"Compendio 10",seccion:"Nuestros veteranos comparten",titulo:"En vez de crítica, acción",pagina:58},
+  {libro:"Compendio 10",seccion:"Nuestros veteranos comparten",titulo:"Vivir despierto",pagina:60},
+  {libro:"Compendio 10",seccion:"Los jóvenes en AA",titulo:"El joven más viejo",pagina:61},
+  {libro:"Compendio 10",seccion:"Los jóvenes en AA",titulo:"Juventud, divino tesoro",pagina:62},
+  {libro:"Compendio 10",seccion:"Los jóvenes en AA",titulo:"Invitando a otros jóvenes",pagina:67},
+  {libro:"Compendio 10",seccion:"Los jóvenes en AA",titulo:"Me dio permiso el Poder superior",pagina:68},
+  {libro:"Compendio 10",seccion:"Los jóvenes en AA",titulo:"Al recibir un aplauso",pagina:70},
+  {libro:"Compendio 10",seccion:"Los jóvenes en AA",titulo:"Vivo gracias al servicio",pagina:71},
+  {libro:"Compendio 10",seccion:"Unidad",titulo:"Manifestación del Poder superior",pagina:73},
+  {libro:"Compendio 10",seccion:"Unidad",titulo:"La importancia de los inventarios de grupo",pagina:78},
+  {libro:"Compendio 10",seccion:"Unidad",titulo:"Necesidad de Dios",pagina:80},
+  {libro:"Compendio 10",seccion:"Unidad",titulo:"Viviendo la tolerancia",pagina:82},
+  {libro:"Compendio 10",seccion:"Unidad",titulo:"Un ejemplo de unidad: Eddie Rickenbacker",pagina:83},
+  {libro:"Compendio 10",seccion:"Unidad",titulo:"La fuerza del Poder superior",pagina:86},
+  {libro:"Compendio 10",seccion:"La mujer en AA",titulo:"Una segunda oportunidad",pagina:90},
+  {libro:"Compendio 10",seccion:"La mujer en AA",titulo:"¿Por qué bebes, mamá?",pagina:94},
+  {libro:"Compendio 10",seccion:"La mujer en AA",titulo:"Una mujer privilegiada",pagina:97},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (primera parte)",pagina:98},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (segunda parte)",pagina:108},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (tercera parte)",pagina:111},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (cuarta parte)",pagina:115},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (quinta parte)",pagina:119},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (sexta parte)",pagina:124},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (séptima parte)",pagina:131},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (octava parte)",pagina:135},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"El Sermón de la montaña (última parte)",pagina:144},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"Los cuatro gigantes del alma (primera parte)",pagina:157},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"Los cuatro gigantes del alma (segunda parte, el amor)",pagina:168},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"Los cuatro gigantes del alma (tercera parte, la ira)",pagina:181},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"Los cuatro gigantes del alma (cuarta parte, el amor continuación)",pagina:195},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"Los cuatro gigantes del alma (última parte, el deber)",pagina:205},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"Alcoholismo y adulto mayor",pagina:216},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"Un programa que salva vidas",pagina:220},
+  {libro:"Compendio 10",seccion:"Criterios profesionales",titulo:"La opinión de la religión sobre AA",pagina:222},
+  {libro:"Compendio 10",seccion:"Servicio",titulo:"¿A quién sirvo realmente?",pagina:228},
+  {libro:"Compendio 10",seccion:"Servicio",titulo:"Guardar el anonimato",pagina:230},
+  {libro:"Compendio 10",seccion:"Servicio",titulo:"Bill y Lois en Yucatán",pagina:243},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"Los cinco puntos básicos",pagina:249},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"La realidad de un nuevo amanecer",pagina:253},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en las comunidades indígenas",titulo:"El milagro más grande",pagina:256},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Un nuevo amanecer",pagina:257},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Nunca es tarde para empezar",pagina:258},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en prisiones",titulo:"De eso se encarga Dios",pagina:261},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en prisiones",titulo:"Una esperanza para vivir",pagina:262},
+  {libro:"Compendio 10",seccion:"Alcohólicos Anónimos en prisiones",titulo:"El alcohol nos destruye",pagina:263},
+  {libro:"Compendio 10",seccion:"Buzón del lector",titulo:"¿Sirve la revista Plenitud AA?",pagina:265},
+  {libro:"Compendio 10",seccion:"Buzón del lector",titulo:"Vivo en plenitud",pagina:266},
+  {libro:"Compendio 10",seccion:"Buzón del lector",titulo:"Testimonio de un familiar",pagina:267},
+  {libro:"Compendio 10",seccion:"Buzón del lector",titulo:"Mensaje de un joven",pagina:269},
+  {libro:"Compendio 10",seccion:"Buzón del lector",titulo:"Necesitamos de todos",pagina:271},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Siendo agradecido",pagina:272},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Recordando la última borrachera",pagina:274},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Eliminando la autocompasión",pagina:276},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Buscando ayuda profesional",pagina:278},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Evitando los enredos emocionales",pagina:280},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Saliendo de la trampa del suponiendo",pagina:282},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"El miedo",pagina:284},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"La ira",pagina:286},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"El amor",pagina:288},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"El amor (continuación)",pagina:290},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"El deber",pagina:292},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Plenitud AA es un servicio",pagina:294},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"La humildad",pagina:296},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"12 acciones de gratitud",pagina:298},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Doce Pasos",pagina:300},
+  {libro:"Compendio 10",seccion:"La historieta",titulo:"Doce Tradiciones",pagina:301},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Los encuentros purépechas",pagina:11},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"El Plan Nacional de Crecimiento Sustentable",pagina:16},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Apadrinamiento",pagina:19},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Plenitud en internet",pagina:22},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Anonimato en internet",pagina:25},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Desmedida autoridad (Tercera Garantía)",pagina:29},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Unanimidad sustancial (Cuarta Garantía)",pagina:31},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Democracia: intención y acción (Sexta Garantía)",pagina:35},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Espiritualidad",pagina:38},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"La acción de la gratitud",pagina:40},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"El pabellón del Rosario",pagina:43},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"El Duodécimo Paso",pagina:44},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"El asunto del miedo",pagina:47},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"El perdón conmigo mismo",pagina:51},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Aceptación vs. resignación",pagina:53},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Las mujeres en la historia de AA",pagina:55},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Las esposas de los alcohólicos",pagina:58},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"La humildad",pagina:60},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"El 36 Aniversario de la revista Plenitud AA",pagina:63},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Egoísmo",pagina:65},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Honradez",pagina:68},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Breve historia de AA en instituciones correccionales en México (primera parte)",pagina:71},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Breve historia de AA en instituciones correccionales en México (segunda parte)",pagina:75},
+  {libro:"Compendio 11",seccion:"Hablando de…",titulo:"Soy profesional y soy alcohólico",pagina:83},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"Ese fantasma del miedo",pagina:85},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"El perdón es amor",pagina:87},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"La llave para ser feliz",pagina:89},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"El origen de los Doce Pasos",pagina:90},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"Hablando del Tercer Paso",pagina:93},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"Morir para renacer",pagina:96},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"Comprender y perdonar",pagina:97},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"La práctica del perdón",pagina:98},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"Ya no hay resignación, hay aceptación",pagina:99},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"¿Qué esperas hoy para sonreír?",pagina:101},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"La moneda de la sobriedad",pagina:103},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"No seas egoísta",pagina:104},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"Luz para no ver el ego",pagina:105},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"Salir del infierno",pagina:107},
+  {libro:"Compendio 11",seccion:"Recuperación",titulo:"¡Estos qué me van a enseñar!",pagina:108},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Dioscidencias",pagina:109},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Entrevista al licenciado Alejandro Martínez Carrera",pagina:112},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"La importancia de AA en el CERESO",pagina:115},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"No es un adiós, sino un hasta luego",pagina:118},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Aprendemos de sus experiencias",pagina:124},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Trabajar en conjunto",pagina:127},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Retroalimentación: pilar de los grupos",pagina:129},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"La espiritualidad de AA",pagina:131},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"El bien que ustedes hacen",pagina:136},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"El miedo al abandono",pagina:140},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Las confesiones de san Agustín (primera parte)",pagina:141},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Las confesiones de san Agustín (segunda parte)",pagina:143},
+  {libro:"Compendio 11",seccion:"Criterios profesionales",titulo:"Las confesiones de san Agustín (última parte)",pagina:146},
+  {libro:"Compendio 11",seccion:"El hombre en busca de sentido",titulo:"El hombre en busca de sentido (primera parte)",pagina:149},
+  {libro:"Compendio 11",seccion:"El hombre en busca de sentido",titulo:"El hombre en busca de sentido (segunda parte)",pagina:154},
+  {libro:"Compendio 11",seccion:"La ventaja evolutiva del amor",titulo:"La ventaja evolutiva del amor (primera parte)",pagina:160},
+  {libro:"Compendio 11",seccion:"La ventaja evolutiva del amor",titulo:"La ventaja evolutiva del amor (segunda parte)",pagina:165},
+  {libro:"Compendio 11",seccion:"La ventaja evolutiva del amor",titulo:"La ventaja evolutiva del amor (tercera parte)",pagina:169},
+  {libro:"Compendio 11",seccion:"La ventaja evolutiva del amor",titulo:"La ventaja evolutiva del amor (cuarta parte)",pagina:174},
+  {libro:"Compendio 11",seccion:"La ventaja evolutiva del amor",titulo:"La ventaja evolutiva del amor (quinta parte)",pagina:178},
+  {libro:"Compendio 11",seccion:"La ventaja evolutiva del amor",titulo:"La ventaja evolutiva del amor (sexta parte)",pagina:182},
+  {libro:"Compendio 11",seccion:"La ventaja evolutiva del amor",titulo:"La ventaja evolutiva del amor (última parte)",pagina:188},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Con el lenguaje del corazón",pagina:193},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Preso, pero no de espíritu",pagina:194},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Una conciencia bien informada",pagina:195},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Respeto a la autonomía del grupo",pagina:196},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Cinco costumbres básicas",pagina:197},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Encendí la llama de la unidad",pagina:200},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Nunca se cansen de AA",pagina:202},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Dinero más soberbia: soledad",pagina:204},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"La unión hace la fuerza",pagina:205},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"¿Qué me gustaría para mi grupo?",pagina:206},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Dolores de crecimiento",pagina:208},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"No se cansen",pagina:209},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Sentido de pertenencia",pagina:210},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"Que la balsa no se hunda",pagina:211},
+  {libro:"Compendio 11",seccion:"Unidad",titulo:"¿Sabes escuchar?",pagina:213},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"El amigo de las gaviotas (primera parte)",pagina:215},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"El amigo de las gaviotas (segunda parte)",pagina:221},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"El amigo de las gaviotas (tercera parte)",pagina:227},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"El amigo de las gaviotas (cuarta parte)",pagina:231},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"El amigo de las gaviotas (quinta parte)",pagina:237},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"El amigo de las gaviotas (sexta parte)",pagina:242},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"El amigo de las gaviotas (última parte)",pagina:247},
+  {libro:"Compendio 11",seccion:"El amigo de las gaviotas",titulo:"Sobre Eddie Rickenbacker",pagina:251},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Responsabilidades del liderazgo",pagina:253},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"La luz del amor y del servicio",pagina:256},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Los principios son iguales para hombres y mujeres",pagina:259},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Un fiel obrero al servicio de Dios",pagina:262},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"El nacimiento de un servidor",pagina:263},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Dios tiene un regalo para mí",pagina:264},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Era un servidor, no el jefe",pagina:266},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Gran espíritu de servicio",pagina:267},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"La espiritualidad en el servicio",pagina:268},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Muchos los llamados y… ¿pocos los elegidos?",pagina:270},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Me despojaron de la soberbia",pagina:272},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"La fortaleza de servir",pagina:276},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Compromiso: fortaleza de la sobriedad",pagina:277},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Para qué servir si no sirvo",pagina:278},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Volver a empezar",pagina:279},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Hoy puedo ser útil",pagina:280},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"No digas que no puedo servir",pagina:282},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Ya lo entenderás",pagina:282},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"No lo pienses: sirve",pagina:283},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"Sí sirvo para servir",pagina:285},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"El servicio me ha servido",pagina:286},
+  {libro:"Compendio 11",seccion:"Servicio",titulo:"La decisión es tuya",pagina:287},
+  {libro:"Compendio 11",seccion:"La historieta",titulo:"El anonimato en internet",pagina:290},
+  {libro:"Compendio 11",seccion:"La historieta",titulo:"Espiritualidad",pagina:292},
+  {libro:"Compendio 11",seccion:"La historieta",titulo:"En todos nuestros asuntos",pagina:294},
+  {libro:"Compendio 11",seccion:"La historieta",titulo:"La mujer en Alcohólicos Anónimos",pagina:296},
+  {libro:"Compendio 11",seccion:"La historieta",titulo:"Egoísmo",pagina:298},
+  {libro:"Compendio 11",seccion:"La historieta",titulo:"Una navidad sobria",pagina:300},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Alcohólicos Anónimos e instituciones",pagina:8},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"El valor terapéutico de los doce pasos de Alcohólicos Anónimos",pagina:14},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Alcohólicos Anónimos en hospitales",pagina:30},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"El alcoholismo y sus repercusiones en la educación",pagina:35},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Alcohólicos Anónimos y la profesión legal",pagina:40},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Ego y rendición",pagina:48},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Aspectos neuropsiquiátricos del alcoholismo",pagina:67},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"La bebida, el abuso del alcohol y el alcoholismo",pagina:73},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Repercusiones del alcoholismo en la familia",pagina:79},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Autoconmiseración por acción constructiva",pagina:87},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Interpretación filosófica, religiosa y psicológica del logotipo de AA",pagina:95},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Puntos de vista sobre el alcoholismo en la mujer",pagina:100},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"La vida emocional y Alcohólicos Anónimos",pagina:108},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Teoría del resentimiento",pagina:119},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"El perdón, característica humana superior",pagina:131},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"La envidia",pagina:136},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Yo no soy alguien especial",pagina:141},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Causas del alcoholismo",pagina:147},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Yo, el Alcohol",pagina:161},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"La personalidad del alcohólico",pagina:169},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Las recaídas y la naturaleza humana",pagina:177},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Evasión del cuarto paso",pagina:182},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"La importancia de la medicina en Alcohólicos Anónimos",pagina:186},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"La voluntad es poder",pagina:192},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"La atención del enfermo",pagina:198},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Una red de apoyo social",pagina:203},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Pretextos para beber y razones para no hacerlo",pagina:208},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"El alcoholismo en ámbitos laborales",pagina:212},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Alcoholismo y adulto mayor",pagina:219},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Un programa que salva vidas",pagina:225},
+  {libro:"Criterios Profesionales",seccion:"",titulo:"Dioscidencias",pagina:228},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"La modestia: un elemento de las buenas relaciones públicas",pagina:3},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Las 'reglas' son peligrosas pero la unidad es vital",pagina:6},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Nace el Libro",pagina:9},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Una Tradición nacida de nuestro anonimato",pagina:13},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Nuestro anonimato es tanto una inspiración como una protección",pagina:16},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Doce puntos sugeridos para la Tradición de AA",pagina:20},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"El uso prudente del dinero",pagina:24},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"En un discurso en Memphis Bill recalca las Tradiciones",pagina:27},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Normas referentes a los donativos",pagina:28},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"La relación del individuo con AA como grupo",pagina:32},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"¿Quién es miembro de Alcohólicos Anónimos?",pagina:37},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"¿Tendrá AA algún día un gobierno personal?",pagina:40},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Los peligros de vincular AA con otros proyectos",pagina:43},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Los clubs en AA",pagina:46},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Hospitalización apropiada: Una necesidad apremiante",pagina:51},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"La falta de dinero resultó ser una bendición para AA",pagina:58},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"En los últimos siete años AA ha llegado a ser automantenida",pagina:62},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"La constitución de sociedades. Uso y abuso",pagina:71},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Primera Tradición",pagina:76},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Segunda Tradición",pagina:78},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Tercera Tradición",pagina:79},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Cuarta Tradición",pagina:80},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Quinta Tradición",pagina:82},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Sexta Tradición",pagina:83},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Séptima Tradición",pagina:85},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Octava Tradición",pagina:86},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Novena Tradición",pagina:88},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Décima Tradición",pagina:89},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Undécima Tradición",pagina:91},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Duodécima Tradición",pagina:92},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Una petición y una disculpa",pagina:94},
+  {libro:"El Lenguaje del Corazón",seccion:"Las tradiciones toman forma",titulo:"Una sugerencia para el Día de Acción de Gracias",pagina:95},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1944-1950",titulo:"Comentarios sobre las ideas de Wylie",pagina:97},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1944-1950",titulo:"Una cita con el destino",pagina:99},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1944-1950",titulo:"Carta a la madre de un alcohólico",pagina:101},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1944-1950",titulo:"Los barbitúricos",pagina:103},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1944-1950",titulo:"La publicación del libro resultó ser una empresa desalentadora",pagina:105},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1944-1950",titulo:"¿Por qué no podemos unirnos a AA nosotros también?",pagina:108},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Nos acercamos a la madurez",pagina:115},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Llegamos a nuestra mayoría de edad",pagina:116},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"AA no es un gran negocio",pagina:124},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Su Tercer Legado",pagina:126},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Servir es vivir",pagina:129},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Los servicios hacen funcionar a AA",pagina:131},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Una visión del mañana",pagina:135},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Nuestra última gran decisión",pagina:137},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Una carta a los grupos",pagina:138},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"La significación de Saint Louis",pagina:140},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Cómo se desarrollaron los servicios mundiales de AA I",pagina:142},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"Cómo se desarrollaron los servicios mundiales de AA II",pagina:150},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"¿Qué es el Tercer Legado?",pagina:161},
+  {libro:"El Lenguaje del Corazón",seccion:"AA llega a su mayoría de edad",titulo:"La guardiana de AA: nuestra Conferencia de Servicios Generales",pagina:167},
+  {libro:"El Lenguaje del Corazón",seccion:"Seamos amistosos con nuestros amigos",titulo:"Los siquiatras",pagina:172},
+  {libro:"El Lenguaje del Corazón",seccion:"Seamos amistosos con nuestros amigos",titulo:"Los médicos",pagina:174},
+  {libro:"El Lenguaje del Corazón",seccion:"Seamos amistosos con nuestros amigos",titulo:"Los clérigos",pagina:177},
+  {libro:"El Lenguaje del Corazón",seccion:"Seamos amistosos con nuestros amigos",titulo:"La prensa, la radio y la televisión",pagina:180},
+  {libro:"El Lenguaje del Corazón",seccion:"Seamos amistosos con nuestros amigos",titulo:"En el frente del alcoholismo",pagina:184},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Un tributo al Canadá",pagina:191},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Les presento a nuestros custodios no-alcohólicos",pagina:192},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Un fragmento de la historia: El origen de los Doce Pasos",pagina:195},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Otro fragmento de la historia: La Hermana Ignacia y el Dr. Bob",pagina:202},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"La correspondencia entre Bill W. y Yale",pagina:205},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Por qué Alcohólicos Anónimos es anónimo",pagina:209},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Con respecto al dinero",pagina:218},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Problemas diferentes del alcohol",pagina:222},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1950-1958",titulo:"Seamos consecuentes desde el punto de vista práctico y espiritual",pagina:226},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"La dádiva más grande de todas",pagina:233},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"La próxima frontera: la sobriedad emocional",pagina:236},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"Dar el undécimo paso",pagina:239},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"El lenguaje del corazón",pagina:242},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"Dios como nosotros lo concebimos: el dilema de la incredulidad",pagina:251},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"La humildad para hoy",pagina:255},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"Este asunto de la honradez",pagina:260},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"Este asunto del miedo",pagina:265},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"¿Qué es la aceptación?",pagina:270},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"Donde entra en juego la fuerza de voluntad",pagina:273},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"Experiencias espirituales",pagina:275},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"La correspondencia de Bill W. con Carl Jung",pagina:276},
+  {libro:"El Lenguaje del Corazón",seccion:"En todos nuestros asuntos",titulo:"El Dr. Jung el Dr. Silkworth y AA",pagina:281},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"El liderazgo en AA. Siempre una necesidad vital",pagina:287},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"La comunicación de AA puede superar todas las barreras",pagina:292},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"Veinticinco años más tarde",pagina:296},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"¿Qué es la libertad en AA?",pagina:300},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"¿Cómo podemos mantenerlo simple?",pagina:303},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"AA mañana",pagina:308},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"Nuestros pioneros de ultramar",pagina:312},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"La libertad bajo Dios: nos corresponde a nosotros elegir",pagina:315},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"Una perspectiva del porvenir",pagina:321},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"Los rincones remotos",pagina:322},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"De nuevo en la encrucijada",pagina:324},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"Nuestro lema: la responsabilidad",pagina:327},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"La dirección de los asuntos mundiales de AA",pagina:334},
+  {libro:"El Lenguaje del Corazón",seccion:"Con miras al futuro",titulo:"La Primera Reunión de Servicio Mundial",pagina:341},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1958-1970",titulo:"El antídoto contra el temor: la prudencia, la confianza y la fe",pagina:342},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1958-1970",titulo:"Nuestros críticos pueden ser nuestros benefactores",pagina:345},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1958-1970",titulo:"Un mensaje de Bill",pagina:347},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1958-1970",titulo:"La Tradición de automantenimiento de AA",pagina:349},
+  {libro:"El Lenguaje del Corazón",seccion:"Otros escritos 1958-1970",titulo:"Un mensaje navideño",pagina:351},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"Anne S.",pagina:353},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"El Dr. Bob: un tributo",pagina:354},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"Nunca dejó de creer (Bill D.)",pagina:360},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"El Dr. A. Weise Hammer",pagina:362},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"Al Padre Ed –Vaya con Dios",pagina:364},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"En memoria de Ebby",pagina:367},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"En memoria de Harry",pagina:369},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"Para la Hermana Ignacia",pagina:371},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"Espero en la puerta (Samuel Shoemaker)",pagina:379},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos conmemorativos",titulo:"Bernard B. Smith",pagina:380},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos acerca del Grapevine",titulo:"Editorial: Una perspectiva del porvenir",pagina:383},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos acerca del Grapevine",titulo:"El Grapevine: Pasado, presente y futuro",pagina:384},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos acerca del Grapevine",titulo:"¿Qué es nuestro Grapevine de AA?",pagina:387},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos acerca del Grapevine",titulo:"A través del espejo de AA",pagina:390},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos acerca del Grapevine",titulo:"El Grapevine y tú y yo",pagina:392},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos acerca del Grapevine",titulo:"Leamos –y demos gracias a Dios",pagina:395},
+  {libro:"El Lenguaje del Corazón",seccion:"Artículos acerca del Grapevine",titulo:"Una carta de aniversario",pagina:396},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Fe",pagina:1},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Miedo",pagina:12},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Honradez",pagina:25},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Humildad",pagina:40},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Amor",pagina:54},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"¿Por qué Alcohólicos Anónimos es anónimo?",pagina:62},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Bill W.",pagina:87},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Los Doce Pasos",pagina:90},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Las Doce Tradiciones",pagina:91},
+  {libro:"Lo Mejor de Bill",seccion:"",titulo:"Oración de San Francisco",pagina:92},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Breve historia de AA en las instituciones correccionales en México (Última parte)",pagina:10},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Las nuevas traducciones: adaptarse a los cambios e ir a la vanguardia",pagina:19},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"El trabajo de información pública",pagina:23},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Luz del espíritu",pagina:26},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Sucedió en Akron, Ohio",pagina:28},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Recuerdos de la X Convención Nacional",pagina:30},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"La importancia de tener una Conferencia",pagina:37},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"El alcoholismo y la familia",pagina:40},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"La ira: una emoción innecesaria",pagina:43},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"80 años de Alcohólicos Anónimos en el mundo",pagina:46},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Apadrinamiento",pagina:48},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Horror y miseria del alcoholismo",pagina:50},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"El apadrinamiento después de la sobriedad",pagina:58},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"La reparación de daños",pagina:60},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"El don de servir",pagina:62},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"La oración y la meditación",pagina:64},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Un rayo en la rueda",pagina:66},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"70 años de Alcohólicos Anónimos en México",pagina:69},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"39 años de la revista Plenitud AA",pagina:70},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"El inventario diario",pagina:72},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"El Sexto Paso: el más difícil",pagina:74},
+  {libro:"Compendio 12",seccion:"Hablando de",titulo:"Mi enfermedad está en mis emociones",pagina:76},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Resentimiento: el enemigo a vencer",pagina:78},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Amarse para amar",pagina:79},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"El espejo de la soberbia",pagina:81},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Mi pasado ya no es un tormento",pagina:81},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"¿Por qué a mí, Señor?",pagina:82},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"La recuperación del espíritu",pagina:85},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"La vida de un soberbio",pagina:86},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Tener una nueva vida",pagina:88},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"¿Qué tanto sé sobre mi yo?",pagina:89},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Reparando daños",pagina:90},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Dios escogió a mi padrino",pagina:92},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"El soberbio pidió ayuda",pagina:94},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Reflexiones sobre la borrachera seca",pagina:95},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Hacia el progreso espiritual",pagina:96},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Comprender sin ser comprendido",pagina:97},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Desarrollo espiritual al estilo del Dr. Bob",pagina:98},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Curar el egoísmo con acción",pagina:101},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Del infierno a la gloria",pagina:102},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Acción firme en el Octavo y Noveno Paso",pagina:104},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"El perdón: pasaporte a la felicidad",pagina:106},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"No deseches lo que no conoces",pagina:108},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"¡Soy joven y existe solución!",pagina:109},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"A la búsqueda de un despertar espiritual",pagina:111},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Oración y meditación: remedio de grandes males",pagina:113},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Con mi Poder Superior, estoy seguro",pagina:115},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Para salvar mi vida: el grupo base",pagina:116},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Mi Séptimo Paso",pagina:117},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Re-sentimiento",pagina:117},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Libre desde las Islas Marías",pagina:119},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Detecta, admite y corrige",pagina:120},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Pruebas de ácido",pagina:121},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Inventario: verdadera libertad espiritual",pagina:122},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"Herramientas para enfrentar los defectos",pagina:123},
+  {libro:"Compendio 12",seccion:"Recuperación",titulo:"La semilla florecerá",pagina:124},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"El hombre en busca de sentido (Última parte)",pagina:125},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"El espíritu de la humanidad compartida",pagina:131},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Conversión espiritual",pagina:135},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"La oración en la psicoterapia (Primera parte)",pagina:142},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"La oración en la psicoterapia (Segunda parte)",pagina:145},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"La oración en la psicoterapia (Última parte)",pagina:149},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Alcoholismo en los adolescentes, ¿un entretenimiento o una enfermedad?",pagina:154},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Hacia la espiritualidad: el viaje interior (Primera parte)",pagina:159},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Hacia la espiritualidad: el viaje interior (Última parte)",pagina:165},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"La oración de un sacerdote para un alcohólico",pagina:171},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"La cosa más grande del mundo (Primera parte)",pagina:175},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"La cosa más grande del mundo (Segunda parte)",pagina:181},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"La cosa más grande del mundo (Última parte)",pagina:188},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Las enseñanzas del corazón (Extracto)",pagina:194},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Aportaciones sobre la psicoterapia Gestalt al modelo del apadrinamiento de AA",pagina:196},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Nociones sobre el apego emocional (Primera parte)",pagina:209},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Nociones sobre el apego emocional (Segunda parte)",pagina:216},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Nociones sobre el apego emocional (Última parte)",pagina:224},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Libertad vs cinismo",pagina:233},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"Servicio: fruto de la gratitud",pagina:236},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"El camino de las lágrimas (Primera parte)",pagina:239},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"El camino de las lágrimas (Segunda parte)",pagina:247},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"El camino de las lágrimas (Última parte)",pagina:255},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"El arte de amar (Primera parte)",pagina:262},
+  {libro:"Compendio 12",seccion:"Criterios profesionales",titulo:"El valor de la tolerancia",pagina:269},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Sacrificio de mis deseos personales",pagina:271},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Plenitud, una experiencia inolvidable",pagina:273},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"El líder: una luz para el grupo",pagina:274},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Contribuir al bienestar común",pagina:274},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Tradiciones: herramientas para reducir mi ego",pagina:276},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"El espíritu de la Primera Tradición",pagina:278},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Es fácil sucumbir si estamos solos",pagina:279},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Soy parte del grupo",pagina:280},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"El manejo responsable del internet y las Doce Tradiciones",pagina:280},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Amigos para toda la vida",pagina:283},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"A veces me creo el dueño del grupo",pagina:284},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Fomentar la unidad para crecer",pagina:286},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Manos que dan, manos llenas",pagina:287},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"El gran corazón de nuestra Comunidad",pagina:288},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Unificar a mi familia",pagina:289},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Primero su bienestar",pagina:290},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Entre los distritos: unidad, no competencia",pagina:292},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Taller sobre el resentimiento y el perdón",pagina:294},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Benditas Tradiciones",pagina:295},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Las Tradiciones en un mundo cambiante",pagina:296},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"Hagamos lo que nos toca hacer",pagina:298},
+  {libro:"Compendio 12",seccion:"Unidad",titulo:"El servicio me liberó",pagina:299},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Al acecho: la borrachera seca",pagina:300},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Servicio: fortaleza de la recuperación",pagina:301},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Flechazos para desinflar el ego",pagina:302},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Sin esperar nada a cambio",pagina:303},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Si fallas, ¡inténtalo de nuevo!",pagina:304},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Los regalos de Dios",pagina:305},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Hacerlo de corazón",pagina:307},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Hoy quiero ser un buen líder",pagina:308},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"El servicio me mantiene de pie",pagina:310},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Él sabía lo que yo necesitaba",pagina:310},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Tolerancia y amor",pagina:312},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Romper las barreras del miedo",pagina:313},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Cuidemos al nuevo",pagina:314},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Ego o buena voluntad",pagina:315},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Liderazgo, necesidad para nuestro futuro",pagina:316},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Amor y servicio",pagina:318},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Grupo y apadrinamiento",pagina:319},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Guiar con el ejemplo",pagina:320},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Practicar los Doce Conceptos en el grupo",pagina:323},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Sin excusa ni pretexto",pagina:324},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"El privilegio de servir",pagina:325},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Herramientas del Décimo Paso",pagina:328},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Ahora sé lo que es el Tercer Legado",pagina:330},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"El miedo en el servicio",pagina:332},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"Verdadero cambio sin egoísmo",pagina:334},
+  {libro:"Compendio 12",seccion:"Servicio",titulo:"El náufrago que encontró la fe",pagina:335},
+  {libro:"Compendio 12",seccion:"Sección especial",titulo:"Mi derrota",pagina:340},
+  {libro:"Compendio 12",seccion:"Sección especial",titulo:"El ateo furioso que hizo grande a la Comunidad",pagina:343},
+  {libro:"Compendio 12",seccion:"Sección especial",titulo:"Buenos líderes",pagina:346},
+  {libro:"Compendio 12",seccion:"Buzón del lector",titulo:"Gracias Plenitud AA",pagina:347},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"El sano juicio y los candados de la mente",pagina:13},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Cambio de juicios y actitudes",pagina:15},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Y nació la Oficina Plenitud",pagina:16},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Necesidad del contacto auténtico con los demás",pagina:17},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Nuestro anonimato en internet",pagina:21},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"El área Chiapas Norte",pagina:23},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Cuarenta años de nuestra revista Plenitud AA",pagina:31},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Un hábito necesario",pagina:32},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Lo que aquí se dice, aquí se queda",pagina:34},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Veinticinco años de la Oficina Plenitud",pagina:37},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Unidad: nuestro Segundo Legado",pagina:38},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Ellas nos necesitan",pagina:40},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"La esposa de un alcohólico",pagina:42},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"A un padre extraordinario",pagina:43},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Algo muy bueno te va a pasar",pagina:45},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Capacitación: llevar el mensaje con la revista",pagina:47},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"12.ª Convención Nacional: ¡solo faltas tú!",pagina:49},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Liberarse del resentimiento",pagina:52},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"El futuro de nuestras revistas nacionales: el caso de México",pagina:54},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Primer inventario de la Conferencia Mexicana (resumen-primera parte)",pagina:58},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Primer inventario de la Conferencia Mexicana (resumen-segunda parte)",pagina:63},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Primer inventario de la Conferencia Mexicana (resumen-última parte)",pagina:68},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Primer inventario de la Conferencia Mexicana (2.° bloque: resumen-primera parte)",pagina:70},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Primer inventario de la Conferencia Mexicana (2.° bloque: resumen-segunda parte)",pagina:75},
+  {libro:"Compendio 13",seccion:"Hablando de",titulo:"Primer inventario de la Conferencia Mexicana (2.° bloque: resumen-última parte)",pagina:83},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Libera de odio tu corazón",pagina:87},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"El alcohol ya no reina mi vida",pagina:88},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Demasiado joven para ser alcohólico",pagina:90},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Lo mejor está por venir",pagina:90},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"La magia del perdón",pagina:91},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Un programa espiritual",pagina:93},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Despertar de conciencia",pagina:94},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Las cuatro opciones",pagina:95},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Alcohólico para toda la vida",pagina:96},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Escribir mi Cuarto Paso",pagina:97},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Me derroté ante la ira",pagina:98},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Herramientas para mi diario vivir",pagina:100},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"El inventario es mío, no de los demás",pagina:101},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"No hay perfección, pero sí progreso",pagina:103},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Hoy comprendo que soy un milagro",pagina:104},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Carta a una madre alcohólica en su primer aniversario",pagina:105},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Una mujer en Alcohólicos Anónimos",pagina:106},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"La hermosa tarea de perdonar",pagina:108},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Derrota y resentimientos",pagina:109},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Domar mis defectos con los Doce Pasos",pagina:110},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"El poder de la aceptación",pagina:111},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Ya no me siento solo",pagina:112},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"De la abstinencia a la sobriedad",pagina:114},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"No eres culpable",pagina:115},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Donde existe un grupo, hay oportunidad",pagina:116},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"La humildad por delante",pagina:117},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Primero mi recuperación",pagina:118},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Sin programa, no hay nada",pagina:119},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"La derrota ante mí mismo",pagina:120},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Consecuencias de la soledad y del egoísmo",pagina:122},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Vigilando mis defectos",pagina:123},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Cambiar odio por amor",pagina:124},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Las cuatro sugerencias",pagina:125},
+  {libro:"Compendio 13",seccion:"Recuperación",titulo:"Aprender, compartir y crecer",pagina:126},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"El arte de amar (segunda parte)",pagina:127},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"El arte de amar (última parte)",pagina:133},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Psicoterapia gestalt y alcoholismo (primera parte)",pagina:140},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Psicoterapia Gestalt y alcoholismo (segunda parte)",pagina:144},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Psicoterapia Gestalt y alcoholismo (última parte)",pagina:148},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Los conflictos en el mundo de los adolescentes alcohólicos (primera parte)",pagina:153},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Los conflictos en el mundo de los adolescentes alcohólicos (segunda parte)",pagina:158},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Los conflictos en el mundo de los adolescentes alcohólicos (última parte)",pagina:165},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"El milagro del renacimiento",pagina:173},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Ebooks: llevar el mensaje en un mundo digital",pagina:175},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"Médico, familiar de un alcohólico",pagina:177},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"El ascensor",pagina:181},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"El gran corazón de Alcohólicos Anónimos",pagina:183},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"¿Cuál es el misterio para quedarse en el programa?",pagina:186},
+  {libro:"Compendio 13",seccion:"Criterios profesionales",titulo:"El ambiente literario y el alcoholismo",pagina:187},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Bienestar común y autonomía en todos mis asuntos",pagina:189},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"La unidad me regresó a mi hijo",pagina:190},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Sin la unidad, no late el corazón",pagina:191},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Veteranos: ¿piedras de tropiezo o padrinos de servicio?",pagina:192},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"No escondamos nuestra identidad entre nosotros",pagina:193},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"¿Hasta dónde nuestro anonimato?",pagina:195},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"El famoso truco de la revista olvidada",pagina:197},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Deseo ser un viejo estadista",pagina:198},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Tenía un concepto equivocado",pagina:199},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Sin tradiciones, habría dictaduras",pagina:200},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Conciencia sobre las tradiciones",pagina:201},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Por favor, apaga tu celular",pagina:201},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Del diario morir al vive y deja vivir",pagina:202},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"El poder de la unidad",pagina:203},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Respeto a la autonomía del grupo",pagina:204},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Nunca me han dejado solo",pagina:204},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Así es mi grupo",pagina:205},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"El que lo necesita soy yo",pagina:206},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Unidos para dejar de beber",pagina:207},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"De mujer a mujer",pagina:207},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Por nuestros hijos y nietos",pagina:209},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"A pesar de las diferencias",pagina:210},
+  {libro:"Compendio 13",seccion:"Unidad",titulo:"Y los demás, ¿qué?",pagina:211},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Te estamos esperando",pagina:213},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Unidad, virtud de salvación",pagina:214},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Una forma de demostrar mi gratitud",pagina:216},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Los mensajeros de la esperanza",pagina:218},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Conocí la amistad sincera",pagina:219},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Valor para cambiar",pagina:219},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"La restitución de mi instinto social",pagina:221},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Juntas atractivas",pagina:223},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"El Dios de la Segunda Tradición",pagina:224},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Vacas sagradas",pagina:225},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Libertad para no sentirse solo",pagina:226},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"No estamos solos",pagina:227},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"El concepto espiritual: la 1.ª Convención",pagina:229},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"El cambio de mi vida",pagina:231},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"Como las experiencias de Bill y Bob",pagina:231},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"La esencia de la Segunda Tradición",pagina:233},
+  {libro:"Compendio 13",seccion:"Tradiciones",titulo:"La dolorosa Séptima Tradición",pagina:234},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Frutos de la información pública",pagina:235},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Servir donde dejé de beber",pagina:237},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Yo lo juzgaba y él me ayudó",pagina:238},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Nadie me forzó a servir",pagina:240},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"¿Sabes a quién le sirves?",pagina:241},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Ser atractivos para los nuevos",pagina:242},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Crecer con plenitud",pagina:243},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Me motiva saber que puedo ser útil",pagina:245},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Gracias Bill y Bob por los servicios generales",pagina:245},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Fortaleza espiritual",pagina:246},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Un viaje a través del Tercer Legado",pagina:247},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"El peor error de un alcohólico",pagina:249},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Si estás pensando en beber...",pagina:250},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Hasta que Dios me llame a cuentas",pagina:251},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Si no fue Dios, ¿quién?",pagina:252},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"La importancia de las aportaciones",pagina:254},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Los Doce Conceptos en nuestros grupos (primera parte)",pagina:256},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Los Doce Conceptos en nuestros grupos (última parte)",pagina:258},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Hay que llegar al ego",pagina:260},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Una mejor mujer",pagina:261},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"No te alejes del servicio",pagina:263},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Lágrimas que no caerán",pagina:264},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Sobriedad con gratitud",pagina:266},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"De enemigo del grupo a servidor",pagina:267},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Un trébol de cinco hojas en acción",pagina:269},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Días de buscar culpables",pagina:270},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Aprovecha tu tiempo",pagina:272},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Sola no lo lograré",pagina:273},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Servicio y constancia",pagina:274},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Una hermosa aventura",pagina:275},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"El trabajo con otro alcohólico",pagina:277},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Sin recuperación, soy inservible",pagina:278},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Sentido de pertenencia: vital para el crecimiento",pagina:279},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"De regreso al servicio",pagina:280},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Quién dirige Alcohólicos Anónimos",pagina:281},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Mi tiempo de servir",pagina:282},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Me ganaron en la elección... ¡y me resentí!",pagina:283},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Ir con los que nos necesitan",pagina:285},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"La revista me acercó al servicio",pagina:285},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Siempre hay un servicio por hacer",pagina:286},
+  {libro:"Compendio 13",seccion:"Servicio",titulo:"Vamos a motivarnos a servir",pagina:287},
+  {libro:"Compendio 13",seccion:"Sección especial",titulo:"Dios nos capacita",pagina:288},
+  {libro:"Compendio 13",seccion:"Sección especial",titulo:"Plenitud AA en los Tres Legados",pagina:289},
+  {libro:"Compendio 13",seccion:"Sección especial",titulo:"¡Transmítelo con Plenitud Digital!",pagina:290},
+  {libro:"Compendio 13",seccion:"Sección especial",titulo:"Aprendamos a usar la tecnología",pagina:292},
+  {libro:"Compendio 13",seccion:"Buzón del lector",titulo:"Unas palabras de aliento",pagina:293},
+  {libro:"Compendio 13",seccion:"Buzón del lector",titulo:"Hagamos la unidad",pagina:294},
+  {libro:"Compendio 13",seccion:"Buzón del lector",titulo:"Soy amiga de Alcohólicos Anónimos",pagina:295},
+  {libro:"Compendio 13",seccion:"La historieta",titulo:"¿Alcohólica yo...?",pagina:296},
+  {libro:"Compendio 13",seccion:"La historieta",titulo:"Recuperando antiguas actividades",pagina:298},
+  {libro:"Compendio 13",seccion:"La historieta",titulo:"Primero lo primero",pagina:300},
+  {libro:"Compendio 13",seccion:"La historieta",titulo:"Evitando la soledad",pagina:302},
+  {libro:"Compendio 13",seccion:"La historieta",titulo:"Vigilando la ira y los resentimientos",pagina:304},
+  {libro:"Compendio 13",seccion:"De buen humor",titulo:"Cartones de buen humor",pagina:306}
+];
+
+const LIBROS = [
+  {id:"Compendio 1",  label:"Compendio 1",  sub:"Revistas 01–18 · 1977–1981", color:"c1"},
+  {id:"Compendio 2",  label:"Compendio 2",  sub:"Revistas 19–36 · 1982–1986", color:"c2"},
+  {id:"Compendio 3",  label:"Compendio 3",  sub:"Revistas 37–54 · 1986–1991", color:"c3"},
+  {id:"Compendio 4",  label:"Compendio 4",  sub:"Revistas 55–72 · 1991–1995", color:"c4"},
+  {id:"Compendio 5",  label:"Compendio 5",  sub:"Revistas 73–90 · 1995–1998", color:"c5"},
+  {id:"Compendio 6",  label:"Compendio 6",  sub:"Revistas 91–108 · 1998–2000", color:"c6"},
+  {id:"Compendio 7",  label:"Compendio 7",  sub:"Revistas 109–126 · 2001–2003", color:"c7"},
+  {id:"Compendio 8",  label:"Compendio 8",  sub:"Revistas 127–144 · 2004–2006", color:"c8"},
+  {id:"Compendio 9",  label:"Compendio 9",  sub:"Revistas 145–162 · 2006–2009", color:"c9"},
+  {id:"Compendio 10", label:"Compendio 10", sub:"Revistas 163–180 · 2009–2011", color:"c10"},
+  {id:"Compendio 11", label:"Compendio 11", sub:"Revistas 181–198 · 2011–2014", color:"c11"},
+  {id:"Compendio 12", label:"Compendio 12", sub:"", color:"c12"},
+  {id:"Compendio 13", label:"Compendio 13", sub:"", color:"c13"},
+  {id:"Criterios Profesionales", label:"Criterios Profesionales", sub:"Revistas 09–181 · 1980–2011", color:"cp"},
+  {id:"El Lenguaje del Corazón", label:"El Lenguaje del Corazón", sub:"Escritos de Bill W.", color:"lc"},
+  {id:"Lo Mejor de Bill",        label:"Lo Mejor de Bill",        sub:"", color:"lmb"},
+];
+
+const COLORES = {
+  c1:"#6a9bc4",c2:"#7ab06a",c3:"#c4a06a",c4:"#c46a6a",c5:"#6ac4b0",
+  c6:"#a06ac4",c7:"#c4c46a",c8:"#6a8ac4",c9:"#c46a9b",c10:"#6ac46a",
+  c11:"#c4956a",c12:"#956ac4",c13:"#5a8ac4",cp:"#c49a6a",lc:"#6ab09a",lmb:"#9b8ec4"
+};
+
+// ── CARRUSEL ─────────────────────────────────────────────────────────────────
+let actual = 0;
+const TOTAL = 3;
+
+function ir(n) {
+  const prev = actual;
+  actual = ((n % TOTAL) + TOTAL) % TOTAL;
+  const car = document.getElementById('car');
+  const ancho = window.innerWidth;
+  const salto = Math.abs(actual - prev) === TOTAL - 1;
+  if (salto) {
+    car.style.transition = 'none';
+    car.style.transform = `translateX(-${actual * ancho}px)`;
+    car.offsetHeight;
+    setTimeout(() => car.style.transition = 'transform 0.4s ease', 30);
+  } else {
+    car.style.transition = 'transform 0.4s ease';
+    car.style.transform = `translateX(-${actual * ancho}px)`;
+  }
+  [0,1,2].forEach(i => document.getElementById('d'+i).className = 'dot'+(i===actual?' activo':''));
+  document.getElementById('flechaScroll').style.display = actual===0?'block':'none';
+  if (actual===2) renderFavs();
+  // Resetear pantalla 2 a los 4 cuadros al salir de ella
+  if (prev===1 && actual!==1) volverColecciones();
+  window.scrollTo(0,0);
+}
+
+// Swipe
+let sx=0,sy=0,swOk=false;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;swOk=true;},{passive:true});
+document.addEventListener('touchmove',e=>{if(!swOk)return;if(Math.abs(e.touches[0].clientY-sy)>Math.abs(e.touches[0].clientX-sx)+5)swOk=false;},{passive:true});
+document.addEventListener('touchend',e=>{if(!swOk)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)ir(actual+(dx<0?1:-1));swOk=false;},{passive:true});
+window.addEventListener('resize',()=>{const car=document.getElementById('car');car.style.transition='none';car.style.transform=`translateX(-${actual*window.innerWidth}px)`;});
+
+// ── UTILIDADES ───────────────────────────────────────────────────────────────
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function esc(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+
+// Decide si "texto" coincide con la búsqueda "q" (ambos ya normalizados o crudos).
+// Regla: si q tiene 2 letras o menos (ej. "fe", "ti"), exige que aparezca como
+// PALABRA COMPLETA dentro del texto (evita que "fe" encuentre "feliz").
+// Si q tiene 3+ letras, se mantiene la búsqueda por substring/prefijo de siempre
+// (para que "amo" sí encuentre "amor", "uni" encuentre "unidad", etc.)
+function coincide(textoCrudo, qCrudo){
+  const nt = norm(textoCrudo), nq = norm(qCrudo);
+  if(!nq) return true;
+  if(nq.length <= 2){
+    // Coincidencia de palabra completa: usa límites de palabra (\b)
+    const re = new RegExp('\\b' + nq.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b');
+    return re.test(nt);
+  }
+  return nt.includes(nq);
+}
+
+function hl(text,q){
+  if(!q)return text;
+  const nt=norm(text),nq=norm(q);let r='',i=0;
+  while(i<text.length){const idx=nt.indexOf(nq,i);if(idx===-1){r+=text.slice(i);break;}
+  r+=text.slice(i,idx)+'<mark>'+text.slice(idx,idx+nq.length)+'</mark>';i=idx+nq.length;}return r;
+}
+function getColor(id){const l=LIBROS.find(x=>x.id===id);return l?COLORES[l.color]||'#8aadca':'#8aadca';}
+function getBadge(id){const l=LIBROS.find(x=>x.id===id);return l?'badge '+l.color:'badge';}
+
+// ── FAVORITOS ────────────────────────────────────────────────────────────────
+const KEY_MIS  = 'plenitud_favs';
+const JB_KEY   = '$2a$10$Y4gn6lOHxb90Gn9lW7WLouXBG4Yb9.tapdc8m2zUhFgK5tEtKe/TS';
+const JB_BIN   = '6a316375da38895dfeca36c9';
+const JB_URL   = `https://api.jsonbin.io/v3/b/${JB_BIN}`;
+let cacheGrp = null;
+
+function getMis(){try{return JSON.parse(localStorage.getItem(KEY_MIS)||'[]');}catch(e){return[];}}
+function setMis(a){localStorage.setItem(KEY_MIS,JSON.stringify(a));}
+
+async function getGrp(){
+  if(cacheGrp!==null)return cacheGrp;
+  try{
+    const r=await fetch(JB_URL+'/latest',{headers:{'X-Master-Key':JB_KEY}});
+    const d=await r.json();
+    const rec=d.record;
+    let arr=Array.isArray(rec)?rec:Array.isArray(rec?.r)?rec.r:Array.isArray(rec?.recomendados)?rec.recomendados:[];
+    // Filtra basura/placeholders que no son temas válidos (ej. {"test":"ok"}) y normaliza votos
+    cacheGrp=arr
+      .filter(f=>f && typeof f==='object' && typeof f.libro==='string' && typeof f.titulo==='string')
+      .map(f=>({libro:f.libro, sec:f.sec||'', titulo:f.titulo, pag:f.pag, votos:typeof f.votos==='number'?f.votos:1}));
+  }catch(e){cacheGrp=[];}
+  return cacheGrp;
+}
+async function setGrp(a){
+  const previo=cacheGrp;
+  cacheGrp=a;
+  try{
+    const r=await fetch(JB_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},body:JSON.stringify(a)});
+    if(!r.ok){
+      const txt=await r.text().catch(()=>'');
+      console.error('JSONbin PUT falló', r.status, txt);
+      cacheGrp=previo;
+      return false;
+    }
+    return true;
+  }catch(e){
+    console.error('JSONbin error de red',e);
+    cacheGrp=previo;
+    return false;
+  }
+}
+
+// Suma o resta 1 voto al tema en el contador compartido del grupo.
+// delta = +1 al marcar favorito, -1 al desmarcar. Si llega a 0, se quita del array.
+// Las llamadas se ENCOLAN para que nunca se ejecuten en paralelo: si tocas varias
+// estrellas rápido, cada voto se procesa uno por uno sobre el estado más reciente,
+// evitando que una sobrescriba a la otra (condición de carrera).
+let colaVotos = Promise.resolve();
+function votarGrupo(libro,sec,titulo,pag,delta){
+  colaVotos = colaVotos.then(async () => {
+    cacheGrp = null; // fuerza releer el bin antes de cada voto, nunca usar cache vieja
+    const f = await getGrp();
+    const idx = f.findIndex(x=>x.libro===libro&&x.titulo===titulo);
+    const nuevo = f.map(x=>Object.assign({},x));
+    if(idx===-1){
+      if(delta>0) nuevo.push({libro,sec,titulo,pag,votos:1});
+    }else{
+      nuevo[idx].votos=(nuevo[idx].votos||0)+delta;
+      if(nuevo[idx].votos<=0) nuevo.splice(idx,1);
+    }
+    await setGrp(nuevo);
+  }).catch(e=>console.error('Error procesando voto', e));
+  return colaVotos;
+}
+
+function esFav(t){return getMis().some(f=>f.libro===t.libro&&f.titulo===t.titulo);}
+function toggleFav(libro,sec,titulo,pag,btn){
+  let favs=getMis();
+  const idx=favs.findIndex(f=>f.libro===libro&&f.titulo===titulo);
+  if(idx===-1){
+    favs.push({libro,sec,titulo,pag});setMis(favs);
+    if(btn){btn.textContent='⭐';btn.classList.add('guardado');}
+    votarGrupo(libro,sec,titulo,pag,+1);
+  }else{
+    favs.splice(idx,1);setMis(favs);
+    if(btn){btn.textContent='☆';btn.classList.remove('guardado');}
+    votarGrupo(libro,sec,titulo,pag,-1);
+  }
+}
+function elimMis(i){
+  const f=getMis();
+  const item=f[i];
+  f.splice(i,1);setMis(f);
+  if(item) votarGrupo(item.libro,item.sec,item.titulo,item.pag,-1);
+  renderFavs();
+}
+
+let tabActual='mis';
+function tabFav(t){
+  tabActual=t;
+  document.querySelectorAll('.p3-tab').forEach((el,i)=>el.classList.toggle('activo',(i===0&&t==='mis')||(i===1&&t==='grupo')));
+  document.getElementById('tabMis').classList.toggle('activa',t==='mis');
+  document.getElementById('tabGrupo').classList.toggle('activa',t==='grupo');
+  renderFavs();
+}
+
+async function renderFavs(){
+  const mis=getMis();
+  document.getElementById('cMis').innerHTML=mis.length===0
+    ?'<div class="p3-empty"><div class="icon">⭐</div><p>Aún no tienes favoritos.<br>Toca ☆ en cualquier tema.</p></div>'
+    :mis.map((f,i)=>`<div class="fav-item"><div class="fav-libro">${f.libro}</div>${f.sec?`<div class="fav-seccion">${f.sec}</div>`:''}<div class="fav-titulo">${f.titulo}</div><div class="fav-row"><span class="fav-pag">Pág. ${f.pag}</span><button class="fav-del" onclick="elimMis(${i})">🗑</button></div></div>`).join('');
+
+  document.getElementById('cGrp').innerHTML='<div class="p3-empty"><div class="icon">⏳</div><p>Cargando…</p></div>';
+  const grp=(await getGrp()).slice().sort((a,b)=>(b.votos||0)-(a.votos||0));
+  document.getElementById('cGrp').innerHTML=grp.length===0
+    ?'<div class="p3-empty"><div class="icon">📌</div><p>Aún nadie ha marcado<br>favoritos en el grupo.</p></div>'
+    :grp.map(f=>`<div class="fav-item rec"><div class="fav-libro">${f.libro}</div>${f.sec?`<div class="fav-seccion">${f.sec}</div>`:''}<div class="fav-titulo">${f.titulo}</div><div class="fav-row"><span class="fav-pag">Pág. ${f.pag}</span><span class="fav-votos">⭐ ${f.votos||0}</span></div></div>`).join('');
+}
+
+// ── PANTALLA 2 — BUSCADOR POTENTE ────────────────────────────────────────────
+let coleccionActual = '';
+
+const COLECCION_LIBROS = {
+  compendios: l => l.startsWith('Compendio'),
+  criterios:  l => l === 'Criterios Profesionales',
+  lenguaje:   l => l === 'El Lenguaje del Corazón',
+  bill:       l => l === 'Lo Mejor de Bill',
+};
+
+const COLECCION_NOMBRE = {
+  compendios: 'Compendios 1–12',
+  criterios:  'Criterios Profesionales',
+  lenguaje:   'El Lenguaje del Corazón',
+  bill:       'Lo Mejor de Bill',
+};
+
+function seleccionarColeccion(col){
+  coleccionActual = col;
+  document.getElementById('p2Colecciones').style.display = 'none';
+  document.getElementById('p2BuscadorFijo').style.display = 'none';
+  document.getElementById('p2Acordeon').style.display = 'block';
+  document.getElementById('p2AcordeonTitulo').textContent = COLECCION_NOMBRE[col];
+  document.getElementById('p2q').value = '';
+  if(col === 'criterios' || col === 'bill'){
+    renderTemasDirect(col);
+  } else {
+    renderSubtemas();
+  }
+}
+
+function renderTemasDirect(col){
+  const filtroLibro = COLECCION_LIBROS[col];
+  const filtered = temas.filter(t => filtroLibro(t.libro));
+
+  document.getElementById('p2stats').textContent =
+    filtered.length + ' tema' + (filtered.length!==1?'s':'');
+
+  document.getElementById('p2results').innerHTML = filtered.map(t => {
+    const fav = esFav(t);
+    return `<div class="p2-sub-card">
+      <div class="p2-tema" style="border-top:none">
+        <div class="p2-tema-titulo">${t.titulo}</div>
+        <div class="p2-tema-foot">
+          <div class="p2-tema-info">
+            <span class="p2-tema-libro">${t.libro}</span>
+            <span class="p2-tema-pag">Pág. ${t.pagina}</span>
+          </div>
+          <button class="p2-fav ${fav?'guardado':''}"
+            onclick="toggleFav('${esc(t.libro)}','','${esc(t.titulo)}',${t.pagina},this)">
+            ${fav?'⭐':'☆'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function volverColecciones(){
+  coleccionActual = '';
+  document.getElementById('p2Acordeon').style.display = 'none';
+  document.getElementById('p2Colecciones').style.display = 'grid';
+  document.getElementById('p2BuscadorFijo').style.display = 'block';
+  document.getElementById('p2stats').textContent = '';
+  document.getElementById('p2results').innerHTML = '';
+  limpiarGlobal();
+}
+
+function iniciarP2(){
+  // Solo mostrar los 4 cuadros al inicio
+}
+
+function renderSubtemas(){
+  if(!coleccionActual) return;
+  const q = document.getElementById('p2q').value.trim();
+  const nq = norm(q);
+  document.getElementById('p2clear').style.display = q ? 'block' : 'none';
+
+  const filtroLibro = COLECCION_LIBROS[coleccionActual];
+
+  const filtered = temas.filter(t => {
+    if(!filtroLibro(t.libro)) return false;
+    if(!nq) return true;
+    return coincide(t.titulo, q) || coincide(t.seccion || t.libro, q);
+  });
+
+  if(filtered.length === 0){
+    document.getElementById('p2stats').textContent = 'Sin resultados';
+    document.getElementById('p2results').innerHTML = '<div class="p2-empty"><div class="icon">🔍</div><p>No se encontraron temas.</p></div>';
+    return;
+  }
+
+  // Agrupar por subtema — si no tiene sección usar nombre del libro
+  const mapa = new Map();
+  for(const t of filtered){
+    const sec = t.seccion || t.libro;
+    if(!mapa.has(sec)) mapa.set(sec, []);
+    mapa.get(sec).push(t);
+  }
+  const claves = [...mapa.keys()].sort((a,b) => a.localeCompare(b,'es'));
+
+  document.getElementById('p2stats').textContent =
+    claves.length + ' subtema' + (claves.length!==1?'s':'') + ' · ' + filtered.length + ' temas';
+
+  document.getElementById('p2results').innerHTML = claves.map(sec => {
+    const items = mapa.get(sec);
+    const color = getColor(items[0].libro);
+    const abierto = !!nq;
+    const temasHTML = items.map(t => {
+      const fav = esFav(t);
+      return `<div class="p2-tema">
+        <div class="p2-tema-titulo">${hl(t.titulo, q)}</div>
+        <div class="p2-tema-foot">
+          <div class="p2-tema-info">
+            <span class="p2-tema-libro">${t.libro}</span>
+            <span class="p2-tema-pag">Pág. ${t.pagina}</span>
+          </div>
+          <button class="p2-fav ${fav?'guardado':''}"
+            onclick="toggleFav('${esc(t.libro)}','${esc(t.seccion||'')}','${esc(t.titulo)}',${t.pagina},this)">
+            ${fav?'⭐':'☆'}
+          </button>
+        </div>
+      </div>`;
+    }).join('');
+
+    return `<div class="p2-sub-card">
+      <div class="p2-sub-header" style="border-left-color:${color}" onclick="toggleSub(this)">
+        <div class="p2-sub-info">
+          <div class="p2-sub-nombre">${hl(sec, q)}</div>
+          <div class="p2-sub-meta">${items.length} tema${items.length!==1?'s':''}</div>
+        </div>
+        <span class="p2-sub-arrow ${abierto?'abierto':''}">›</span>
+      </div>
+      <div class="p2-sub-temas ${abierto?'visible':''}">${temasHTML}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleSub(header){
+  const temas = header.nextElementSibling;
+  const arrow = header.querySelector('.p2-sub-arrow');
+  const yaAbierto = temas.classList.contains('visible');
+  document.querySelectorAll('.p2-sub-temas').forEach(t => t.classList.remove('visible'));
+  document.querySelectorAll('.p2-sub-arrow').forEach(a => a.classList.remove('abierto'));
+  if(!yaAbierto){
+    temas.classList.add('visible');
+    arrow.classList.add('abierto');
+    setTimeout(() => header.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+  }
+}
+
+function limpiarP2(){
+  document.getElementById('p2q').value = '';
+  document.getElementById('p2clear').style.display = 'none';
+  renderSubtemas();
+}
+
+function buscarGlobal(){
+  const q = document.getElementById('p2qGlobal').value.trim();
+  const nq = norm(q);
+  document.getElementById('p2clearGlobal').style.display = q ? 'block' : 'none';
+
+  if(!q){
+    document.getElementById('p2statsGlobal').textContent = '';
+    document.getElementById('p2resultsGlobal').innerHTML = '';
+    return;
+  }
+
+  const filtered = temas.filter(t => coincide(t.titulo, q));
+  document.getElementById('p2statsGlobal').textContent =
+    filtered.length + ' resultado' + (filtered.length!==1?'s':'') + ' para "' + q + '"';
+
+  if(filtered.length === 0){
+    document.getElementById('p2resultsGlobal').innerHTML =
+      '<div class="p2-empty"><div class="icon">🔍</div><p>No se encontraron temas.</p></div>';
+    return;
+  }
+
+  // Agrupar por subtema
+  const mapa = new Map();
+  for(const t of filtered){
+    const sec = t.seccion || t.libro;
+    if(!mapa.has(sec)) mapa.set(sec, []);
+    mapa.get(sec).push(t);
+  }
+  const claves = [...mapa.keys()].sort((a,b) => a.localeCompare(b,'es'));
+
+  document.getElementById('p2resultsGlobal').innerHTML = claves.map(sec => {
+    const items = mapa.get(sec);
+    const color = getColor(items[0].libro);
+    const temasHTML = items.map(t => {
+      const fav = esFav(t);
+      return `<div class="p2-tema">
+        <div class="p2-tema-titulo">${hl(t.titulo, q)}</div>
+        <div class="p2-tema-foot">
+          <div class="p2-tema-info">
+            <span class="p2-tema-libro">${t.libro}</span>
+            <span class="p2-tema-pag">Pág. ${t.pagina}</span>
+          </div>
+          <button class="p2-fav ${fav?'guardado':''}"
+            onclick="toggleFav('${esc(t.libro)}','${esc(t.seccion||'')}','${esc(t.titulo)}',${t.pagina},this)">
+            ${fav?'⭐':'☆'}
+          </button>
+        </div>
+      </div>`;
+    }).join('');
+
+    return `<div class="p2-sub-card">
+      <div class="p2-sub-header" style="border-left-color:${color}" onclick="toggleSub(this)">
+        <div class="p2-sub-info">
+          <div class="p2-sub-nombre">${hl(sec, q)}</div>
+          <div class="p2-sub-meta">${items.length} tema${items.length!==1?'s':''}</div>
+        </div>
+        <span class="p2-sub-arrow">›</span>
+      </div>
+      <div class="p2-sub-temas visible">${temasHTML}</div>
+    </div>`;
+  }).join('');
+}
+
+function limpiarGlobal(){
+  document.getElementById('p2qGlobal').value = '';
+  document.getElementById('p2clearGlobal').style.display = 'none';
+  document.getElementById('p2statsGlobal').textContent = '';
+  document.getElementById('p2resultsGlobal').innerHTML = '';
+}
+
+// ── PANTALLA 1 ───────────────────────────────────────────────────────────────
+let filtro='todos',query='',modoHome=true,modoLibro=false;
+
+function buildHome(){
+  document.getElementById('booksGrid').innerHTML=LIBROS.map(l=>{
+    const count=temas.filter(t=>t.libro===l.id).length;
+    return `<div class="book-card color-${l.color}" onclick="abrirLibro('${esc(l.id)}')">
+      <div class="book-card-title">${l.label}</div>
+      ${l.id.startsWith('Compendio')?'<div class="book-card-plenitud">PLENITUD</div>':''}
+      ${l.sub?`<div class="book-card-sub">${l.sub}</div>`:''}
+      <div class="book-card-count">${count} temas</div>
+    </div>`;
+  }).join('');
+}
+
+function abrirLibro(libro){
+  modoHome=false;modoLibro=true;filtro=libro;query='';
+  document.getElementById('q').value='';
+  document.getElementById('homeSection').style.display='none';
+  document.getElementById('instruccion').style.display='none';
+  document.getElementById('flechaScroll').style.display='none';
+  document.getElementById('filters').style.display='none';
+  document.getElementById('backBtn').style.display='block';
+  document.getElementById('libroSticky').style.display='block';
+  history.pushState({p:'libro',libro},'');
+  const l=LIBROS.find(x=>x.id===libro);
+  document.getElementById('libroNombre').textContent=libro;
+  document.getElementById('libroSub').textContent=l?l.sub:'';
+  renderLibro(libro);
+}
+
+function volverInicio(){
+  modoHome=true;modoLibro=false;filtro='todos';query='';
+  document.getElementById('q').value='';
+  document.getElementById('clearBtn').style.display='none';
+  document.getElementById('homeSection').style.display='block';
+  document.getElementById('instruccion').style.display='block';
+  document.getElementById('flechaScroll').style.display='block';
+  document.getElementById('filters').style.display='none';
+  document.getElementById('backBtn').style.display='none';
+  document.getElementById('libroSticky').style.display='none';
+  document.getElementById('stats').textContent='';
+  document.getElementById('results').innerHTML='';
+}
+
+function renderLibro(libro){
+  const ts=temas.filter(t=>t.libro===libro);
+  document.getElementById('stats').textContent=ts.length+' temas en '+libro;
+  const secs=[],map={};
+  for(const t of ts){const s=t.seccion||'';if(!map[s]){map[s]=[];secs.push(s);}map[s].push(t);}
+  let html='';
+  for(const s of secs){
+    const items=map[s];
+    if(s)html+=`<div class="seccion-header"><div class="seccion-header-nombre">${s}</div><div class="seccion-header-count">${items.length} tema${items.length!==1?'s':''}</div></div>`;
+    for(const t of items){
+      const fav=esFav(t);
+      html+=`<div class="result-libro">
+        <div class="result-libro-titulo">${t.titulo}</div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+          <div class="result-libro-pagina">Pág. ${t.pagina}</div>
+          <button class="btn-fav ${fav?'guardado':''}" onclick="toggleFav('${esc(t.libro)}','${esc(t.seccion||'')}','${esc(t.titulo)}',${t.pagina},this)">${fav?'⭐':'☆'}</button>
+        </div>
+      </div>`;
+    }
+  }
+  document.getElementById('results').innerHTML=html;
+  window.scrollTo(0,0);
+}
+
+function render(){
+  const qRaw=query.trim();
+  const filtered=temas.filter(t=>{
+    if(filtro==='todos')return true;
+    if(filtro==='compendio')return t.libro.startsWith('Compendio');
+    return t.libro===filtro;
+  }).filter(t=>!qRaw||coincide(t.titulo, qRaw));
+  const total=filtered.length;
+  document.getElementById('stats').textContent=total+' resultado'+(total!==1?'s':'')+(query?' para "'+query+'"':'')+(filtro!=='todos'&&filtro!=='compendio'?' en '+filtro:'');
+  if(total===0){document.getElementById('results').innerHTML='<div class="p2-empty"><div class="icon">🔍</div><p>No se encontraron temas.<br>Intenta con otra palabra.</p></div>';return;}
+  document.getElementById('results').innerHTML=filtered.map(t=>{
+    const fav=esFav(t);
+    return `<div class="result">
+      <span class="${getBadge(t.libro)}">${t.libro}</span>
+      ${t.seccion?`<div class="seccion">${hl(t.seccion,query)}</div>`:''}
+      <div class="titulo">${hl(t.titulo,query)}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+        <span class="pagina">Pág. ${t.pagina}</span>
+        <button class="btn-fav ${fav?'guardado':''}" onclick="toggleFav('${esc(t.libro)}','${esc(t.seccion||'')}','${esc(t.titulo)}',${t.pagina},this)">${fav?'⭐':'☆'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function setFilter(val,el){filtro=val;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');render();}
+function clearSearch(){document.getElementById('q').value='';query='';document.getElementById('clearBtn').style.display='none';volverInicio();}
+
+document.getElementById('q').addEventListener('input',function(){
+  query=this.value;
+  document.getElementById('clearBtn').style.display=query?'block':'none';
+  if(query){
+    modoHome=false;modoLibro=false;
+    document.getElementById('homeSection').style.display='none';
+    document.getElementById('instruccion').style.display='none';
+    document.getElementById('flechaScroll').style.display='none';
+    document.getElementById('filters').style.display='flex';
+    document.getElementById('backBtn').style.display='block';
+    document.getElementById('libroSticky').style.display='none';
+    filtro='todos';
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    document.querySelector('.chip').classList.add('active');
+  }else{volverInicio();}
+  render();
+});
+
+// BTN SUBIR
+
+
+// ── MODAL SALIR ──────────────────────────────────────────────────────────────
+let esperando=false;
+function mostrarModal(){document.getElementById('modalSalir').classList.add('activo');esperando=true;}
+function cerrarModal(){document.getElementById('modalSalir').classList.remove('activo');esperando=false;history.pushState({p:'inicio'},'');}
+function confirmarSalir(){document.getElementById('modalSalir').classList.remove('activo');esperando=false;history.go(-2);}
+
+window.addEventListener('popstate',function(){
+  if(esperando)return;
+  if(!modoHome&&actual===0){volverInicio();history.pushState({p:'inicio'},'');}
+  else if(modoHome&&actual===0){mostrarModal();}
+  else{history.pushState({p:'inicio'},'');}
+});
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+buildHome();
+iniciarP2();
+history.pushState({p:'base'},'');
+history.pushState({p:'inicio'},'');
+</script>
+</body>
+</html>
